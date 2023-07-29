@@ -3,12 +3,13 @@
         "baseUrl": "./",
         "paths": { 
             "@assets/*":["src/assets/*"],
-            "@hooks/*":["src/application/hooks/*"],
-            "@utils/*":["src/application/utils/*"],
-            "@api/*":["src/infrastructure/api/*"],
-            "@components/*":["src/presentation/components/*"],
-            "@pages/*":["src/presentation/pages/*"],
-            "@routes/*":["src/presentation/routes/*"],
+            "@hooks":["src/application/hooks"],
+            "@utils":["src/application/utils"],
+            "@store":["src/application/store"],
+            "@api":["src/infrastructure/api"],
+            "@components":["src/presentation/components"],
+            "@pages":["src/presentation/pages"],
+            "@router":["src/presentation/router"],
             "@styles/*":["src/presentation/styles/*"]
         }
     }
