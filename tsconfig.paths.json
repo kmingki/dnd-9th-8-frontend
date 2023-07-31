@@ -6,6 +6,7 @@
             "@hooks":["src/application/hooks"],
             "@utils":["src/application/utils"],
             "@store":["src/application/store"],
+            "@constants":["src/application/constants"],
             "@api":["src/infrastructure/api"],
             "@components":["src/presentation/components"],
             "@pages":["src/presentation/pages"],
