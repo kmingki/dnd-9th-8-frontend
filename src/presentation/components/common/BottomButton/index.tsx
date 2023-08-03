@@ -1,12 +1,12 @@
 import React from "react";
 import { styled } from "styled-components";
 
-type BottomButtonTypes = {
+type BottomButtonType = {
   text: string;
   disabled?: boolean;
 };
 
-const BottomButton = ({ text, disabled }: BottomButtonTypes) => {
+const BottomButton = ({ text, disabled }: BottomButtonType) => {
   return (
     <BottomButtonWrapper>
       <Button disabled={disabled}>{text}</Button>
