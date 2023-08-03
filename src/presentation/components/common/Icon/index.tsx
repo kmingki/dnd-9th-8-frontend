@@ -10,9 +10,11 @@ interface IconProps {
 
   fill?: string;
   color?: string;
+
+  onClick?: any;
 }
 
-const Icon = ({ icon, width, height, rotate, fill, color }: IconProps) => {
+const Icon = ({ icon, width, height, rotate, fill, color, onClick }: IconProps) => {
   const IconComponent = icons[icon as keyof typeof icons];
   return (
     <IconWrapper
@@ -21,6 +23,7 @@ const Icon = ({ icon, width, height, rotate, fill, color }: IconProps) => {
       rotate={rotate}
       fill={fill}
       color={color}
+      onClick={onClick}
     >
       <IconComponent />
     </IconWrapper>
