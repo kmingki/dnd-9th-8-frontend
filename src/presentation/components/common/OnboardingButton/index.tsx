@@ -2,6 +2,8 @@
 import React from "react";
 import { styled } from "styled-components";
 import COLOR from "@styles/colors";
+import Icon from "../Icon";
+import { DESTINATION } from "@constants";
 
 type OnboardingButtonType = {
     children? : JSX.Element;
@@ -15,6 +17,9 @@ const OnboardingButton = ({ children , dest, isChecked, text }: OnboardingButton
     return (
         <OnboardingButtonWapper>
         <Text>
+          {dest === DESTINATION.abroad ? <Icon icon="Plane"  /> :
+          <Icon icon="Bus"  />
+          }
           {text}
         </Text>
         </OnboardingButtonWapper>
