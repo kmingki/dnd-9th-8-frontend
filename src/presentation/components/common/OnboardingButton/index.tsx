@@ -8,14 +8,14 @@ import { DESTINATION } from "@constants";
 type OnboardingButtonType = {
     children? : JSX.Element;
     dest?: string;
-    isChecked?: string;
+    isChecked?: boolean;
     text?: string;
   };
   
 
 const OnboardingButton = ({ children , dest, isChecked, text }: OnboardingButtonType) => {
     return (
-        <OnboardingButtonWapper>
+        <OnboardingButtonWapper isChecked={isChecked}>
         <Text>
           {dest === DESTINATION.abroad ? <Icon icon="Plane"  /> :
           <Icon icon="Bus"  />
@@ -26,10 +26,15 @@ const OnboardingButton = ({ children , dest, isChecked, text }: OnboardingButton
     );
 }
 
-const OnboardingButtonWapper = styled.button`
+const OnboardingButtonWapper = styled.button<{ isChecked?: boolean }>`
   width: 100%;
   height: 80px;
   border: none;
+  ${({ isChecked }) =>
+  isChecked && 
+    `border-width: 1px; 
+    border-color: ${COLOR.MAIN_GREEN}`
+  }
   border-radius: 10px;
   background-color: ${COLOR.GRAY_50};
   outline: none;
