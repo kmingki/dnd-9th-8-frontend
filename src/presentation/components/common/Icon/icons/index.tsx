@@ -1,3 +1,4 @@
+export { default as AuthLogo } from "./auth/AuthLogo";
 export { default as AuthKakao } from "./auth/AuthKakao";
 export { default as AuthNaver } from "./auth/AuthNaver";
 
