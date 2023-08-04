@@ -105,6 +105,8 @@
   border-radius: 16px !important;
   background-color: var(--MAIN_GREEN) !important;
   height: 40px;
+  width: 40px;
+  margin: 0 auto;
 }
 
 .react-calendar .react-calendar__tile--rangeStart {
