@@ -2,6 +2,7 @@ const COLOR = {
     MAIN_GREEN: '#00B488',
     MAIN_BLUE: '#6B5FFB',
     MAIN_YELLOW: '#FFF8F1',
+    MAIN_BLACK: '#292929',
     GRAY_900: '#232527',
     GRAY_800: '#404244',
     GRAY_700: '#5C5F64',//
