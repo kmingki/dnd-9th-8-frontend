@@ -25,4 +25,4 @@ const COLOR = {
     WHITE: '#FFFFFF',
   };
   
-  export default COLOR;
+export default COLOR;
