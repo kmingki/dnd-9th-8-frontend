@@ -26,6 +26,7 @@ const LoginPageWrapper = styled.div`
   width: 100%;
   height: 100%;
   background: url(${LoginImage}) no-repeat center/cover;
+  overflow: hidden;
 `;
 
 const TopWrapper = styled.div`
@@ -48,7 +49,7 @@ const TopWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   position: fixed;
-  bottom: 55px;
+  bottom: 4%;
   left: 50%;
   transform: translateX(-50%);
 
