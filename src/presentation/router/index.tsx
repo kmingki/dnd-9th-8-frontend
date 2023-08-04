@@ -5,7 +5,7 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div style={{width : '170px'}}><OnboardingButton isChecked={false} text={'해외여행'}/></div>} />
+        <Route path="/" element={<div></div>} />
       </Routes>
     </BrowserRouter>
   );
