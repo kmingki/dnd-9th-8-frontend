@@ -1,7 +1,10 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
+import createTripSlice from "../reducer/slices/createTrip/createTripSlice";
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  createTrip: createTripSlice,
+});
 
 const store = configureStore({
   reducer: rootReducer,
