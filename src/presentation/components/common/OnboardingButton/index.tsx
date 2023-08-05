@@ -21,11 +21,11 @@ const OnboardingButton = ({
 }: OnboardingButtonType) => {
   return (
     <OnboardingButtonWapper isChecked={isChecked} onClick={onClick}>
-      {isChecked && (
+      {isChecked ? (
         <IconWrapper>
           <Icon icon="Check" />
         </IconWrapper>
-      )}
+      ) : null}
 
       {dest === DESTINATION.abroad ? <Icon icon="Plane" /> : <Icon icon="Bus" />}
       <Text>{text}</Text>
