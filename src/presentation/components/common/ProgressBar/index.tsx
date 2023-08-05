@@ -5,7 +5,8 @@ import { styled, css } from "styled-components";
 type ProgressBarType = {
     max: string;
     value: string;
-    percent : boolean; //프로그레스바위에 퍼센트 표시용
+    percent : boolean; //프로그레스바위에 퍼센트 표시 유무
+    percentNumber : Number; //프로그레스바위에 퍼센트 표시 
     size: string; //large / small
     startColor : string;
     finishColor?: string; //linear gradient 를 위한 타입
@@ -15,13 +16,14 @@ const ProgressBar = ({
     max,
     value,
     percent,
+    percentNumber,
     size,
     startColor,
     finishColor
  }: ProgressBarType) => {
   return (
     <>
-    {percent && <Ballon max={Number(max)} value={Number(value)} />}
+    {percent && <Ballon max={Number(max)} value={Number(value)}>{`${percentNumber}%`}</Ballon>}
     {size === "large" ?
     <>
     <ProgressBarWrapper  size={size} startColor={startColor} finishColor={finishColor}>
@@ -42,7 +44,7 @@ const ProgressBar = ({
 
 
 const Ballon = styled.div<{ max : number, value : number}>`
-    width: 30px;
+    width: 31px;
     height: 18px;
     background: ${COLOR.MAIN_BLACK};
     color: ${COLOR.WHITE};
@@ -62,8 +64,11 @@ const Ballon = styled.div<{ max : number, value : number}>`
         transform: translateX(-50%);
         top : 18px;
     }
-
-
+    font-weight: 600;
+    font-size: 11px;
+    display : flex;
+    justify-content : center;
+    align-items : center;
 `;
 
 const ProgressBarWrapper = styled.div<{ size : string, startColor:string, finishColor?:string}>`
