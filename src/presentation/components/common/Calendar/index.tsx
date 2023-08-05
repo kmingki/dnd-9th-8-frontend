@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import Calendar from "react-calendar";
 import "./Calendar.css";
+import { getMonthandDate } from "../../../../application/utils/getDate";
+import { changeTripRange } from "../../../../application/reducer/slices/createTrip/createTripSlice";
 
 const CustomCalendar = () => {
+  const dispatch = useDispatch();
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
 
   const formatMonthYear = (locale: string | undefined, date: Date) => {
@@ -17,8 +21,26 @@ const CustomCalendar = () => {
   const updateDateRange = (date: Date) => {
     if (dateRange[0] === dateRange[1] && date >= dateRange[0]) {
       setDateRange([dateRange[0], date]);
+      dispatch(
+        changeTripRange({
+          type: "end",
+          value: getMonthandDate(date),
+        })
+      );
     } else {
       setDateRange([date, date]);
+      dispatch(
+        changeTripRange({
+          type: "start",
+          value: getMonthandDate(date),
+        })
+      );
+      dispatch(
+        changeTripRange({
+          type: "end",
+          value: "",
+        })
+      );
     }
   };
 

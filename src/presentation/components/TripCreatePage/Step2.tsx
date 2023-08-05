@@ -1,0 +1,78 @@
+import React from "react";
+import { styled } from "styled-components";
+import Spacing from "../common/Spacing";
+import COLOR from "@styles/colors";
+import TextBox from "./components/TextBox";
+import BottomButton from "../common/BottomButton";
+import { useNavigate } from "react-router-dom";
+import Input from "../common/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@store";
+import { changeCreateTripState } from "../../../application/reducer/slices/createTrip/createTripSlice";
+
+const Step2 = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { tripName } = useSelector((state: RootState) => state.createTrip);
+
+  const userName = "DND";
+  const handleChangeTripName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      changeCreateTripState({
+        type: "tripName",
+        value: e.target.value,
+      })
+    );
+  };
+  const handleClickNextBtn = () => {
+    navigate("/trip-create/3");
+  };
+  return (
+    <StepWrapper>
+      <Spacing size={28} />
+      <TextContainer>
+        <TextBox>
+          <div>
+            {`${userName}님 반가워요,`}
+            <br />
+            어떤 여행을 준비하고 계신가요?
+          </div>
+        </TextBox>
+        <div className="sub-text">텍스트 입력 시 체크리스트 제목으로 설정됩니다</div>
+      </TextContainer>
+      <Spacing size={30} />
+      <Input
+        placeholder="여행지를 입력해주세요"
+        onChange={handleChangeTripName}
+        type="text"
+        value={tripName || ""}
+        textCount={true}
+        maxLength={10}
+      />
+      <BottomButton
+        disabled={tripName === "" ? true : false}
+        text="다음"
+        onClick={handleClickNextBtn}
+        textButton={true}
+        textButtonOnClick={() => {}}
+        textButtonChild="다음에 할래요"
+      />
+    </StepWrapper>
+  );
+};
+
+const StepWrapper = styled.div``;
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  .sub-text {
+    color: ${COLOR.GRAY_600};
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 132%;
+  }
+`;
+
+export default Step2;
