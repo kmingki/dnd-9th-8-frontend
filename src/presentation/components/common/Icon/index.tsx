@@ -38,7 +38,6 @@ const IconWrapper = styled.div<{
   color?: string;
 }>`
   display: flex;
-  justify-content: center;
   align-items: center;
 
   width: ${({ width }) => width}px;
