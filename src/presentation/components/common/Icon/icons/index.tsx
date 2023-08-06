@@ -9,3 +9,4 @@ export { default as Plane } from "./Plane";
 export { default as Check } from "./Check";
 export { default as InputChecked } from "./InputChecked";
 export { default as Checked } from "./Checked";
+export { default as Plus } from "./Plus";
