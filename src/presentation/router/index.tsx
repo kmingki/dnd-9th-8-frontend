@@ -3,6 +3,7 @@ import LoginPage from "../pages/LoginPage";
 import TripCreatePage from "../pages/TripCreatePage";
 import TripDetailPage from "../pages/TripDetailPage";
 import LoginCompletePage from "../pages/LoginComplatePage";
+import { CheckListPage } from "@pages";
 
 const Router = () => {
   return (
@@ -13,7 +14,7 @@ const Router = () => {
         <Route path="/login/complete" element={<LoginCompletePage />} />
         <Route path="/trip-create/:step" element={<TripCreatePage />} />
         <Route path="/trip/:trip-id" element={<TripDetailPage />} />
-
+        <Route path="/checklist/:list-id" element={<CheckListPage />} />
       </Routes>
     </BrowserRouter>
   );
