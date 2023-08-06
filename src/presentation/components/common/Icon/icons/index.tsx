@@ -16,3 +16,8 @@ export { default as Folder } from "./Folder";
 export { default as User } from "./User";
 
 export { default as NotExistCheckList } from "./NotExistCheckList";
+export { default as CreateButton } from "./CreateButton";
+export { default as XButton } from "./XButton";
+export { default as Chevron } from "./Chevron";
+
+export { default as Beach } from "./Beach";
