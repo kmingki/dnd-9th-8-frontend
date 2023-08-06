@@ -16,7 +16,7 @@ const TodoCard = ({}: TodoCardType) => {
         </Title>
         <Spacing size={8} />
         <Description>
-        여행 전 해야 할 일 간단한 메모 작성 칸?
+            여행 전 해야 할 일 간단한 메모 작성 칸?
         </Description>
         <Spacing size={11} />
         <ProgressBar 
@@ -26,16 +26,16 @@ const TodoCard = ({}: TodoCardType) => {
         percentNumber={44}
         size='small'
         startColor='#4561F9' />
-        <div style={{right: '0'}}>
+        <TextButtonWrapper>
             <TextButton onClick={() => {}} text='편집하기' />
-        </div>
+        </TextButtonWrapper>
     </TodoCardWrapper>
   );
 };
 
 const TodoCardWrapper = styled.div`
     padding: 19px 17px;
-    height: 152px;
+    margin-bottom: 20px;
     background-color: ${Color.WHITE};
     border-radius: 10px;
 `;
@@ -51,5 +51,11 @@ const Description = styled.div`
     font-size: 14px;
     color: #A5A5A5;
 `;
+
+const TextButtonWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`;
+
 
 export default TodoCard;
