@@ -38,6 +38,7 @@ const TodoCardWrapper = styled.div`
     margin-bottom: 20px;
     background-color: ${Color.WHITE};
     border-radius: 10px;
+    box-shadow: 0px 4px 30px 10px #0000000D;
 `;
 
 
