@@ -14,7 +14,7 @@ const Step3 = () => {
   const { tripRange } = useSelector((state: RootState) => state.createTrip);
 
   const handleClickNextBtn = () => {
-    navigate("/");
+    navigate("/trip-create/complate");
   };
 
   return (

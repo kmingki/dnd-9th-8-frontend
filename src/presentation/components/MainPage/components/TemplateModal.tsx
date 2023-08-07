@@ -8,6 +8,12 @@ const TemplateModal = () => {
   const templateData = [
     { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
     { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
+    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
+    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
+    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
+    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
+    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
+    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
   ];
   return (
     <TemplateModalWrapper>
@@ -50,6 +56,9 @@ const TemplateList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
+
+  max-height: ${window.innerHeight * 0.32}px;
+  overflow-y: auto;
 
   .template-container {
     display: flex;
