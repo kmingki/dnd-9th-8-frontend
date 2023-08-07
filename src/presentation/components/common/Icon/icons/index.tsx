@@ -10,3 +10,19 @@ export { default as Check } from "./Check";
 export { default as InputChecked } from "./InputChecked";
 export { default as Checked } from "./Checked";
 export { default as Plus } from "./Plus";
+
+export { default as Logo } from "./Logo";
+export { default as Folder } from "./Folder";
+export { default as User } from "./User";
+
+export { default as NotExistCheckList } from "./NotExistCheckList";
+export { default as CreateButton } from "./CreateButton";
+export { default as XButton } from "./XButton";
+export { default as LoadMenu } from "./LoadMenu";
+export { default as CreateMenu } from "./CreateMenu";
+
+export { default as Chevron } from "./Chevron";
+export { default as Complate } from "./Complate";
+
+export { default as Beach } from "./Beach";
+export { default as Family } from "./Family";
