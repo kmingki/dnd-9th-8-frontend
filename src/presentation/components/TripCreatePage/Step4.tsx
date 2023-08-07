@@ -38,7 +38,7 @@ const Step4 = () => {
             <br />몇 번 체크하시겠어요?
           </div>
         </TextBox>
-        <div className="sub-text">체크할 횟수를 선택해주세요</div>
+        <div className="sub-text">설정된 횟수만큼 리스트를 체크할 수 있어요</div>
       </TextContainer>
       <Spacing size={38} />
       <ButtonWrapper>
@@ -61,7 +61,7 @@ const Step4 = () => {
       </ButtonWrapper>
       <BottomButton
         disabled={checkCount === ""}
-        text="다음"
+        text="체크리스트 만들기"
         onClick={handleClickNextBtn}
         textButton={true}
         textButtonOnClick={() => {}}
