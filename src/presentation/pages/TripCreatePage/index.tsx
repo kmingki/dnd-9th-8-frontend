@@ -7,11 +7,10 @@ import Spacing from "../../components/common/Spacing";
 import Step1 from "../../components/TripCreatePage/Step1";
 import Step2 from "../../components/TripCreatePage/Step2";
 import Step3 from "../../components/TripCreatePage/Step3";
-import Step4 from "../../components/TripCreatePage/Step4";
 
 const TripCreatePage = () => {
   const { step } = useParams();
-  const pageComponents = [<Step1 />, <Step2 />, <Step3 />, <Step4 />];
+  const pageComponents = [<Step1 />, <Step2 />, <Step3 />];
   return (
     <TripCreateTemplate>
       {Number(step) !== 1 && <BackHeader />}
