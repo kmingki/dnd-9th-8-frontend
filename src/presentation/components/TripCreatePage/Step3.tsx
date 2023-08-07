@@ -26,11 +26,15 @@ const Step3 = () => {
         <CustomCalendar />
         <Spacing size={16} />
       </CalendarWrapper>
-      <Spacing size={20} />
+      <Spacing size={23} />
       <TripRangeWrapper>
         <div className="range-box">
           <span>부터</span>
           <div className="range-text">{tripRange?.start}</div>
+        </div>
+        <div className="range-slash">
+          <span></span>
+          <div>/</div>
         </div>
         <div className="range-box">
           <span>까지</span>
@@ -58,46 +62,40 @@ const CalendarWrapper = styled.div`
 const TripRangeWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 8px;
+  gap: 30px;
+  justify-content: center;
+
   .range-box {
-    position: relative;
-    width: 100%;
-    height: 40px;
-    border: 1px solid ${COLOR.GRAY_500};
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 
-    background-color: ${COLOR.WHITE};
+    width: 115px;
+
+    color: ${COLOR.GRAY_500};
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
     text-align: center;
+    .range-text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    span {
-      position: absolute;
-      top: -5px;
-      left: 20%;
-      transform: translateX(-50%);
-
-      padding: 0 4px;
-
-      background-color: ${COLOR.WHITE};
-      color: ${COLOR.GRAY_600};
-      font-size: 10px;
-      font-style: normal;
+      color: ${COLOR.GRAY_900};
+      font-size: 18px;
       font-weight: 600;
       line-height: normal;
     }
   }
-
-  .range-text {
+  .range-slash {
     display: flex;
-    justify-content: center;
     align-items: center;
 
-    height: 100%;
-
-    color: ${COLOR.GRAY_700};
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+    font-size: 17px;
+    color: ${COLOR.GRAY_500};
   }
 `;
 export default Step3;
