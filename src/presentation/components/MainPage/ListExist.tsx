@@ -7,15 +7,28 @@ import useModal from "../../../application/hooks/useModal";
 import Modal from "@components/common/Modal";
 import COLOR from "@styles/colors";
 import { useNavigate } from "react-router-dom";
+import TemplateModal from "./components/TemplateModal";
 
 const ListExist = () => {
   const navigate = useNavigate();
   const { isShowModal, toggleModal, closeModal } = useModal();
+  const {
+    isShowModal: isShowTemplate,
+    toggleModal: toggleTemplate,
+    closeModal: closeTemplate,
+  } = useModal();
+
   const handleClickMenu = () => {
     toggleModal();
   };
+
   const handleClickCreateBtn = () => {
     navigate("/trip-create/1");
+  };
+
+  const handleClickLoadBtn = () => {
+    closeModal();
+    toggleTemplate();
   };
   return (
     <ListExistWrapper>
@@ -33,7 +46,7 @@ const ListExist = () => {
               </div>
               <div className="menu-box">
                 불러오기
-                <Icon icon="LoadMenu" />
+                <Icon icon="LoadMenu" onClick={handleClickLoadBtn} />
               </div>
               <div className="menu-box">
                 <Icon icon="XButton" onClick={handleClickMenu} />
@@ -44,6 +57,9 @@ const ListExist = () => {
           <Icon icon="CreateButton" onClick={handleClickMenu} />
         )}
       </IconWrapper>
+      <Modal isVisible={isShowTemplate} closeModal={closeTemplate}>
+        <TemplateModal />
+      </Modal>
     </ListExistWrapper>
   );
 };
