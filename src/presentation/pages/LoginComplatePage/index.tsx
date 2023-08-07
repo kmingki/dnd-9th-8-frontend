@@ -9,7 +9,7 @@ import Spacing from "../../../presentation/components/common/Spacing";
 const LoginCompletePage = () => {
   const navigate = useNavigate();
   const handleClickStart = () => {
-    navigate("/");
+    navigate("/trip-create/1");
   };
   return (
     <LoginCompleteWrapper>
@@ -25,7 +25,7 @@ const LoginCompletePage = () => {
       <IconWrapper>
         <Icon icon="LoginComplete" />
       </IconWrapper>
-      <BottomButton text="시작하기" onClick={handleClickStart} />
+      <BottomButton text="패킷 시작하기" onClick={handleClickStart} />
     </LoginCompleteWrapper>
   );
 };

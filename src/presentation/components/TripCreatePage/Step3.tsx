@@ -14,7 +14,7 @@ const Step3 = () => {
   const { tripRange } = useSelector((state: RootState) => state.createTrip);
 
   const handleClickNextBtn = () => {
-    navigate("/trip-create/4");
+    navigate("/trip-create/complate");
   };
 
   return (
@@ -43,7 +43,7 @@ const Step3 = () => {
       </TripRangeWrapper>
       <BottomButton
         disabled={tripRange?.start === "" || tripRange?.end === ""}
-        text="다음"
+        text="체크리스트 만들기"
         onClick={handleClickNextBtn}
         textButton={true}
         textButtonOnClick={() => {}}

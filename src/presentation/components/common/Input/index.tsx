@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 import Icon from "../Icon";
 import COLOR from "@styles/colors";
 
@@ -11,6 +11,7 @@ type InputType = {
   padding?: string;
   textCount?: boolean;
   maxLength?: number;
+  error?: boolean;
 };
 
 const Input = ({
@@ -21,6 +22,7 @@ const Input = ({
   padding,
   textCount,
   maxLength,
+  error,
 }: InputType) => {
   return (
     <InputWrapper>
@@ -32,8 +34,9 @@ const Input = ({
           value={value}
           padding={padding}
           maxLength={maxLength}
+          error={error}
         />
-        {value.length >= 2 && (
+        {value.length >= 2 && !error && (
           <div className="checked-icon">
             <Icon icon="InputChecked" />
           </div>
@@ -64,7 +67,7 @@ const InputContainer = styled.div`
   }
 `;
 
-const CustomInput = styled.input<{ padding?: string }>`
+const CustomInput = styled.input<{ padding?: string; error?: boolean }>`
   width: 100%;
   height: 57px;
   padding: 16.5px 15px;
@@ -92,6 +95,15 @@ const CustomInput = styled.input<{ padding?: string }>`
   &:focus {
     outline: 1px solid ${COLOR.MAIN_GREEN};
   }
+
+  ${({ error }) =>
+    error &&
+    css`
+      border: 1px solid ${COLOR.WARNING};
+      &:focus {
+        outline: none;
+      }
+    `}
 `;
 
 const TextCount = styled.div`

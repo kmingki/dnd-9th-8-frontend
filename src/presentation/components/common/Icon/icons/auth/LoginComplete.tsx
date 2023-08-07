@@ -3,122 +3,158 @@ import React from "react";
 const LoginComplete = () => {
   return (
     <svg
-      width="240"
-      height="207"
-      viewBox="0 0 240 207"
+      width="181"
+      height="206"
+      viewBox="0 0 181 206"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <ellipse
-        cx="91.1007"
-        cy="91.0409"
-        rx="90.8117"
-        ry="90.8105"
-        fill="#CBDFFF"
-        fillOpacity="0.3"
-      />
+      <ellipse cx="90.1084" cy="90.0924" rx="90" ry="90.31" fill="#CCF0E7" />
+      <g filter="url(#filter0_d_761_7736)">
+        <rect
+          x="28.8545"
+          y="49.0083"
+          width="124.365"
+          height="155.774"
+          rx="8.91956"
+          fill="#E0E3E8"
+        />
+      </g>
+      <g filter="url(#filter1_d_761_7736)">
+        <rect
+          x="40.0566"
+          y="69.8457"
+          width="101.966"
+          height="124.282"
+          rx="7.9285"
+          fill="white"
+        />
+      </g>
       <rect
-        x="41.166"
-        y="49.7305"
-        width="125.486"
-        height="156.637"
-        rx="15"
-        fill="url(#paint0_linear_632_3167)"
-      />
-      <rect
-        x="52.4688"
-        y="70.6836"
-        width="102.886"
-        height="124.971"
-        rx="9.37769"
-        fill="white"
-      />
-      <rect
-        x="102.973"
-        y="84.2754"
-        width="42.7256"
-        height="41.0821"
-        rx="5.62662"
+        x="90.1084"
+        y="83.3643"
+        width="42.3437"
+        height="40.8557"
+        rx="5.57633"
         fill="#00B488"
-        fillOpacity="0.12"
-      />
-      <path
-        d="M121.555 93.6257C120.453 92.721 119.016 92.2302 117.533 92.2516C116.05 92.273 114.631 92.8052 113.56 93.7413C112.49 94.6774 111.847 95.9483 111.76 97.2989C111.673 98.6496 112.15 99.9802 113.094 101.024L126.139 113.514C126.685 114.037 127.341 114.454 128.068 114.739C128.795 115.025 129.578 115.174 130.37 115.176C131.157 115.181 131.937 115.04 132.664 114.764C133.391 114.488 134.049 114.081 134.6 113.568L174.44 76.0422C174.98 75.5353 175.406 74.9363 175.692 74.2794C175.979 73.6225 176.121 72.9206 176.11 72.2138C176.099 71.5069 175.935 70.8089 175.629 70.1596C175.322 69.5104 174.878 68.9226 174.323 68.4298C173.767 67.937 173.111 67.5488 172.391 67.2875C171.671 67.0262 170.901 66.8968 170.126 66.9068C169.352 66.9167 168.587 67.0658 167.875 67.3455C167.163 67.6252 166.519 68.0301 165.979 68.537L130.428 102.096L121.555 93.6257Z"
-        fill="url(#paint1_linear_632_3167)"
+        fill-opacity="0.12"
       />
       <rect
-        x="62.5352"
-        y="144.125"
-        width="82.6286"
-        height="7.06436"
-        rx="2.81331"
+        width="8.60979"
+        height="19.1744"
+        rx="4.3049"
+        transform="matrix(0.710531 -0.703666 -0.703667 -0.71053 117.155 112.782)"
+        fill="#33C3A0"
+      />
+      <rect
+        width="9.16632"
+        height="38.5066"
+        rx="4.58316"
+        transform="matrix(-0.736852 -0.676054 -0.676055 0.736851 144.951 86.6909)"
+        fill="#99E1CF"
+      />
+      <rect
+        x="50.0332"
+        y="142.884"
+        width="81.8901"
+        height="7.02543"
+        rx="2.78816"
         fill="#E7EAF0"
       />
       <rect
-        x="62.5352"
-        y="156.477"
-        width="60.9893"
-        height="7.06436"
-        rx="2.81331"
+        x="50.0332"
+        y="155.168"
+        width="60.4442"
+        height="7.02543"
+        rx="2.78816"
         fill="#E7EAF0"
       />
       <rect
-        x="62.5352"
-        y="170.453"
-        width="37.359"
-        height="7.06436"
-        rx="2.81331"
+        x="50.0332"
+        y="169.067"
+        width="37.0251"
+        height="7.02543"
+        rx="2.78816"
         fill="#E7EAF0"
       />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M115.48 42.7715C115.48 42.7713 115.48 42.7711 115.48 42.7709C115.48 36.0392 110.022 30.582 103.291 30.582C96.5588 30.582 91.1016 36.0392 91.1016 42.7709C91.1016 42.7711 91.1016 42.7713 91.1016 42.7715H79.5331C75.9077 42.7715 72.9688 45.7105 72.9688 49.3359V53.0722C72.9688 56.6976 75.9077 59.6366 79.5331 59.6366H127.053C130.678 59.6366 133.617 56.6976 133.617 53.0722V49.3359C133.617 45.7105 130.678 42.7715 127.053 42.7715H115.48Z"
-        fill="url(#paint2_linear_632_3167)"
+        d="M102.504 42.0884C102.504 42.0882 102.504 42.088 102.504 42.0877C102.504 35.3931 97.0955 29.9661 90.4239 29.9661C83.7522 29.9661 78.3438 35.3931 78.3438 42.0877C78.3438 42.088 78.3438 42.0882 78.3438 42.0884H66.8788C63.2858 42.0884 60.373 45.0011 60.373 48.5941V52.3548C60.373 55.9478 63.2858 58.8605 66.8788 58.8605H113.974C117.567 58.8605 120.48 55.9478 120.48 52.3548V48.5941C120.48 45.0011 117.567 42.0884 113.974 42.0884H102.504Z"
+        fill="#99E1CF"
       />
-      <ellipse cx="103.292" cy="42.7688" rx="4.95053" ry="4.95047" fill="white" />
-      <path
-        d="M218.028 142.914L229.835 154.72L191.512 193.008L178.471 194.108L179.738 181.235L218.028 142.914Z"
-        fill="#E0E2E5"
-      />
-      <path
-        d="M231.646 152.849L219.824 141.027L226.937 133.948C227.563 133.326 228.409 132.977 229.292 132.977C230.174 132.977 231.02 133.326 231.646 133.948L238.726 141.027C239.039 141.338 239.287 141.707 239.457 142.114C239.626 142.521 239.714 142.957 239.714 143.398C239.714 143.839 239.626 144.276 239.457 144.683C239.287 145.09 239.039 145.459 238.726 145.769L231.646 152.849Z"
-        fill="#E0E2E5"
-      />
+      <ellipse cx="90.4258" cy="42.0863" rx="4.90629" ry="4.92319" fill="white" />
       <defs>
-        <linearGradient
-          id="paint0_linear_632_3167"
-          x1="167"
-          y1="36"
-          x2="41"
-          y2="206"
-          gradientUnits="userSpaceOnUse"
+        <filter
+          id="filter0_d_761_7736"
+          x="23.8992"
+          y="44.053"
+          width="134.275"
+          height="165.685"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
         >
-          <stop stopColor="#C8CDD6" />
-          <stop offset="1" stopColor="#ADC4FF" />
-        </linearGradient>
-        <linearGradient
-          id="paint1_linear_632_3167"
-          x1="149.5"
-          y1="78.5"
-          x2="130"
-          y2="121"
-          gradientUnits="userSpaceOnUse"
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset />
+          <feGaussianBlur stdDeviation="2.47766" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.524341 0 0 0 0 0.514708 0 0 0 0 0.635116 0 0 0 0.06 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_761_7736"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_761_7736"
+            result="shape"
+          />
+        </filter>
+        <filter
+          id="filter1_d_761_7736"
+          x="35.1013"
+          y="64.8904"
+          width="111.877"
+          height="134.193"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
         >
-          <stop stopColor="#33C3A0" />
-          <stop offset="1" stopColor="#66F5D3" />
-        </linearGradient>
-        <linearGradient
-          id="paint2_linear_632_3167"
-          x1="103.293"
-          y1="30.582"
-          x2="103.293"
-          y2="59.6366"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#B8B2FF" />
-          <stop offset="1" stopColor="#7468FF" />
-        </linearGradient>
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feColorMatrix
+            in="SourceAlpha"
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+            result="hardAlpha"
+          />
+          <feOffset />
+          <feGaussianBlur stdDeviation="2.47766" />
+          <feComposite in2="hardAlpha" operator="out" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0.524341 0 0 0 0 0.514708 0 0 0 0 0.635116 0 0 0 0.06 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow_761_7736"
+          />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="effect1_dropShadow_761_7736"
+            result="shape"
+          />
+        </filter>
       </defs>
     </svg>
   );

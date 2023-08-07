@@ -1,6 +1,7 @@
 const COLOR = {
   BASE_100: "#242424",
   BASE_80: "#707070",
+  WARNING: "#FF4667",
 
   MAIN_GREEN: "#00B488",
   MAIN_BLUE: "#6B5FFB",

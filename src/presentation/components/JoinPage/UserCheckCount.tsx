@@ -1,27 +1,29 @@
 import React from "react";
 import { styled } from "styled-components";
 import Spacing from "../common/Spacing";
-import TextBox from "./components/TextBox";
+
 import COLOR from "@styles/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store";
 import Button from "../common/Button";
 import BottomButton from "../common/BottomButton";
 import { useNavigate } from "react-router-dom";
-import { changeCreateTripState } from "../../../application/reducer/slices/createTrip/createTripSlice";
+import TextBox from "@components/TripCreatePage/components/TextBox";
+import { changeUserInfo } from "../../../application/reducer/slices/user/userInfoSlice";
+import BackHeader from "@components/common/BackHeader";
 
-const Step4 = () => {
+const UserCheckCount = () => {
   const navigate = useNavigate();
   const disptach = useDispatch();
-  const { checkCount } = useSelector((state: RootState) => state.createTrip);
+  const { checkCount } = useSelector((state: RootState) => state.userInfo);
 
   const handleClickNextBtn = () => {
-    navigate("/");
+    navigate("/login/complate");
   };
 
   const handleClickCount = (count: string) => {
     disptach(
-      changeCreateTripState({
+      changeUserInfo({
         type: "checkCount",
         value: count.split("번")[0],
       })
@@ -29,8 +31,9 @@ const Step4 = () => {
   };
 
   return (
-    <StepWrapper>
-      <Spacing size={28} />
+    <UserCheckWrapper>
+      <BackHeader />
+      <Spacing size={60} />
       <TextContainer>
         <TextBox>
           <div>
@@ -67,11 +70,13 @@ const Step4 = () => {
         textButtonOnClick={() => {}}
         textButtonChild="다음에 할래요"
       />
-    </StepWrapper>
+    </UserCheckWrapper>
   );
 };
 
-const StepWrapper = styled.div``;
+const UserCheckWrapper = styled.div`
+  padding: 0 20px;
+`;
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -96,4 +101,4 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-export default Step4;
+export default UserCheckCount;
