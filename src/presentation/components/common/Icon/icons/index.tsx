@@ -24,3 +24,4 @@ export { default as CreateMenu } from "./CreateMenu";
 export { default as Chevron } from "./Chevron";
 
 export { default as Beach } from "./Beach";
+export { default as Complate } from "./Complate";
