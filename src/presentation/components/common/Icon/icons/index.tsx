@@ -10,3 +10,7 @@ export { default as Check } from "./Check";
 export { default as InputChecked } from "./InputChecked";
 export { default as Checked } from "./Checked";
 export { default as Plus } from "./Plus";
+export { default as Calendar } from "./Calendar";
+export { default as MoreOutlined } from "./MoreOutlined";
+export { default as UpOutlined } from "./UpOutlined";
+export { default as DownOutlined } from "./DownOutlined";

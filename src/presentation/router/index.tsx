@@ -3,7 +3,7 @@ import LoginPage from "../pages/LoginPage";
 import TripCreatePage from "../pages/TripCreatePage";
 import TripDetailPage from "../pages/TripDetailPage";
 import LoginCompletePage from "../pages/LoginComplatePage";
-import { CheckListPage } from "@pages";
+import CheckListPage from "../pages/CheckListPage";
 
 const Router = () => {
   return (
