@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 
 type ButtonType = {
   text: string;
-  onClick: any;
+  onClick?: any;
 };
 
 const EditMyPageButton = ({ text, onClick }: ButtonType) => {
