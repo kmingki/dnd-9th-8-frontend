@@ -27,6 +27,7 @@ const BackHeaderWrapper = styled.div<{ color?: string }>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 
   padding: 20px 0;
 
@@ -37,8 +38,9 @@ const BackHeaderWrapper = styled.div<{ color?: string }>`
   line-height: 22px;
 
   .text {
+    flex-grow: 1;
     text-align: center;
-    margin: 0 auto;
+    margin-left: -24px;
   }
 `;
 export default BackHeader;

@@ -25,6 +25,7 @@ const CloseModalHeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 
   padding: 20px 0;
 
@@ -35,8 +36,9 @@ const CloseModalHeaderWrapper = styled.div`
   line-height: 22px;
 
   .text {
+    flex-grow: 1;
     text-align: center;
-    margin: 0 auto;
+    margin-left: -24px;
   }
 `;
 export default CloseModalHeader;
