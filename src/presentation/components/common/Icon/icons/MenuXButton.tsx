@@ -1,6 +1,6 @@
 import React from "react";
 
-const XButton = () => {
+const MenuXButton = () => {
   return (
     <svg
       width="75"
@@ -61,4 +61,4 @@ const XButton = () => {
   );
 };
 
-export default XButton;
+export default MenuXButton;

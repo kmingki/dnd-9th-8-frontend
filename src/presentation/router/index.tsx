@@ -6,6 +6,8 @@ import LoginCompletePage from "../pages/LoginComplatePage";
 import MainPage from "../pages/MainPage";
 import CreateComplatePage from "../pages/CreateComplatePage";
 import JoinPage from "../pages/JoinPage";
+import MyPage from "../pages/MyPage";
+import EditMyInfoPage from "../pages/EditMyInfoPage";
 
 const Router = () => {
   return (
@@ -18,6 +20,8 @@ const Router = () => {
         <Route path="/trip-create/:step" element={<TripCreatePage />} />
         <Route path="/trip-create/complate" element={<CreateComplatePage />} />
         <Route path="/trip/:trip-id" element={<TripDetailPage />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/edit" element={<EditMyInfoPage />} />
       </Routes>
     </BrowserRouter>
   );

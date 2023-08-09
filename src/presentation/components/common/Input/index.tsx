@@ -11,7 +11,8 @@ type InputType = {
   padding?: string;
   textCount?: boolean;
   maxLength?: number;
-  error?: boolean;
+  error?: string;
+  success?: string;
 };
 
 const Input = ({
@@ -23,6 +24,7 @@ const Input = ({
   textCount,
   maxLength,
   error,
+  success,
 }: InputType) => {
   return (
     <InputWrapper>
@@ -36,7 +38,7 @@ const Input = ({
           maxLength={maxLength}
           error={error}
         />
-        {value.length >= 2 && !error && (
+        {success === "true" && (
           <div className="checked-icon">
             <Icon icon="InputChecked" />
           </div>
@@ -67,7 +69,7 @@ const InputContainer = styled.div`
   }
 `;
 
-const CustomInput = styled.input<{ padding?: string; error?: boolean }>`
+const CustomInput = styled.input<{ padding?: string; error?: string }>`
   width: 100%;
   height: 57px;
   padding: 16.5px 15px;
@@ -76,7 +78,7 @@ const CustomInput = styled.input<{ padding?: string; error?: boolean }>`
   border-radius: 12px;
   border: 1px solid ${COLOR.GRAY_400};
   outline: none;
-  background-color: ${COLOR.WHITE};
+  background-color: transparent;
 
   color: ${COLOR.GRAY_800};
   font-size: 18px;
@@ -97,7 +99,7 @@ const CustomInput = styled.input<{ padding?: string; error?: boolean }>`
   }
 
   ${({ error }) =>
-    error &&
+    error === "true" &&
     css`
       border: 1px solid ${COLOR.WARNING};
       &:focus {
