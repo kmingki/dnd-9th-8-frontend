@@ -15,7 +15,11 @@ const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
   const [isError, setIsError] = useState(false);
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    let value = e.target.value;
+
+    if (value.length > 5) {
+      value = value.substring(0, 5);
+    }
 
     const pattern = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$/;
     if (pattern.test(value)) {
