@@ -76,7 +76,7 @@ const CustomInput = styled.input<{ padding?: string; error?: boolean }>`
   border-radius: 12px;
   border: 1px solid ${COLOR.GRAY_400};
   outline: none;
-  background-color: ${COLOR.WHITE};
+  background-color: transparent;
 
   color: ${COLOR.GRAY_800};
   font-size: 18px;
