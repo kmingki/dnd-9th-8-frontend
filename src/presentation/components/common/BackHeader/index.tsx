@@ -18,7 +18,7 @@ const BackHeader = ({ text, color }: BackHeaderType) => {
   return (
     <BackHeaderWrapper color={color}>
       <Icon icon="Arrow" fill={color} onClick={handleClickBack} />
-      {text}
+      <div className="text">{text}</div>
     </BackHeaderWrapper>
   );
 };
@@ -26,7 +26,6 @@ const BackHeader = ({ text, color }: BackHeaderType) => {
 const BackHeaderWrapper = styled.div<{ color?: string }>`
   display: flex;
   flex-direction: row;
-  gap: 10px;
   align-items: center;
 
   padding: 20px 0;
@@ -36,5 +35,10 @@ const BackHeaderWrapper = styled.div<{ color?: string }>`
   font-style: normal;
   font-weight: 500;
   line-height: 22px;
+
+  .text {
+    text-align: center;
+    margin: 0 auto;
+  }
 `;
 export default BackHeader;
