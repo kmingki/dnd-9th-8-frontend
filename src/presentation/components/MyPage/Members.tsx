@@ -10,8 +10,11 @@ import useModal from "../../../application/hooks/useModal";
 import LeaveModal from "./components/LeaveModal";
 import Modal from "@components/common/Modal";
 import LogoutModal from "./components/LogoutModal";
+import { useNavigate } from "react-router-dom";
 
 const Members = () => {
+  const navigate = useNavigate();
+
   const user = {
     name: "DND",
     email: "dnd00@gmail.com",
@@ -34,17 +37,27 @@ const Members = () => {
     toggleLogoutModal();
   };
 
+  const handleClickEditInfo = () => {
+    navigate("/mypage/edit");
+  };
+
   return (
     <MembersWrapper>
       <Spacing size={38} />
       <InfoWrapper>
+        <div className="icon-wrapper">
+          <Icon icon="Profile" width={80} height={80} />
+          <div className="edit-icon">
+            <Icon icon="EditProfile" onClick={handleClickEditInfo} />
+          </div>
+        </div>
+
         <div className="info-text">
           <div>
             <span className="name">{user.name}</span>님
           </div>
           <span className="email">{user.email}</span>
         </div>
-        <Icon icon="Profile" width={80} height={80} />
       </InfoWrapper>
       <Spacing size={23} />
       <Button
@@ -72,9 +85,7 @@ const Members = () => {
           />
         </div>
       </Button>
-      <Spacing size={20} />
-      <MyPageButton text="회원 정보 관리" onClick={() => {}} />
-      <Spacing size={14} />
+      <Spacing size={21} />
       <MyPageButton text="로그아웃" onClick={handleClickLogout} />
       <LeaveButton onClick={handleClickLeave}>탈퇴하기</LeaveButton>
 
@@ -107,9 +118,17 @@ const MembersWrapper = styled.div`
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 20px;
   align-items: center;
 
+  .icon-wrapper {
+    position: relative;
+    .edit-icon {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
   .info-text {
     display: flex;
     flex-direction: column;
