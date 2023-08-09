@@ -2,6 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import Icon from "@components/common/Icon";
 import COLOR from "@styles/colors";
+import { Link } from "react-router-dom";
 
 const Header = ({ data }: { data: boolean }) => {
   // 데이터 유무에 따라 색상 바뀜
@@ -18,11 +19,13 @@ const Header = ({ data }: { data: boolean }) => {
           color={data ? COLOR.WHITE : COLOR.GRAY_500}
           fill={data ? COLOR.WHITE : COLOR.GRAY_500}
         />
-        <Icon
-          icon="User"
-          color={data ? COLOR.WHITE : COLOR.GRAY_500}
-          fill={data ? COLOR.WHITE : COLOR.GRAY_500}
-        />
+        <Link to="/mypage">
+          <Icon
+            icon="User"
+            color={data ? COLOR.WHITE : COLOR.GRAY_500}
+            fill={data ? COLOR.WHITE : COLOR.GRAY_500}
+          />
+        </Link>
       </div>
     </HeaderWrapper>
   );
