@@ -10,7 +10,7 @@ const EditProfile = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect width="24" height="24" rx="12" fill="white" />
-      <g clip-path="url(#clip0_744_9431)">
+      <g clipPath="url(#clip0_744_9431)">
         <path
           fillRule="evenodd"
           clipRule="evenodd"
