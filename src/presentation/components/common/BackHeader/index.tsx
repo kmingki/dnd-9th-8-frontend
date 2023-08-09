@@ -19,6 +19,7 @@ const BackHeader = ({ text, color }: BackHeaderType) => {
     <BackHeaderWrapper color={color}>
       <Icon icon="Arrow" fill={color} onClick={handleClickBack} />
       <div className="text">{text}</div>
+      <div className="emptySpace"></div>
     </BackHeaderWrapper>
   );
 };
@@ -27,18 +28,23 @@ const BackHeaderWrapper = styled.div<{ color?: string }>`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 
   padding: 20px 0;
 
   color: ${({ color }) => (color ? color : "#292929")};
   font-size: 22px;
-  font-style: normal;
   font-weight: 500;
   line-height: 22px;
 
   .text {
+    flex-grow: 1;
     text-align: center;
-    margin: 0 auto;
+  }
+  .emptySpace {
+    width: 24px;
+    height: 25px;
+    visibility: hidden;
   }
 `;
 export default BackHeader;
