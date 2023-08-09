@@ -12,6 +12,7 @@ type InputType = {
   textCount?: boolean;
   maxLength?: number;
   error?: string;
+  success?: string;
 };
 
 const Input = ({
@@ -23,6 +24,7 @@ const Input = ({
   textCount,
   maxLength,
   error,
+  success,
 }: InputType) => {
   return (
     <InputWrapper>
@@ -36,7 +38,7 @@ const Input = ({
           maxLength={maxLength}
           error={error}
         />
-        {value.length >= 2 && !error && (
+        {success === "true" && (
           <div className="checked-icon">
             <Icon icon="InputChecked" />
           </div>

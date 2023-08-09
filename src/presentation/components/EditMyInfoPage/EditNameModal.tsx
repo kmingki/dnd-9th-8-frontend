@@ -51,6 +51,7 @@ const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
         textCount={true}
         maxLength={5}
         error={isError ? "true" : "false"}
+        success={!isError && name ? "true" : "false"}
       />
       <BottomButton text="완료" onClick={handleClickNextBtn} />
     </EditNameModalWrapper>

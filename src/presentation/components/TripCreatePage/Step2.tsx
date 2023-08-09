@@ -48,6 +48,7 @@ const Step2 = () => {
         value={tripName || ""}
         textCount={true}
         maxLength={10}
+        success={tripName && tripName.length < 2 ? "false" : "true"}
       />
       <BottomButton
         disabled={tripName === "" ? true : false}
