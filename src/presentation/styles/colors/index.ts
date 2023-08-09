@@ -17,7 +17,7 @@ const COLOR = {
   GRAY_300: "#D1D5DC",
   GRAY_200: "#E0E3E8",
   GRAY_100: "#E9ECF0",
-  GRAY_50: "#F2F6FB",
+  GRAY_50: "#F7F9FC",
 
   GREEN_900: "#004A56",
   GREEN_800: "#006368",
