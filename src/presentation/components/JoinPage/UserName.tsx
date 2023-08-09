@@ -35,7 +35,7 @@ const UserName = () => {
   return (
     <UserNameWrapper>
       <Spacing size={95} />
-      <TextContainer error={isError}>
+      <TextContainer error={String(isError)}>
         <TextBox>
           <div>
             만나서 반가워요,
@@ -53,7 +53,7 @@ const UserName = () => {
         value={name || ""}
         textCount={true}
         maxLength={5}
-        error={isError}
+        error={isError ? "true" : "false"}
       />
       <BottomButton disabled={isError} text="다음" onClick={handleClickNextBtn} />
     </UserNameWrapper>
@@ -64,12 +64,12 @@ const UserNameWrapper = styled.div`
   padding: 0 20px;
 `;
 
-const TextContainer = styled.div<{ error: boolean }>`
+const TextContainer = styled.div<{ error: string }>`
   display: flex;
   flex-direction: column;
   gap: 8px;
   .sub-text {
-    color: ${({ error }) => (error ? COLOR.WARNING : COLOR.GRAY_600)};
+    color: ${({ error }) => (error === "true" ? COLOR.WARNING : COLOR.GRAY_600)};
     font-size: 16px;
     font-style: normal;
     font-weight: 600;

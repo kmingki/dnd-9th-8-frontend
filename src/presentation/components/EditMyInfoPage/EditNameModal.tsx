@@ -35,7 +35,7 @@ const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
     <EditNameModalWrapper>
       <CloseModalHeader text="이름 변경" closeModal={closeModal} />
       <Spacing size={30} />
-      <TextContainer error={isError}>
+      <TextContainer error={String(isError)}>
         한글 최대 5자 / 공백,영문,숫자,특수기호 불가
       </TextContainer>
       <Spacing size={14} />
@@ -46,7 +46,7 @@ const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
         value={name || ""}
         textCount={true}
         maxLength={5}
-        error={isError}
+        error={isError ? "true" : "false"}
       />
       <BottomButton text="완료" onClick={handleClickNextBtn} />
     </EditNameModalWrapper>
@@ -61,12 +61,12 @@ const EditNameModalWrapper = styled.div`
   background-color: ${COLOR.GRAY_50};
 `;
 
-const TextContainer = styled.div<{ error: boolean }>`
+const TextContainer = styled.div<{ error: string }>`
   display: flex;
   flex-direction: column;
   gap: 8px;
 
-  color: ${({ error }) => (error ? COLOR.WARNING : COLOR.GRAY_600)};
+  color: ${({ error }) => (error === "true" ? COLOR.WARNING : COLOR.GRAY_600)};
   font-size: 16px;
   font-style: normal;
   font-weight: 600;

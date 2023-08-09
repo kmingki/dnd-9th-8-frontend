@@ -11,7 +11,7 @@ type InputType = {
   padding?: string;
   textCount?: boolean;
   maxLength?: number;
-  error?: boolean;
+  error?: string;
 };
 
 const Input = ({
@@ -67,7 +67,7 @@ const InputContainer = styled.div`
   }
 `;
 
-const CustomInput = styled.input<{ padding?: string; error?: boolean }>`
+const CustomInput = styled.input<{ padding?: string; error?: string }>`
   width: 100%;
   height: 57px;
   padding: 16.5px 15px;
@@ -97,7 +97,7 @@ const CustomInput = styled.input<{ padding?: string; error?: boolean }>`
   }
 
   ${({ error }) =>
-    error &&
+    error === "true" &&
     css`
       border: 1px solid ${COLOR.WARNING};
       &:focus {
