@@ -49,7 +49,7 @@ const ListExist = () => {
                 <Icon icon="LoadMenu" onClick={handleClickLoadBtn} />
               </div>
               <div className="menu-box">
-                <Icon icon="XButton" onClick={handleClickMenu} />
+                <Icon icon="MenuXButton" onClick={handleClickMenu} />
               </div>
             </MainMenu>
           </Modal>
