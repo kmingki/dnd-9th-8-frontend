@@ -16,6 +16,7 @@ const CheckListPage = () => {
     
     const [newCheckList, setNewCheckList] = useState<State>({ checkListState : []}); 
 
+
     const onClickAdd = () => {
         
         setNewCheckList(prev => produce(prev, draft => {
@@ -24,15 +25,17 @@ const CheckListPage = () => {
         }));
     }
 
-    const onClickPlusItem = (checkListId: number, id: number, value: string) => {
+    const onClickPlusItem = (checkListId: number, id: number) => {
         
         setNewCheckList(prev => produce(prev , draft => {
             draft?.checkListState.forEach((checklist)=>{
                 if (checklist.id === checkListId) {
-                    checklist.list.push({id : id , isChecked: false , title : value});
+                    checklist.list.push({id : id , isChecked: false, title : ''});
                 }
             })
         }));
+
+        
     }
 
     const onChangeCheckItem = (checkListId:number, id:number, isChecked:boolean) => {
@@ -47,20 +50,50 @@ const CheckListPage = () => {
             })
         }));
 
-
     };
 
+    const onChangeCheckItemTitle = (checkListId:number, id:number, title:string) => {
 
+        setNewCheckList(prev => produce(prev , draft => {
+            draft?.checkListState.forEach((checklist)=>{
+                if (checklist.id === checkListId) {
+                    checklist.list.forEach((item)=>{
+                        item.id === id && (item.title = title);
+                    })
+                }
+            })
+        }));
+    };
     
+
+    const onClickDeleteCheckItem = (checkListId: number, id:number) => {
+        setNewCheckList(prev => produce(prev , draft => {
+            draft?.checkListState.forEach((checklist)=>{
+                if (checklist.id === checkListId) {
+                    checklist.list = checklist.list.filter((item)=>{
+                        return item.id !== id;
+                    })
+                }
+            })
+        }));
+    };
+
     return (
       <GreyTemplate>
         <div style={{ display:'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <BackHeader />
-        <div>해야 할 일</div>
-        <div>편집</div>
+        <Title>{'예약 및 확인'}</Title>
+        <div>완료</div>
         </div>
         
+        <TextWrapper>
+            남은 체크리스트
+        </TextWrapper>
         <TextContainer>
+            <CountWrapper>
+                <Count>{'11'}</Count><Total>&nbsp;/&nbsp;{'11'}</Total>
+                
+            </CountWrapper>
             <Description>
                     {'도쿄 여행'}
             </Description>
@@ -70,16 +103,19 @@ const CheckListPage = () => {
                     {'3박 4일'}
             </Description>
         </TextContainer>
+        
         <TextContainer>
-            <ChecklistNumber>
-                {'11'}
-            </ChecklistNumber>
-            <Title>
-                {'개의 체크리스트가 남아 있어요'}
-            </Title>
         </TextContainer>
         {newCheckList && (newCheckList.checkListState.map((item, index) => (
-          <AddCheckList id={item.id} name={item.name} list={item.list} onChangeCheckItem={onChangeCheckItem} onClickPlusItem={onClickPlusItem}></AddCheckList>
+          <AddCheckList 
+          id={item.id} 
+          name={item.name} list={item.list} 
+          onChangeCheckItem={onChangeCheckItem} 
+          onClickPlusItem={onClickPlusItem}
+          onChangeCheckItemTitle={onChangeCheckItemTitle}
+          onClickDeleteCheckItem={onClickDeleteCheckItem}
+          />
+          
        )))
        }
 
@@ -95,25 +131,45 @@ const CheckListPage = () => {
     );
   };
 
+const TextWrapper = styled.div`
+    margin-top : 35.52px;
+    font-weight : 600;
+    font-size : 22px;
+    line-height: 20px;
+    color: ${COLOR.GRAY_800};
+`;
+
+const CountWrapper = styled.div`
+    display: flex;
+
+    margin-right: 17px;
+`;
+
+const Count = styled.div`
+    font-weight : 600;
+    font-size : 28px;
+    line-height: 30px;
+    color: ${COLOR.MAIN_GREEN};
+`;
+
+const Total = styled.div`
+    font-weight : 500;
+    font-size : 18px;
+    line-height: 30px;
+    color: ${COLOR.GRAY_500};
+`;
 
 const TextContainer = styled.div`
+    margin-top: 8px;
     width:100%;
-    margin-left: 15px;
     display: flex;
     align-items: center;
 `;
 
-const ChecklistNumber = styled.div`
-    margin-right: 8px;
-    color : ${COLOR.MAIN_GREEN};
-    font-weight : 500;
-    font-size : 34px;
-    line-height: 34px;
-`;
-
 const Title = styled.div`
     font-weight : 700;
-    font-size: 26px;
+    font-size: 18px;
+    line-height: 25.2px;
 `;
 
 const Dot = styled.div`

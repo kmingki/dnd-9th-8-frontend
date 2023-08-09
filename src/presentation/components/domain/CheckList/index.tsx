@@ -34,14 +34,17 @@ const CheckList = () => {
 }
 */
 
-type checkListType = { id: number; name: string; list: listItem[], onChangeCheckItem: any, onClickPlusItem: any};
+type checkListType = { id: number; name: string; list: listItem[], onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
 
 
-const AddCheckList = ({id, name, list, onChangeCheckItem, onClickPlusItem}: checkListType) => {
+const AddCheckList = ({id, name, list, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
 
     const [title, setTitle] = useState('');
+    const [isOpen, setIsOpen] = useState(true);
 
-    
+    const onClickOpenCheckList = () => {
+        setIsOpen(prev=>!prev);
+    };
 
     return (
         <CheckListWrapper>
@@ -51,22 +54,58 @@ const AddCheckList = ({id, name, list, onChangeCheckItem, onClickPlusItem}: chec
                     <InputWrapper placeholder={name} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{setTitle(e.target.value)}} value={title}/>
                     <TitleLeft>
                     <Indicator>{list.filter((item)=>item.isChecked === true).length}/{list.length}</Indicator>
-                    <Icon icon='DownOutlined'/>
+                    {isOpen? 
+                    <IconWrapper>
+                        <Icon icon='UpOutlined' onClick={onClickOpenCheckList}/>
+                    </IconWrapper>:
+                    <IconWrapper>
+                        <Icon icon='DownOutlined' onClick={onClickOpenCheckList}/>
+                    </IconWrapper>}
                 </TitleLeft>
-
                 </Title>
-                
             </Head>
-            <CheckItemWrapper>
-            {list.map((item, index) =>
-                <CheckItem checkListId={id} id={item.id} isChecked={item.isChecked} title={item.title} onChangeCheckItem={onChangeCheckItem}/>
-            )}
-            <AddCheckItem checkListId={id} id={list.length} onClickPlusItem={onClickPlusItem}/>
-            </CheckItemWrapper>
+
+            {isOpen && 
+            <>
+                <CheckItemWrapper>
+                    {list.map((item, index) =>
+                        <CheckItem 
+                        checkListId={id} 
+                        id={item.id} 
+                        isChecked={item.isChecked} 
+                        title={item.title} 
+                        onChangeCheckItem={onChangeCheckItem} 
+                        onChangeCheckItemTitle={onChangeCheckItemTitle}
+                        onClickDeleteCheckItem={onClickDeleteCheckItem}
+                        />
+                    )} 
+                    <AddCheckItem checkListId={id} id={list.length} onClickPlusItem={onClickPlusItem}/>
+                </CheckItemWrapper>
+                <FinishButtonWrapper>
+                    <FinishButton>
+                        완료
+                    </FinishButton>
+                </FinishButtonWrapper>
+            </>
+            }
         </CheckListWrapper>
     );
 }
 
+const FinishButtonWrapper = styled.div`
+    display : flex;
+    justify-content: flex-end;
+    margin-top : 10px;
+`;
+
+const FinishButton = styled.button`
+    all : unset;
+    border : 0px;
+    font-weight: 500;
+    font-size : 16px;
+    line-height: 16px;
+    color : ${Color.MAIN_GREEN};
+`;
 
 const CheckListWrapper = styled.div`
     padding: 19px 17px;
@@ -95,6 +134,7 @@ const Indicator = styled.div`
     background-color: ${Color.WHITE};
     border-radius: 38px;
     box-shadow: 0px 0px 4px 0px #0000001A;
+    margin-right : 9px;
 `;
 
 const TitleLeft = styled.div`
@@ -116,6 +156,13 @@ const InputWrapper = styled.input`
     &:focus {
         outline:none;
     }
+`;
+
+
+const IconWrapper = styled.button`
+    all : unset;
+    border : 0px;
+    padding-right: 8px;
 `;
 
 export { /*CheckList,*/ AddCheckList };
