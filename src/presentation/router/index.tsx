@@ -5,7 +5,6 @@ import TripDetailPage from "../pages/TripDetailPage";
 import LoginCompletePage from "../pages/LoginComplatePage";
 import MainPage from "../pages/MainPage";
 import CreateComplatePage from "../pages/CreateComplatePage";
-import JoinPage from "../pages/JoinPage";
 import MyPage from "../pages/MyPage";
 import EditMyInfoPage from "../pages/EditMyInfoPage";
 
@@ -16,7 +15,6 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/login/complate" element={<LoginCompletePage />} />
-        <Route path="/join" element={<JoinPage />} />
         <Route path="/trip-create/:step" element={<TripCreatePage />} />
         <Route path="/trip-create/complate" element={<CreateComplatePage />} />
         <Route path="/trip/:trip-id" element={<TripDetailPage />} />
