@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store";
 import { useNavigate } from "react-router-dom";
 import { initializeCreateTripInfo } from "../../../application/reducer/slices/createTrip/createTripSlice";
+import CalendarRange from "@components/common/CalendarRange";
 
 const Step3 = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,8 @@ const Step3 = () => {
       <Spacing size={26} />
       <CalendarWrapper>
         <CustomCalendar />
-        <Spacing size={16} />
+        <Spacing size={23} />
+        <CalendarRange />
       </CalendarWrapper>
       <BottomButton
         disabled={tripRange?.start === "" || tripRange?.end === ""}
