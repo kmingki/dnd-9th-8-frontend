@@ -22,7 +22,9 @@ const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
     }
 
     const pattern = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$/;
-    if (pattern.test(value)) {
+    if (value === "") {
+      setIsError(false);
+    } else if (pattern.test(value)) {
       setIsError(false);
     } else {
       setIsError(true);

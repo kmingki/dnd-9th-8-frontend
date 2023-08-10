@@ -16,7 +16,7 @@ const LeaveModal = ({ closeModal }: { closeModal: () => void }) => {
   return (
     <LeaveModalWrapper>
       <Text
-        text="탈퇴하기"
+        text="정말 탈퇴하시겠어요?"
         color="#191F28"
         fontSize={20}
         lineHeight="28px"
@@ -25,22 +25,15 @@ const LeaveModal = ({ closeModal }: { closeModal: () => void }) => {
       <Spacing size={10} />
       <div className="content">
         <Text
-          text="탈퇴하시면 현재 계정으로 작성한 체크리스트"
+          text="탈퇴 버튼 선택 시, "
           color="#6B7684"
           fontSize={15}
           lineHeight="22px"
           fontWeight={500}
         />
         <Text
-          text="템플릿을 수정하거나 삭제할 수 없습니다."
+          text="계정은 삭제되며 복구되지 않습니다"
           color="#6B7684"
-          fontSize={15}
-          lineHeight="22px"
-          fontWeight={500}
-        />
-        <Text
-          text="정말 탈퇴하시겠습니까?"
-          color={COLOR.MAIN_GREEN}
           fontSize={15}
           lineHeight="22px"
           fontWeight={500}
