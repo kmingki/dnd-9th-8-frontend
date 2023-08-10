@@ -6,7 +6,10 @@ import TextBox from "./components/TextBox";
 import OnboardingButton from "../common/OnboardingButton";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store";
-import { changeCreateTripState } from "../../../application/reducer/slices/createTrip/createTripSlice";
+import {
+  changeCreateTripState,
+  initializeCreateTripInfo,
+} from "../../../application/reducer/slices/createTrip/createTripSlice";
 import BottomButton from "../common/BottomButton";
 import { useNavigate } from "react-router-dom";
 
@@ -30,6 +33,10 @@ const Step1 = () => {
   const handleClickNextBtn = () => {
     navigate("/trip-create/2");
   };
+  const handleClickSkipBtn = () => {
+    dispatch(initializeCreateTripInfo());
+    navigate("/");
+  };
   return (
     <StepWrapper>
       <Spacing size={28} />
@@ -41,7 +48,7 @@ const Step1 = () => {
             어떤 여행을 준비하고 계신가요?
           </div>
         </TextBox>
-        <div className="sub-text">준비중인 여행 유형을 선택해주세요</div>
+        <div className="sub-text">여행지 유형을 선택해주세요</div>
       </TextContainer>
       <Spacing size={38} />
       <OnboardingButtonContainer>
@@ -60,7 +67,7 @@ const Step1 = () => {
         text="다음"
         onClick={handleClickNextBtn}
         textButton={true}
-        textButtonOnClick={() => {}}
+        textButtonOnClick={handleClickSkipBtn}
         textButtonChild="다음에 할래요"
       />
     </StepWrapper>
