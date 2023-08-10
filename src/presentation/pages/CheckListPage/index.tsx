@@ -88,12 +88,12 @@ const CheckListPage = () => {
         
         <TextWrapper>
             남은 체크리스트
+            <CountWrapper>
+                <Count>{'11'}</Count><Total>&nbsp;/&nbsp;{'11'}개</Total>
+            </CountWrapper>
         </TextWrapper>
         <TextContainer>
-            <CountWrapper>
-                <Count>{'11'}</Count><Total>&nbsp;/&nbsp;{'11'}</Total>
-                
-            </CountWrapper>
+            
             <Description>
                     {'도쿄 여행'}
             </Description>
@@ -104,8 +104,7 @@ const CheckListPage = () => {
             </Description>
         </TextContainer>
         
-        <TextContainer>
-        </TextContainer>
+        <CheckListWrapper>
         {newCheckList && (newCheckList.checkListState.map((item, index) => (
           <AddCheckList 
           id={item.id} 
@@ -116,9 +115,8 @@ const CheckListPage = () => {
           onClickDeleteCheckItem={onClickDeleteCheckItem}
           />
           
-       )))
-       }
-
+       )))}
+       </CheckListWrapper>
         <AddButtonWrapper>
         <AddButton onClick={onClickAdd}>
             <Icon icon='Plus'/>
@@ -137,12 +135,13 @@ const TextWrapper = styled.div`
     font-size : 22px;
     line-height: 20px;
     color: ${COLOR.GRAY_800};
+    display : flex;
+    align-items: center;
 `;
 
 const CountWrapper = styled.div`
     display: flex;
-
-    margin-right: 17px;
+    margin-left: 7px;
 `;
 
 const Count = styled.div`
@@ -156,7 +155,7 @@ const Total = styled.div`
     font-weight : 500;
     font-size : 18px;
     line-height: 30px;
-    color: ${COLOR.GRAY_500};
+    color: ${COLOR.GRAY_700};
 `;
 
 const TextContainer = styled.div`
@@ -164,6 +163,10 @@ const TextContainer = styled.div`
     width:100%;
     display: flex;
     align-items: center;
+`;
+
+const CheckListWrapper = styled.div`
+    margin-top: 22px;
 `;
 
 const Title = styled.div`
@@ -184,7 +187,7 @@ const Description = styled.div`
   font-weight : 600;
   font-size: 14px;
   line-height: 14px;
-  color: ${COLOR.GRAY_500};
+  color: ${COLOR.GRAY_700};
 `;
 
 const AddButtonWrapper = styled.div`
