@@ -5,9 +5,15 @@ import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
 import { styled } from "styled-components";
 import TextBox from "./components/TextBox";
+import { useNavigate } from "react-router-dom";
 
 const ListNotExist = () => {
+  const navigate = useNavigate();
   const userName = "DND";
+
+  const handleClickCreat = () => {
+    navigate("/trip-create/1");
+  };
   return (
     <ListNotExistWrapper>
       <Spacing size={36} />
@@ -16,7 +22,7 @@ const ListNotExist = () => {
         <br />
         어디로 여행을 떠나시나요?
       </TextBox>
-      <Spacing size={16} />
+      <Spacing size={26} />
       <CheckListBox>
         <Icon icon="NotExistCheckList" />
         <Spacing size={18} />
@@ -28,6 +34,7 @@ const ListNotExist = () => {
           background={COLOR.MAIN_GREEN}
           color={COLOR.WHITE}
           border="none"
+          onClick={handleClickCreat}
         >
           <div className="button-text">체크리스트 만들기</div>
         </Button>
