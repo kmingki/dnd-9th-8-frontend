@@ -13,10 +13,14 @@ import CalendarRange from "@components/common/CalendarRange";
 const Step3 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { tripRange } = useSelector((state: RootState) => state.createTrip);
+  const { tripRange, state } = useSelector((state: RootState) => state.createTrip);
 
   const handleClickNextBtn = () => {
-    navigate("/trip-create/complate");
+    if (state === "main") {
+      navigate("/trip");
+    } else {
+      navigate("/trip-create/complate");
+    }
   };
   const handleClickSkipBtn = () => {
     dispatch(initializeCreateTripInfo());

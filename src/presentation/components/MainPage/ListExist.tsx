@@ -8,8 +8,12 @@ import Modal from "@components/common/Modal";
 import COLOR from "@styles/colors";
 import { useNavigate } from "react-router-dom";
 import TemplateModal from "./components/TemplateModal";
+import { useDispatch } from "react-redux";
+import { changeCreateTripState } from "../../../application/reducer/slices/createTrip/createTripSlice";
+import BottomSheet from "@components/common/BottomSheet";
 
 const ListExist = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isShowModal, toggleModal, closeModal } = useModal();
   const {
@@ -24,9 +28,21 @@ const ListExist = () => {
 
   const handleClickCreateBtn = () => {
     navigate("/trip-create/1");
+    dispatch(
+      changeCreateTripState({
+        type: "state",
+        value: "main",
+      })
+    );
   };
 
   const handleClickLoadBtn = () => {
+    dispatch(
+      changeCreateTripState({
+        type: "state",
+        value: "main",
+      })
+    );
     closeModal();
     toggleTemplate();
   };
@@ -57,9 +73,9 @@ const ListExist = () => {
           <Icon icon="CreateButton" onClick={handleClickMenu} />
         )}
       </IconWrapper>
-      <Modal isVisible={isShowTemplate} closeModal={closeTemplate}>
+      <BottomSheet isVisible={isShowTemplate} closeModal={closeTemplate}>
         <TemplateModal />
-      </Modal>
+      </BottomSheet>
     </ListExistWrapper>
   );
 };

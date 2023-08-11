@@ -12,6 +12,7 @@ const initialState: CreateTripType = {
     end: "",
   },
   checkCount: "",
+  state: "", // 여행 생성 시작한 페이지 알기 위해 (ex. main)
 };
 
 export const createTripSlice = createSlice({
