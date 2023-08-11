@@ -1,4 +1,5 @@
 import React from "react";
+import COLOR from "@styles/colors";
 import styled, { CSSProp } from "styled-components";
 
 type ButtonType = {
@@ -10,6 +11,7 @@ type ButtonType = {
   background: string;
   color?: string;
   border?: string;
+  disabled?: boolean;
   onClick?: any;
   clicked?: string;
   customstyle?: CSSProp; // 클릭 시 스타일
@@ -24,6 +26,7 @@ const Button = ({
   background,
   color,
   border,
+  disabled,
   onClick,
   clicked,
   customstyle,
@@ -37,6 +40,7 @@ const Button = ({
       background={background}
       padding={padding}
       border={border}
+      disabled={disabled}
       onClick={onClick}
       clicked={clicked}
       customstyle={customstyle}
@@ -56,6 +60,9 @@ const ButtonWrapper = styled.button<ButtonType>`
   padding: ${({ padding }) => padding};
   border: ${({ border }) => border};
 
+  &:disabled {
+    background-color: ${COLOR.GRAY_100};
+  }
   ${({ clicked, customstyle }) => clicked === "true" && customstyle}
 `;
 
