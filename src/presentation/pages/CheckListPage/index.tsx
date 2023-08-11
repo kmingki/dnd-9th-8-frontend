@@ -7,6 +7,7 @@ import COLOR from "@styles/colors";
 import { /*CheckList,*/ AddCheckList} from "@components/domain/CheckList";
 import { produce } from "immer"
 import { listItem , checkList } from "../../../application/type/checkList";
+import Tag from "@components/common/Tag";
 
 interface State {
     checkListState: checkList[];
@@ -93,7 +94,8 @@ const CheckListPage = () => {
             </CountWrapper>
         </TextWrapper>
         <TextContainer>
-            
+            <Tag text="dfsfdf" backgroundColor={COLOR.MAIN_GREEN} color={COLOR.WHITE}/>
+            <Space />
             <Description>
                     {'도쿄 여행'}
             </Description>
@@ -215,6 +217,10 @@ const AddButton = styled.button`
 
 const AddButtonText = styled.div`
   margin-left : 8.5px;
+`;
+
+const Space = styled.div`
+    width: 10px;
 `;
 
 export default CheckListPage;

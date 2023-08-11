@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Icon from "@components/common/Icon";
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'; //drag and drop
-
-
+import Tag from "@components/common/Tag";
 import { CheckItem, AddCheckItem } from "./CheckItem";
 import { listItem , checkList } from "../../../../application/type/checkList";
 import { 
@@ -106,7 +105,7 @@ const AddCheckList = ({id, name, list, emoji, onChangeCheckItem, onClickPlusItem
             </Head>
 
             {isOpen && 
-            <>
+            <CheckItemWrapper>
                 <DragDropContext onDragEnd={onDragEnd}>
                     <Droppable droppableId="droppable">
                         {(provided: any) => (
@@ -143,7 +142,7 @@ const AddCheckList = ({id, name, list, emoji, onChangeCheckItem, onClickPlusItem
                         완료
                     </FinishButton>
                 </FinishButtonWrapper>
-            </>
+            </CheckItemWrapper>
             }
         </CheckListWrapper>
 

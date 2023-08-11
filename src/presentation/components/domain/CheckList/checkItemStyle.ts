@@ -21,6 +21,7 @@ const CheckItemContainer = styled.div<{ isChecked : boolean }>`
     align-items : center;
     justify-content: space-between;
     background-color : ${({ isChecked }) => isChecked? `${Color.GRAY_100}` : `${Color.WHITE}`};
+    margin-bottom: 10px;
 `;
 
 const CheckItemWrapper = styled.div`
