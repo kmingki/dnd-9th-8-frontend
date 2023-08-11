@@ -10,4 +10,5 @@ export interface checkList {
     id: number; 
     name: string; 
     list: listItem[];
+    emoji: string;
 }

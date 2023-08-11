@@ -20,7 +20,7 @@ const CheckListPage = () => {
     const onClickAdd = () => {
         
         setNewCheckList(prev => produce(prev, draft => {
-            draft?.checkListState.push({id : newCheckList.checkListState.length, name : '', list:[]});
+            draft?.checkListState.push({id : newCheckList.checkListState.length, name : '', list:[], emoji: ''});
             return draft;
         }));
     }
@@ -108,7 +108,9 @@ const CheckListPage = () => {
         {newCheckList && (newCheckList.checkListState.map((item, index) => (
           <AddCheckList 
           id={item.id} 
-          name={item.name} list={item.list} 
+          name={item.name} 
+          list={item.list} 
+          emoji={item.emoji}
           onChangeCheckItem={onChangeCheckItem} 
           onClickPlusItem={onClickPlusItem}
           onChangeCheckItemTitle={onChangeCheckItemTitle}

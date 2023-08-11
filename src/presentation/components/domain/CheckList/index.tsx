@@ -1,10 +1,31 @@
 import React, { useState } from "react";
-import { styled } from "styled-components";
-import Color from '@styles/colors';
 import Icon from "@components/common/Icon";
-import Input from "@components/common/Input";
+import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'; //drag and drop
+
+
 import { CheckItem, AddCheckItem } from "./CheckItem";
 import { listItem , checkList } from "../../../../application/type/checkList";
+import { 
+    FinishButtonWrapper, 
+    FinishButton, 
+    CheckListWrapper, 
+    Head, 
+    Title, 
+    Indicator, 
+    TitleLeft, 
+    CheckItemWrapper, 
+    InputWrapper, 
+    IconWrapper, 
+    TitleIconWrapper, 
+    ModalOverlay,
+    ModalWindow,
+    Content,
+    ContentWrapper,
+    ModalDeleteButton,
+    ModalSaveButton,
+    ButtonContainer,
+    Space
+} from "./style"
 
 /*
 const CheckList = () => {
@@ -34,18 +55,33 @@ const CheckList = () => {
 }
 */
 
-type checkListType = { id: number; name: string; list: listItem[], onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
+type checkListType = { id: number; name: string; list: listItem[], emoji:string ,onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
 
 
-const AddCheckList = ({id, name, list, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
+const AddCheckList = ({id, name, list, emoji, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
 
     const [title, setTitle] = useState('');
     const [isOpen, setIsOpen] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [titleEmoji, setTitleEmoji] = useState(emoji);
 
     const onClickOpenCheckList = () => {
         setIsOpen(prev=>!prev);
     };
+
+    //모달에서 아이콘 클릭했을때
+    const onClickModalIcon = (e: React.MouseEvent<HTMLButtonElement>) => {
+     
+        setTitleEmoji(e.currentTarget.id);
+    };
+
+    // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
+    const onDragEnd = ({ source, destination }: DropResult) => {
+        console.log('>>> source', source);
+        console.log('>>> destination', destination);
+    };
+    
+
 
     return (
         <>
@@ -71,20 +107,37 @@ const AddCheckList = ({id, name, list, onChangeCheckItem, onClickPlusItem, onCha
 
             {isOpen && 
             <>
-                <CheckItemWrapper>
-                    {list.map((item, index) =>
-                        <CheckItem 
-                        checkListId={id} 
-                        id={item.id} 
-                        isChecked={item.isChecked} 
-                        title={item.title} 
-                        onChangeCheckItem={onChangeCheckItem} 
-                        onChangeCheckItemTitle={onChangeCheckItemTitle}
-                        onClickDeleteCheckItem={onClickDeleteCheckItem}
-                        />
-                    )} 
-                    <AddCheckItem checkListId={id} id={list.length} onClickPlusItem={onClickPlusItem}/>
-                </CheckItemWrapper>
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId="droppable">
+                        {(provided: any) => (
+                        <div ref={provided.innerRef} {...provided.droppableProps}>
+                            {list.map((item, index) => (
+                            <Draggable key={item.id} draggableId={String(item.id)} index={index}>
+                                {(provided : any) => (
+                                <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                >
+                                    <CheckItem 
+                                    checkListId={id} 
+                                    id={item.id} 
+                                    isChecked={item.isChecked} 
+                                    title={item.title} 
+                                    onChangeCheckItem={onChangeCheckItem} 
+                                    onChangeCheckItemTitle={onChangeCheckItemTitle}
+                                    onClickDeleteCheckItem={onClickDeleteCheckItem}
+                                    />
+                                </div>
+                                )}
+                            </Draggable>
+                            ))}
+                            {provided.placeholder}
+                        </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+                <AddCheckItem checkListId={id} id={list.length} onClickPlusItem={onClickPlusItem}/>
                 <FinishButtonWrapper>
                     <FinishButton>
                         완료
@@ -98,28 +151,28 @@ const AddCheckList = ({id, name, list, onChangeCheckItem, onClickPlusItem, onCha
         <ModalOverlay>
             <ModalWindow>
                 <Content>
-                    <ContentWrapper>
+                    <ContentWrapper id={'Bus'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
                         <Icon icon='Bus' />
                     </ContentWrapper>
-                    <ContentWrapper>
+                    <ContentWrapper id={'Plane'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
+                        <Icon icon='Plane' />
+                    </ContentWrapper>
+                    <ContentWrapper id={'dfs'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
+                        <Icon icon='Plane' />
+                    </ContentWrapper>
+                    <ContentWrapper id={'de'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
+                        <Icon icon='Plane' />
+                    </ContentWrapper>
+                    <ContentWrapper id={'dne'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
                         <Icon icon='Bus' />
                     </ContentWrapper>
-                    <ContentWrapper>
+                    <ContentWrapper id={'Pdne'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
                         <Icon icon='Bus' />
                     </ContentWrapper>
-                    <ContentWrapper>
+                    <ContentWrapper id={'Pde'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
                         <Icon icon='Bus' />
                     </ContentWrapper>
-                    <ContentWrapper>
-                        <Icon icon='Bus' />
-                    </ContentWrapper>
-                    <ContentWrapper>
-                        <Icon icon='Bus' />
-                    </ContentWrapper>
-                    <ContentWrapper>
-                        <Icon icon='Bus' />
-                    </ContentWrapper>
-                    <ContentWrapper>
+                    <ContentWrapper id={'Pddfne'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
                         <Icon icon='Bus' />
                     </ContentWrapper>
                 </Content>
@@ -138,162 +191,5 @@ const AddCheckList = ({id, name, list, onChangeCheckItem, onClickPlusItem, onCha
         </>
     );
 }
-
-const FinishButtonWrapper = styled.div`
-    display : flex;
-    justify-content: flex-end;
-    margin-top : 10px;
-`;
-
-const FinishButton = styled.button`
-    all : unset;
-    border : 0px;
-    font-weight: 500;
-    font-size : 16px;
-    line-height: 16px;
-    color : ${Color.MAIN_GREEN};
-`;
-
-const CheckListWrapper = styled.div`
-    padding: 19px 17px;
-    margin-bottom: 20px;
-    background-color: ${Color.WHITE};
-    border-radius: 12px;
-`;
-
-const Head = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
-
-const Title = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    width : 100%;
-`;
-
-const Indicator = styled.div`
-    width: 41px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${Color.WHITE};
-    border-radius: 38px;
-    box-shadow: 0px 0px 4px 0px #0000001A;
-    margin-right : 9px;
-`;
-
-const TitleLeft = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-const CheckItemWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-top: 18px;
-    gap: 10px;
-`
-
-const InputWrapper = styled.input`
-    width:100%;
-    border: none;
-    background: transparent;
-    &:focus {
-        outline:none;
-    }
-`;
-
-
-const IconWrapper = styled.button`
-    all : unset;
-    border : 0px;
-    padding-right: 8px;
-`;
-
-const TitleIconWrapper = styled.button`
-    all : unset;
-    border : 0px;
-    padding-right: 8px;
-`;
-
-const ModalOverlay = styled.div`
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-`;
-
-const ModalWindow = styled.div`
-    background: ${Color.WHITE};
-    box-shadow: 0px 0px 10px 0px #85858540;
-    backdrop-filter: blur( 13.5px );
-    -webkit-backdrop-filter: blur( 13.5px );
-    border-radius: 16px;
-    height: 197px;
-    width : 80%;
-    max-width : 420px;
-    position: relative;
-    margin : 0 0 47px 0 ;
-`;
-
-
-const Content = styled.div`
-    padding : 20px 20px 0px 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    justify-items: center;
-    align-content: center;
-`;
-
-
-const ContentWrapper = styled.div`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: ${Color.GRAY_50};
-    display: flex;
-    justify-content: center;
-    margin-bottom: 16px;
-`;
-
-const ModalDeleteButton = styled.button`
-    all : unset;
-    border : 0px;    
-    width: 142px;
-    height : 45px;
-    border-radius: 10px;
-    background-color : #F2F4F6;
-    text-align: center;
-    margin-bottom : 20px;
-`;
-
-
-const ModalSaveButton = styled.button`
-    all : unset;
-    border : 0px;
-    width: 142px;
-    height : 45px;
-    border-radius: 10px;
-    background-color : ${Color.MAIN_GREEN};
-    text-align: center;
-    margin-bottom : 20px;s
-`;
-
-const ButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
-const Space = styled.div`
-    width: 12px;
-`;
 
 export { /*CheckList,*/ AddCheckList };

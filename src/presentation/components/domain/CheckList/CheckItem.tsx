@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { styled } from "styled-components";
-import Color from '@styles/colors';
 import Icon from "@components/common/Icon";
-import Input from "@components/common/Input";
-import { listItem , checkList } from "../../../../application/type/checkList";
+import {AddCheckItemWrapper, CheckItemContainer , CheckItemWrapper, CheckBox, HiddenCheckbox, Description, IconWrapper, InputWrapper} from "./checkItemStyle";
+import Color from '@styles/colors';
+
+
 
 type CheckItemType = {
     checkListId : number,
@@ -27,13 +27,15 @@ const CheckItem = ({ checkListId, id, isChecked, title, onChangeCheckItem, onCha
     }
     
     return (
-        <CheckItemContainer>
+        <CheckItemContainer isChecked={isChecked}>
             <CheckItemWrapper>
-                <CheckBox type="checkbox"
-                checked={isChecked}
-                onChange={()=>onChangeCheckItem(checkListId, id, isChecked)} />
-                <Description>
-                <InputWrapper placeholder="항목을 작성해주세요" onChange={onChange} value={value}/>
+                <CheckBox checked={isChecked}>
+                    <HiddenCheckbox type="checkbox"
+                    onChange={()=>onChangeCheckItem(checkListId, id, isChecked)} />
+                    {isChecked && <Icon icon='Checked' width={10} height={10} color={Color.WHITE}/> }
+                </CheckBox>
+                <Description isChecked={isChecked}>
+                <InputWrapper placeholder="항목을 작성해주세요" onChange={onChange} value={value} isChecked={isChecked}/>
                 </Description>
             </CheckItemWrapper>
             <CheckItemWrapper>
@@ -60,7 +62,7 @@ const AddCheckItem = ({ checkListId, id, onClickPlusItem }: AddCheckItemType) =>
     return (
         <AddCheckItemWrapper onClick={()=>{onClickPlusItem(checkListId, id)}}>
             <IconWrapper>
-                <Icon icon='Plus'/>
+                <Icon icon='Plus' width={14} height={14} fill={Color.GRAY_500}/>
             </IconWrapper>
             항목추가하기
         </AddCheckItemWrapper>
@@ -68,81 +70,4 @@ const AddCheckItem = ({ checkListId, id, onClickPlusItem }: AddCheckItemType) =>
 }
 
 
-const AddCheckItemWrapper = styled.button`
-    all : unset;
-    border : 1px solid ${Color.GRAY_200};
-    height: 40px;
-    border-radius: 8px;
-    display : flex;
-    align-items : center;
-    color: ${Color.GRAY_300};
-    padding-left : 13px;
-`;
-
-
-const CheckItemContainer = styled.div`
-    height: 40px;
-    border : 1px solid ${Color.GRAY_200};
-    border-radius: 8px;
-    display : flex;
-    align-items : center;
-    justify-content: space-between;
-`;
-
-const CheckItemWrapper = styled.div`
-    height: 40px;
-    border-radius: 8px;
-    display : flex;
-    align-items : center;
-`;
-
-/*
-const CheckItemWrapper = styled.button`
-    all : unset;
-    border : 0px;
-    height: 40px;
-    border : 1px solid ${Color.GRAY_200};
-    border-radius: 8px;
-    display : flex;
-    align-items : center;
-    justify-content: space-between;
-`;
-*/
-
-const CheckBox = styled.input`
-    height: 16px;
-    width: 16px;
-    border : 1px solid ${Color.GRAY_400};
-    border-radius: 4px;
-    margin-left : 11px;
-`;
-
-const Description = styled.div`
-    margin-left : 10px;
-    font-weight: 400;
-    font-size: 14px;
-    color: ${Color.MAIN_BLACK};
-`;
-
-const IconWrapper = styled.button`
-    all : unset;
-    border : 0px;
-    padding-right: 8px;
-`;
-
-const InputWrapper = styled.input`
-    width:100%;
-    border: none;
-    background: transparent;
-    &:focus {
-        outline:none;
-    }
-
-    &::placeholder {
-        font-weight : 300;
-        font-size : 15px;
-        line-height : 15px;
-        color: ${Color.GRAY_300};
-    }
-`;
 export { CheckItem, AddCheckItem };
