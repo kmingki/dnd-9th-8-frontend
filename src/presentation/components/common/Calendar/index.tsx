@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 import "./Calendar.css";
 import { getMonthandDate } from "../../../../application/utils/getDate";
 import { changeTripRange } from "../../../../application/reducer/slices/createTrip/createTripSlice";
+import Spacing from "../Spacing";
 
 const CustomCalendar = () => {
   const dispatch = useDispatch();
@@ -67,9 +68,13 @@ const CustomCalendar = () => {
         next2Label={null}
         prev2Label={null}
       />
+      <Spacing size={16} />
     </CalendarWrapper>
   );
 };
 
-const CalendarWrapper = styled.div``;
+const CalendarWrapper = styled.div`
+  border-bottom: 1px solid #dbdbdb;
+`;
+
 export default CustomCalendar;

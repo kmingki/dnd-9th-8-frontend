@@ -5,27 +5,35 @@ import COLOR from "@styles/colors";
 import BottomButton from "../../../presentation/components/common/BottomButton";
 import Icon from "../../../presentation/components/common/Icon";
 import Spacing from "../../../presentation/components/common/Spacing";
+import Text from "@components/common/Text";
 
 const LoginCompletePage = () => {
   const navigate = useNavigate();
   const handleClickStart = () => {
-    navigate("/");
+    navigate("/trip-create/1");
   };
   return (
     <LoginCompleteWrapper>
       <TextWrapper>
-        <div className="main-text">환영합니다!</div>
+        <Text
+          color={COLOR.GRAY_900}
+          fontSize={30}
+          fontWeight={700}
+          lineHeight="140%"
+          text="환영합니다"
+        />
+
         <div className="sub-text">
           이제부터 체크리스트를 만들어
           <br />
           여행 준비를 시작해보세요
         </div>
       </TextWrapper>
-      <Spacing size={65} />
+      <Spacing size={32} />
       <IconWrapper>
         <Icon icon="LoginComplete" />
       </IconWrapper>
-      <BottomButton text="시작하기" onClick={handleClickStart} />
+      <BottomButton text="패킷 시작하기" onClick={handleClickStart} />
     </LoginCompleteWrapper>
   );
 };
@@ -40,16 +48,12 @@ const TextWrapper = styled.div`
 
   margin-top: 22%;
 
-  font-weight: 600;
   text-align: center;
-  .main-text {
-    color: ${COLOR.MAIN_GREEN};
-    font-size: 34px;
-    line-height: 140%;
-  }
+
   .sub-text {
-    color: ${COLOR.GRAY_800};
-    font-size: 20px;
+    color: ${COLOR.GRAY_600};
+    font-size: 18px;
+    font-weight: 500;
     line-height: 132%;
   }
 `;

@@ -8,14 +8,16 @@ import { useNavigate } from "react-router-dom";
 import Input from "../common/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store";
-import { changeCreateTripState } from "../../../application/reducer/slices/createTrip/createTripSlice";
+import {
+  changeCreateTripState,
+  initializeCreateTripInfo,
+} from "../../../application/reducer/slices/createTrip/createTripSlice";
 
 const Step2 = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { tripName } = useSelector((state: RootState) => state.createTrip);
 
-  const userName = "DND";
   const handleChangeTripName = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
       changeCreateTripState({
@@ -27,15 +29,19 @@ const Step2 = () => {
   const handleClickNextBtn = () => {
     navigate("/trip-create/3");
   };
+  const handleClickSkipBtn = () => {
+    dispatch(initializeCreateTripInfo());
+    navigate("/");
+  };
   return (
     <StepWrapper>
       <Spacing size={28} />
       <TextContainer>
         <TextBox>
           <div>
-            {`${userName}님 반가워요,`}
+            떠날 여행지 이름을
             <br />
-            어떤 여행을 준비하고 계신가요?
+            입력해주세요
           </div>
         </TextBox>
         <div className="sub-text">텍스트 입력 시 체크리스트 제목으로 설정됩니다</div>
@@ -48,13 +54,14 @@ const Step2 = () => {
         value={tripName || ""}
         textCount={true}
         maxLength={10}
+        success={!tripName || tripName.length < 2 ? "false" : "true"}
       />
       <BottomButton
         disabled={tripName === "" ? true : false}
         text="다음"
         onClick={handleClickNextBtn}
         textButton={true}
-        textButtonOnClick={() => {}}
+        textButtonOnClick={handleClickSkipBtn}
         textButtonChild="다음에 할래요"
       />
     </StepWrapper>

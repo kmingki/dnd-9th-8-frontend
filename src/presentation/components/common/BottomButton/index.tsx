@@ -23,11 +23,13 @@ const BottomButton = ({
   textButtonOnClick,
 }: BottomButtonType) => {
   return (
-    <BottomButtonWrapper onClick={onClick}>
+    <BottomButtonWrapper>
       {textButton && (
         <TextButton onClick={textButtonOnClick} text={textButtonChild} />
       )}
-      <Button disabled={disabled}>{text}</Button>
+      <Button onClick={onClick} disabled={disabled}>
+        {text}
+      </Button>
     </BottomButtonWrapper>
   );
 };
