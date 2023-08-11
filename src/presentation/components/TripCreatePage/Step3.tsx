@@ -17,7 +17,7 @@ const Step3 = () => {
 
   const handleClickNextBtn = () => {
     if (state === "main") {
-      navigate("/trip");
+      navigate("/trip"); // 여행 상세 페이지로 이동
     } else {
       navigate("/trip-create/complate");
     }

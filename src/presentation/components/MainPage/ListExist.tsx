@@ -9,8 +9,13 @@ import COLOR from "@styles/colors";
 import { useNavigate } from "react-router-dom";
 import TemplateModal from "./components/TemplateModal";
 import { useDispatch } from "react-redux";
-import { changeCreateTripState } from "../../../application/reducer/slices/createTrip/createTripSlice";
+import {
+  changeCreateTripState,
+  initializeCreateTripInfo,
+} from "../../../application/reducer/slices/createTrip/createTripSlice";
 import BottomSheet from "@components/common/BottomSheet";
+import { useEffect, useState } from "react";
+import CalendarModal from "./components/CalendarModal";
 
 const ListExist = () => {
   const dispatch = useDispatch();
@@ -21,6 +26,12 @@ const ListExist = () => {
     toggleModal: toggleTemplate,
     closeModal: closeTemplate,
   } = useModal();
+
+  const [clicked, setClicked] = useState(false); // 템플릿 선택 -> 선택하기 클릭 유무를 통해 캘린더 보여주기 위한 임시 값
+
+  useEffect(() => {
+    dispatch(initializeCreateTripInfo());
+  }, []);
 
   const handleClickMenu = () => {
     toggleModal();
@@ -74,7 +85,11 @@ const ListExist = () => {
         )}
       </IconWrapper>
       <BottomSheet isVisible={isShowTemplate} closeModal={closeTemplate}>
-        <TemplateModal />
+        {!clicked ? (
+          <TemplateModal setClicked={setClicked} />
+        ) : (
+          <CalendarModal closeModal={closeTemplate} setClicked={setClicked} />
+        )}
       </BottomSheet>
     </ListExistWrapper>
   );
