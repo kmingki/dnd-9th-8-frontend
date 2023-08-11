@@ -7,6 +7,7 @@ import MainPage from "../pages/MainPage";
 import CreateComplatePage from "../pages/CreateComplatePage";
 import MyPage from "../pages/MyPage";
 import EditMyInfoPage from "../pages/EditMyInfoPage";
+import MyTemplatePage from "../pages/MyTemplatePage";
 
 const Router = () => {
   return (
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/trip/:trip-id" element={<TripDetailPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/edit" element={<EditMyInfoPage />} />
+        <Route path="/my-template" element={<MyTemplatePage />} />
       </Routes>
     </BrowserRouter>
   );
