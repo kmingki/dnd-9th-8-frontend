@@ -3,6 +3,7 @@ export interface CreateTripType {
   tripName?: string;
   tripRange?: TripRangeType;
   checkCount?: string;
+  state?: string;
   [key: string]: string | TripRangeType | undefined;
 }
 

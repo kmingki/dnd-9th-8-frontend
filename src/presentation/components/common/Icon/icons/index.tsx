@@ -30,3 +30,6 @@ export { default as Profile } from "./Profile";
 
 export { default as ModalXButton } from "./ModalXButton";
 export { default as EditProfile } from "./EditProfile";
+export { default as Template } from "./Template";
+
+export { CheckedBox, UnCheckedBox } from "./CheckBox";

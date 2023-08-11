@@ -8,14 +8,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@store";
 import { useNavigate } from "react-router-dom";
 import { initializeCreateTripInfo } from "../../../application/reducer/slices/createTrip/createTripSlice";
+import CalendarRange from "@components/common/CalendarRange";
 
 const Step3 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { tripRange } = useSelector((state: RootState) => state.createTrip);
+  const { tripRange, state } = useSelector((state: RootState) => state.createTrip);
 
   const handleClickNextBtn = () => {
-    navigate("/trip-create/complate");
+    if (state === "main") {
+      navigate("/trip"); // 여행 상세 페이지로 이동
+    } else {
+      navigate("/trip-create/complate");
+    }
   };
   const handleClickSkipBtn = () => {
     dispatch(initializeCreateTripInfo());
@@ -28,7 +33,8 @@ const Step3 = () => {
       <Spacing size={26} />
       <CalendarWrapper>
         <CustomCalendar />
-        <Spacing size={16} />
+        <Spacing size={23} />
+        <CalendarRange />
       </CalendarWrapper>
       <BottomButton
         disabled={tripRange?.start === "" || tripRange?.end === ""}

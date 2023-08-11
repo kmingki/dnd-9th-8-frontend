@@ -7,7 +7,7 @@ import ListNotExist from "@components/MainPage/ListNotExist";
 
 const MainPage = () => {
   // 데이터 유무에 따라 색상 바뀜
-  const data = true;
+  const data = false;
   return (
     <MainPageWrapper data={data}>
       <Header data={data} />
