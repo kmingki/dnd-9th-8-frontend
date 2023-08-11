@@ -7,21 +7,21 @@ import ListNotExist from "@components/MainPage/ListNotExist";
 
 const MainPage = () => {
   // 데이터 유무에 따라 색상 바뀜
-  const data = "true";
+  const data = false;
   return (
     <MainPageWrapper data={data}>
       <Header data={data} />
-      {data === "true" ? <ListExist /> : <ListNotExist />}
+      {data ? <ListExist /> : <ListNotExist />}
     </MainPageWrapper>
   );
 };
 
-const MainPageWrapper = styled.div<{ data: string }>`
+const MainPageWrapper = styled.div<{ data: boolean }>`
   min-height: 100vh;
   background: linear-gradient(
     to bottom,
-    ${({ data }) => (data === "true" ? COLOR.GREEN_500 : COLOR.GRAY_50)} 0%,
-    ${({ data }) => (data === "true" ? COLOR.GREEN_500 : COLOR.GRAY_50)} 30%,
+    ${({ data }) => (data ? COLOR.GREEN_500 : COLOR.GRAY_50)} 0%,
+    ${({ data }) => (data ? COLOR.GREEN_500 : COLOR.GRAY_50)} 30%,
     ${COLOR.GRAY_50} 30%,
     ${COLOR.GRAY_50} 100%
   );

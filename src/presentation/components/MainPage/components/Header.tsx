@@ -4,15 +4,17 @@ import Icon from "@components/common/Icon";
 import COLOR from "@styles/colors";
 import { Link } from "react-router-dom";
 
-const Header = ({ data }: { data: string }) => {
+const Header = ({ data }: { data: boolean }) => {
   // 데이터 유무에 따라 색상 바뀜
   return (
     <HeaderWrapper>
-      <Icon icon="Logo" fill={data === "true" ? COLOR.WHITE : COLOR.GRAY_500} />
+      <Icon icon="Logo" fill={data ? COLOR.WHITE : COLOR.GRAY_500} />
       <div className="user-side">
-        <Icon icon="Folder" fill={data === "true" ? COLOR.WHITE : COLOR.GRAY_500} />
+        <Link to="/my-template">
+          <Icon icon="Folder" fill={data ? COLOR.WHITE : COLOR.GRAY_500} />
+        </Link>
         <Link to="/mypage">
-          <Icon icon="User" fill={data === "true" ? COLOR.WHITE : COLOR.GRAY_500} />
+          <Icon icon="User" fill={data ? COLOR.WHITE : COLOR.GRAY_500} />
         </Link>
       </div>
     </HeaderWrapper>
