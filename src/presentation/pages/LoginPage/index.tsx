@@ -3,18 +3,25 @@ import { styled } from "styled-components";
 import Icon from "../../components/common/Icon";
 import LoginImage from "../../../assets/images/Login.png";
 import COLOR from "@styles/colors";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
+  const kakaoUrl = `${process.env.REACT_APP_BASE_URL}/oauth2/authorization/kakao?redirect_uri=${process.env.REACT_APP_REDIRECT_URL}`;
+
   return (
     <LoginPageWrapper>
       <TopWrapper>
-        <Icon icon="AuthLogo" />
+        <div className="icon">
+          <Icon icon="AuthLogo" />
+        </div>
         <div className="login-text">완벽한 여행 준비의 시작</div>
       </TopWrapper>
       <ButtonWrapper>
         <div>SNS 계정으로 로그인하기</div>
         <ButtonContainer>
-          <Icon icon="AuthKakao" />
+          <Link to={kakaoUrl}>
+            <Icon icon="AuthKakao" />
+          </Link>
           <Icon icon="AuthNaver" />
         </ButtonContainer>
       </ButtonWrapper>
@@ -38,6 +45,9 @@ const TopWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
 
+  .icon {
+    display: flex;
+  }
   .login-text {
     color: ${COLOR.WHITE};
     text-shadow: 0px 4px 3px rgba(255, 255, 255, 0.25);
