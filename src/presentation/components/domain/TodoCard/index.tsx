@@ -51,6 +51,7 @@ const Description = styled.div`
     font-weight: 600;
     font-size: 14px;
     color: #A5A5A5;
+    line-height: 14px;
 `;
 
 const TextButtonWrapper = styled.div`

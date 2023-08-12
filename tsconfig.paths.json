@@ -6,10 +6,11 @@
             "@hooks":["src/application/hooks"],
             "@utils":["src/application/utils"],
             "@store":["src/application/store"],
+            "@type/*":["src/application/type/*"],
             "@constants":["src/application/constants"],
             "@api":["src/infrastructure/api"],
             "@components/*":["src/presentation/components/*"],
-            "@pages":["src/presentation/pages"],
+            "@pages/*":["src/presentation/pages/*"],
             "@router":["src/presentation/router"],
             "@styles/*":["src/presentation/styles/*"]
         }
