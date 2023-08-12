@@ -23,6 +23,7 @@ const Router = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/edit" element={<EditMyInfoPage />} />
         <Route path="/my-template" element={<MyTemplatePage />} />
+        <Route path="/checklist/:id" element={<CheckListPage />} />
       </Routes>
     </BrowserRouter>
   );

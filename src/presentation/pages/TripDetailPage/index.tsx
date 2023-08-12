@@ -1,9 +1,11 @@
-import { BlueTemplate } from "@styles/templates";
+import { DefaultTemplate } from "@styles/templates";
 import BackHeader from "@components/common/BackHeader";
 import Spacing from "@components/common/Spacing";
 import styled from "styled-components";
 import TodoCard from '@components/domain/TodoCard';
 import Icon from '@components/common/Icon';
+import Tag from "@components/common/Tag";
+import COLOR from "@styles/colors";
 
 const TripDetailPage = () => {
 
@@ -18,53 +20,52 @@ const TripDetailPage = () => {
     const list = [{},{}]; 
 
     return (
-        <BlueTemplate>
-            <BackHeader />
-            <TripInfo>
-                <Image src={dummyData.photo} />
-                <TextContainer>
-                    <Title>
-                        {dummyData.title}
-                    </Title>
-                    <Spacing size={5} />
-                    <Description>
-                        {dummyData.startDate}&nbsp;~&nbsp;{dummyData.finishDate},&nbsp;{dummyData.people}명
-                    </Description>
-                </TextContainer>
-                
-            </TripInfo>
-            <Line />
-            <Spacing size={28} />
+        <>
+        <TripInfo>
+        <BackHeader />
+            <Tag text={`D-${'12'}`} backgroundColor={COLOR.MAIN_GREEN} color={COLOR.WHITE}/>
+            <Spacing size={15} />
+            <TextContainer>
+                <Title>
+                    {dummyData.title}
+                </Title>
+                <Spacing size={5} />
+                <DescriptionWrapper>
+                    <Description>{dummyData.startDate}&nbsp;~&nbsp;{dummyData.finishDate}</Description>
+                    <Icon icon="MoreOutlined" fill="#8B95A1"/>
+                </DescriptionWrapper>
+            </TextContainer>
+        </TripInfo>
+        <Spacing size={25.5} />
+        <DefaultTemplate>
+        <ContentWrapper>
             {list.map((item, index) => (
-          <TodoCard {...item} />
-       ))}
-        <AddTodoButton>
+            <TodoCard {...item} />))}    
+        </ContentWrapper> 
+            
+        {/* <AddTodoButton>
             <IconWrapper>
                 <Icon icon="Plus" />
             </IconWrapper>
-        </AddTodoButton>
-        </BlueTemplate>
-    )
+        </AddTodoButton> */}
+        </DefaultTemplate>
+        </>
+    )  
 };
 
+const ContentWrapper = styled.div`
+    padding-top: 21px;
+    background-color: #F6F7F9;
+`;
 
 const TripInfo = styled.div`
     width : 100%;
-    height : 73px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const Image = styled.img`
-  height : 44px;
-  width : 44px;
-  border-radius: 50%;
+    background-color : ${COLOR.WHITE};
+    padding : 0 20px;
 `;
 
 const TextContainer = styled.div`
     width:100%;
-    margin-left: 15px;
 `;
 
 const Title = styled.div`
@@ -72,15 +73,17 @@ const Title = styled.div`
     font-size: 26px;
 `;
 
+const DescriptionWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+;
+ 
 const Description = styled.div`
-    font-weight : 500;
-    font-size: 15px;
-    color: #A5A5A5;
-`;
-
-
-const Line = styled.hr`
-    border: 1px solid #D9D9D9;
+    font-weight : 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: ${COLOR.GRAY_800};
 `;
 
 const AddTodoButton = styled.div`
