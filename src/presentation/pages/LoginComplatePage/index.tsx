@@ -22,11 +22,10 @@ const LoginCompletePage = () => {
           lineHeight="140%"
           text="환영합니다"
         />
-
         <div className="sub-text">
-          이제부터 체크리스트를 만들어
+          패킷의 체크리스트로
           <br />
-          여행 준비를 시작해보세요
+          마음 편한 여행 준비를 시작하세요
         </div>
       </TextWrapper>
       <Spacing size={32} />
@@ -46,7 +45,7 @@ const TextWrapper = styled.div`
   flex-direction: column;
   gap: 11px;
 
-  margin-top: 22%;
+  margin-top: 40%;
 
   text-align: center;
 
