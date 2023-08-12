@@ -5,13 +5,20 @@ import Text from "@components/common/Text";
 import COLOR from "@styles/colors";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../../../infrastructure/api/user";
+import { deleteCookie } from "../../../../application/utils/cookie";
 
 const LogoutModal = ({ closeModal }: { closeModal: () => void }) => {
   const navigate = useNavigate();
 
-  const handleClickLogout = () => {
-    closeModal();
-    navigate("/login");
+  const handleClickLogout = async () => {
+    const result = await logout();
+    if (result.message === "성공적으로 로그아웃되었습니다.") {
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      closeModal();
+      navigate("/login");
+    }
   };
 
   return (
