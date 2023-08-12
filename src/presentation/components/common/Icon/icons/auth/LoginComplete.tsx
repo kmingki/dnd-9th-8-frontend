@@ -37,7 +37,7 @@ const LoginComplete = () => {
         height="40.8557"
         rx="5.57633"
         fill="#00B488"
-        fill-opacity="0.12"
+        fillOpacity="0.12"
       />
       <rect
         width="8.60979"
