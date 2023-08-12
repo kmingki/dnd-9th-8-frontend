@@ -3,6 +3,7 @@ import LoginPage from "../pages/LoginPage";
 import TripCreatePage from "../pages/TripCreatePage";
 import TripDetailPage from "../pages/TripDetailPage";
 import LoginCompletePage from "../pages/LoginComplatePage";
+import CheckListPage from "../pages/CheckListPage";
 import MainPage from "../pages/MainPage";
 import CreateComplatePage from "../pages/CreateComplatePage";
 import MyPage from "../pages/MyPage";

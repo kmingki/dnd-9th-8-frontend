@@ -10,6 +10,15 @@ export { default as Check } from "./Check";
 export { default as InputChecked } from "./InputChecked";
 export { default as Checked } from "./Checked";
 export { default as Plus } from "./Plus";
+<<<<<<< HEAD
+export { default as Calendar } from "./Calendar";
+export { default as MoreOutlined } from "./MoreOutlined";
+export { default as UpOutlined } from "./UpOutlined";
+export { default as DownOutlined } from "./DownOutlined";
+export { default as Delete } from "./Delete";
+export { default as SwapOutlined } from "./SwapOutlined";
+
+=======
 
 export { default as Logo } from "./Logo";
 export { default as Folder } from "./Folder";
@@ -33,3 +42,4 @@ export { default as EditProfile } from "./EditProfile";
 export { default as Template } from "./Template";
 
 export { CheckedBox, UnCheckedBox } from "./CheckBox";
+>>>>>>> develop
