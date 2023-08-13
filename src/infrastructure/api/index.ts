@@ -22,7 +22,7 @@ client.interceptors.response.use(
   async (error: any) => {
     const { config, response } = error;
 
-    if (response.data.code === 1503 || response.data.code === 1500) {
+    if (response.data.errorCode === "AT-C-0002") {
       const refreshToken = getCookie("refreshToken");
       const originalRequest = config;
 
