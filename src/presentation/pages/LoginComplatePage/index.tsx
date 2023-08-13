@@ -1,15 +1,20 @@
 import React from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import COLOR from "@styles/colors";
 import BottomButton from "../../../presentation/components/common/BottomButton";
 import Icon from "../../../presentation/components/common/Icon";
 import Spacing from "../../../presentation/components/common/Spacing";
 import Text from "@components/common/Text";
+import { setCookie } from "../../../application/utils/cookie";
 
 const LoginCompletePage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const accessToken = new URLSearchParams(location.search).get("token") as string;
+
   const handleClickStart = () => {
+    setCookie("accessToken", accessToken, 1);
     navigate("/trip-create/1");
   };
   return (
@@ -22,11 +27,10 @@ const LoginCompletePage = () => {
           lineHeight="140%"
           text="환영합니다"
         />
-
         <div className="sub-text">
-          이제부터 체크리스트를 만들어
+          패킷의 체크리스트로
           <br />
-          여행 준비를 시작해보세요
+          마음 편한 여행 준비를 시작하세요
         </div>
       </TextWrapper>
       <Spacing size={32} />
@@ -46,7 +50,7 @@ const TextWrapper = styled.div`
   flex-direction: column;
   gap: 11px;
 
-  margin-top: 22%;
+  margin-top: 40%;
 
   text-align: center;
 
