@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const kakaoUrl = `${process.env.REACT_APP_BASE_URL}/oauth2/authorization/kakao?redirect_uri=${process.env.REACT_APP_REDIRECT_URL}`;
+  const naverUrl = `${process.env.REACT_APP_BASE_URL}/oauth2/authorization/naver?redirect_uri=${process.env.REACT_APP_REDIRECT_URL}`;
 
   return (
     <LoginPageWrapper>
@@ -22,7 +23,9 @@ const LoginPage = () => {
           <Link to={kakaoUrl}>
             <Icon icon="AuthKakao" />
           </Link>
-          <Icon icon="AuthNaver" />
+          <Link to={naverUrl}>
+            <Icon icon="AuthNaver" />
+          </Link>
         </ButtonContainer>
       </ButtonWrapper>
     </LoginPageWrapper>
