@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import Calendar from "react-calendar";
 import "./Calendar.css";
-import { getMonthandDate } from "../../../../application/utils/getDate";
 import { changeTripRange } from "../../../../application/reducer/slices/createTrip/createTripSlice";
 import Spacing from "../Spacing";
 
@@ -25,7 +24,7 @@ const CustomCalendar = () => {
       dispatch(
         changeTripRange({
           type: "end",
-          value: getMonthandDate(date),
+          value: date.toISOString().slice(0, -1),
         })
       );
     } else {
@@ -33,7 +32,7 @@ const CustomCalendar = () => {
       dispatch(
         changeTripRange({
           type: "start",
-          value: getMonthandDate(date),
+          value: date.toISOString().slice(0, -1),
         })
       );
       dispatch(

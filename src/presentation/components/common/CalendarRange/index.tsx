@@ -3,14 +3,16 @@ import { RootState } from "@store";
 import COLOR from "@styles/colors";
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
+import { getMonthandDate } from "../../../../application/utils/getDate";
 
 const CalendarRange = () => {
   const { tripRange } = useSelector((state: RootState) => state.createTrip);
+
   return (
     <CalendarRangeWrapper>
       <div className="range-box">
         <span>부터</span>
-        <div className="range-text">{tripRange?.start}</div>
+        <div className="range-text">{getMonthandDate(tripRange?.start) || ""}</div>
       </div>
       <div className="range-slash">
         <span></span>
@@ -18,7 +20,7 @@ const CalendarRange = () => {
       </div>
       <div className="range-box">
         <span>까지</span>
-        <div className="range-text">{tripRange?.end}</div>
+        <div className="range-text">{getMonthandDate(tripRange?.end)}</div>
       </div>
     </CalendarRangeWrapper>
   );
