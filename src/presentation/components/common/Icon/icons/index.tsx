@@ -2,6 +2,7 @@ export { default as AuthLogo } from "./auth/AuthLogo";
 export { default as AuthKakao } from "./auth/AuthKakao";
 export { default as AuthNaver } from "./auth/AuthNaver";
 export { default as LoginComplete } from "./auth/LoginComplete";
+export { default as LogoIcon } from "./auth/LogoIcon";
 
 export { default as Arrow } from "./Arrow";
 export { default as Bus } from "./Bus";
