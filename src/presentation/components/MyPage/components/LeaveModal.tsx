@@ -5,13 +5,20 @@ import Text from "@components/common/Text";
 import COLOR from "@styles/colors";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { deleteUser } from "../../../../infrastructure/api/user";
+import { deleteCookie } from "../../../../application/utils/cookie";
 
 const LeaveModal = ({ closeModal }: { closeModal: () => void }) => {
   const navigate = useNavigate();
 
-  const handleClickLeave = () => {
-    closeModal();
-    navigate("/login");
+  const handleClickLeave = async () => {
+    const result = await deleteUser();
+    if (result.message === "성공적으로 회원 정보가 삭제되었습니다.") {
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
+      closeModal();
+      navigate("/login");
+    }
   };
   return (
     <LeaveModalWrapper>

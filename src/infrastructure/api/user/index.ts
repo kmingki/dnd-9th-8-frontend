@@ -17,3 +17,9 @@ export const logout = async () =>
     .delete("/auth/logout")
     .then(({ data }) => data)
     .catch((err) => err.response);
+
+export const deleteUser = async () =>
+  await client
+    .delete("/members")
+    .then(({ data }) => data)
+    .catch((err) => err.response);
