@@ -5,13 +5,16 @@ import Input from "@components/common/Input";
 import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@store";
-import { changeUserInfo } from "../../../application/reducer/slices/user/userInfoSlice";
+import { useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
+import useEditName from "../../../application/hooks/queries/user/useEditName";
 
 const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
-  const dispatch = useDispatch();
-  const { name } = useSelector((state: RootState) => state.userInfo);
+  const mutate = useEditName();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const userData: any = queryClient.getQueryData("user");
+  const [nickName, setNickName] = useState(userData.data.nickname);
   const [isError, setIsError] = useState(false);
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,11 +33,13 @@ const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
       setIsError(true);
     }
 
-    dispatch(changeUserInfo({ type: "name", value: value }));
+    setNickName(value);
   };
 
-  const handleClickNextBtn = () => {
+  const handleClickNextBtn = async () => {
+    mutate(nickName);
     closeModal();
+    navigate(-1);
   };
 
   return (
@@ -49,13 +54,23 @@ const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
         placeholder="이름을 변경해주세요"
         onChange={handleChangeName}
         type="text"
-        value={name || ""}
+        value={nickName}
         textCount={true}
         maxLength={5}
         error={isError ? "true" : "false"}
-        success={!isError && name ? "true" : "false"}
+        success={
+          !isError && nickName !== userData.data.nickname && nickName.length > 0
+            ? "true"
+            : "false"
+        }
       />
-      <BottomButton text="완료" onClick={handleClickNextBtn} />
+      <BottomButton
+        text="완료"
+        onClick={handleClickNextBtn}
+        disabled={
+          !(!isError && nickName !== userData.data.nickname && nickName.length > 0)
+        }
+      />
     </EditNameModalWrapper>
   );
 };
