@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import Icon from "../../components/common/Icon";
 import COLOR from "@styles/colors";
 import { Link } from "react-router-dom";
-import { ReactComponent as LogoImage } from "../../../application/assets/LogoImage.svg";
 import Text from "@components/common/Text";
 import Spacing from "@components/common/Spacing";
 
@@ -24,7 +23,7 @@ const LoginPage = () => {
         <Spacing size={5} />
         <Icon icon="AuthLogo" />
         <Spacing size={40} />
-        <LogoImage />
+        <Icon icon="LogoIcon" />
       </MainWrapper>
       <ButtonWrapper>
         <div>SNS 계정으로 로그인하기</div>
@@ -48,8 +47,8 @@ const LoginPageWrapper = styled.div`
   background: linear-gradient(
     to bottom,
     ${COLOR.MAIN_GREEN} 0%,
-    ${COLOR.MAIN_GREEN} 65%,
-    ${COLOR.WHITE} 65%,
+    ${COLOR.MAIN_GREEN} 70%,
+    ${COLOR.WHITE} 70%,
     ${COLOR.WHITE} 100%
   );
 `;
@@ -75,7 +74,7 @@ const MainWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   position: fixed;
-  bottom: 8%;
+  bottom: 6%;
   left: 50%;
   transform: translateX(-50%);
 
