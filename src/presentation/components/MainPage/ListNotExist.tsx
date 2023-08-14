@@ -7,10 +7,8 @@ import { styled } from "styled-components";
 import TextBox from "./components/TextBox";
 import { useNavigate } from "react-router-dom";
 
-const ListNotExist = () => {
+const ListNotExist = ({ nickname }: { nickname: string }) => {
   const navigate = useNavigate();
-  const userName = "DND";
-
   const handleClickCreat = () => {
     navigate("/trip-create/1");
   };
@@ -18,7 +16,7 @@ const ListNotExist = () => {
     <ListNotExistWrapper>
       <Spacing size={36} />
       <TextBox>
-        {`안녕하세요 ${userName}님,`}
+        {`안녕하세요 ${nickname}님,`}
         <br />
         어디로 여행을 떠나시나요?
       </TextBox>

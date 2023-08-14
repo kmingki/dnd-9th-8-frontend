@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import Header from "@components/MainPage/components/Header";
 import COLOR from "@styles/colors";
 import ListExist from "@components/MainPage/ListExist";
 import ListNotExist from "@components/MainPage/ListNotExist";
+import useGetMyInfo from "../../../application/hooks/queries/user/useGetMyInfo";
+import { useDispatch } from "react-redux";
+import { initializeCreateTripInfo } from "../../../application/reducer/slices/createTrip/createTripSlice";
 
 const MainPage = () => {
-  // 데이터 유무에 따라 색상 바뀜
-  const data = false;
+  const dispatch = useDispatch();
+  const { data } = useGetMyInfo();
+  useEffect(() => {
+    dispatch(initializeCreateTripInfo());
+  }, []);
   return (
-    <MainPageWrapper data={data}>
-      <Header data={data} />
-      {data ? <ListExist /> : <ListNotExist />}
-    </MainPageWrapper>
+    <>
+      {data && (
+        <MainPageWrapper data={false}>
+          <Header data={false} />
+          {false ? <ListExist /> : <ListNotExist nickname={data?.data.nickname} />}
+        </MainPageWrapper>
+      )}
+    </>
   );
 };
 

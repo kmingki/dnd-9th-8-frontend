@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import COLOR from "@styles/colors";
 import Spacing from "../common/Spacing";
@@ -13,16 +13,24 @@ import {
 import BottomButton from "../common/BottomButton";
 import { useNavigate } from "react-router-dom";
 import Text from "@components/common/Text";
+import useGetMyInfo from "../../../application/hooks/queries/user/useGetMyInfo";
 
 const Step1 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userName = "DND";
+  const { data } = useGetMyInfo();
+  const userName = data?.data.nickname;
+
   const { tripType } = useSelector((state: RootState) => state.createTrip);
   const tripObj = [
-    { dest: "국내", text: "국내 여행" },
-    { dest: "해외", text: "해외 여행" },
+    { dest: "DOMESTIC", text: "국내 여행" },
+    { dest: "OVERSEAS", text: "해외 여행" },
   ];
+
+  useEffect(() => {
+    dispatch(initializeCreateTripInfo());
+  }, []);
+
   const handleClickOnboarding = (dest: string) => {
     dispatch(
       changeCreateTripState({
@@ -34,6 +42,7 @@ const Step1 = () => {
   const handleClickNextBtn = () => {
     navigate("/trip-create/2");
   };
+
   const handleClickSkipBtn = () => {
     dispatch(initializeCreateTripInfo());
     navigate("/");
