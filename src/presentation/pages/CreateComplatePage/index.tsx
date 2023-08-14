@@ -4,6 +4,7 @@ import Icon from "@components/common/Icon";
 import COLOR from "@styles/colors";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
+import Text from "@components/common/Text";
 
 const CreateComplatePage = () => {
   const navigate = useNavigate();
@@ -12,36 +13,58 @@ const CreateComplatePage = () => {
   };
   return (
     <CreateComplateWrapper>
-      <IconWrapper>
+      <MainWrapper>
         <Icon icon="Complate" />
-      </IconWrapper>
-      <TextBox>체크리스트 생성 완료</TextBox>
-      <BottomButton text="시작하기" onClick={handleClickStart} />
+        <TextWrapper>
+          <Text
+            color={COLOR.MAIN_GREEN}
+            fontSize={30}
+            fontWeight={600}
+            lineHeight="140%"
+            text="여행이 생성되었어요!"
+          />
+          <div className="sub-text">
+            패-킷과 체크리스트로
+            <br />
+            여행 준비를 시작하세요
+          </div>
+        </TextWrapper>
+      </MainWrapper>
+      <BottomButton text="패킷 시작하기" onClick={handleClickStart} />
     </CreateComplateWrapper>
   );
 };
 
 const CreateComplateWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+
+  height: 100%;
+  overflow-y: hidden;
 `;
-const IconWrapper = styled.div`
+
+const MainWrapper = styled.div`
+  position: absolute;
+  top: 30%;
+
   display: flex;
-  justify-content: center;
-
-  width: 154px;
-  height: 154px;
-  margin-top: 50%;
-
-  border-radius: 100%;
-  background-color: ${COLOR.GREEN_50};
+  flex-direction: column;
+  gap: 40px;
 `;
-const TextBox = styled.div`
-  color: ${COLOR.GRAY_900};
-  font-size: 21px;
-  font-weight: 700;
-  line-height: 140%;
+const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  text-align: center;
+
+  .sub-text {
+    color: ${COLOR.GRAY_700};
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 132%;
+  }
 `;
 export default CreateComplatePage;
