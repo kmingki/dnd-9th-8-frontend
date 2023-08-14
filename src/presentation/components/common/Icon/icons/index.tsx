@@ -17,7 +17,8 @@ export { default as DownOutlined } from "./DownOutlined";
 export { default as Delete } from "./Delete";
 export { default as SwapOutlined } from "./SwapOutlined";
 export { default as EllipsisOutlined } from "./EllipsisOutlined";
-
+export { default as KakaoLogo } from "./KakaoLogo";
+export { default as LinkOutlined } from "./LinkOutlined";
 
 export { default as Logo } from "./Logo";
 export { default as Folder } from "./Folder";

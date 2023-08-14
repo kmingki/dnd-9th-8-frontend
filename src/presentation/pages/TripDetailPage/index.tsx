@@ -31,7 +31,7 @@ const TripDetailPage = () => {
     }
 
     const onClickDeleteButton = () => {
-
+        toggleDeleteModal();
     }
 
     const dummyData = {
@@ -57,7 +57,7 @@ const TripDetailPage = () => {
                 <DescriptionWrapper>
                     <Description>{dummyData.startDate}&nbsp;~&nbsp;{dummyData.finishDate}</Description>
                     <IconWrapper onClick={(e: React.MouseEvent) => {setDropdownVisibility(!dropdownVisibility)}}>
-                    <Icon icon="MoreOutlined" fill="#8B95A1"/>
+                    <Icon icon="EllipsisOutlined" fill="#8B95A1"/>
                     {dropdownVisibility &&
                     <DropDown>
                         <ShareButton onClick={onClickShareButton}>템플릿 공유</ShareButton>
@@ -70,7 +70,7 @@ const TripDetailPage = () => {
             </TextContainer>
         </TripInfo>
         <Spacing size={25.5} />
-        <DefaultTemplate>
+        <ContentContainer>
         <ContentWrapper>
             {list.map((item, index) => (
             <TodoCard {...item} />))}    
@@ -88,7 +88,7 @@ const TripDetailPage = () => {
                 <Icon icon="Plus" />
             </IconWrapper>
         </AddTodoButton> */}
-        </DefaultTemplate>
+        </ContentContainer>
         </>
     )  
 };
@@ -99,7 +99,6 @@ const ContentWrapper = styled.div`
 `;
 
 const TripInfo = styled.div`
-    width : 100%;
     background-color : ${COLOR.WHITE};
     padding : 0 20px;
 `;
@@ -113,7 +112,15 @@ const Title = styled.div`
     font-size: 26px;
 `;
 
-const DescriptionWrapper = styled.div`
+
+const ContentContainer = styled.div`
+    height: 100%;
+    padding: 0 20px;
+    background-color:#F6F7F9;
+`;
+
+  
+  const DescriptionWrapper = styled.div`
     display: flex;
     justify-content: space-between;
 `

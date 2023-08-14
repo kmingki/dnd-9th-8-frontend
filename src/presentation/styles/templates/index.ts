@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 import COLOR from "@styles/colors";
 
 const DefaultTemplate = styled.div`
-  width: 100%;
   height: 100%;
   padding: 0 20px;
   background-color:#F6F7F9;
