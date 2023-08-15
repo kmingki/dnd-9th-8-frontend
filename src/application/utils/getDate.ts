@@ -1,3 +1,4 @@
+// 캘린더 range에 사용
 export const getMonthandDate = (date: any) => {
   if (!date) {
     return "";
@@ -38,4 +39,16 @@ export const toLocalISOString = (date: Date) => {
     ":" +
     pad(date.getSeconds())
   );
+};
+
+// 여행 정보에서 기간 나타낼 때 사용
+export const getTripDetailRange = (date: any) => {
+  if (!date) {
+    return "";
+  }
+  const newDateValue = new Date(date);
+  const newMonth = String(newDateValue.getMonth() + 1);
+  const newDate = String(newDateValue.getDate());
+
+  return `${newMonth}월 ${newDate}일`;
 };
