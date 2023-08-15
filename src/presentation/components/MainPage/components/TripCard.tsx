@@ -6,6 +6,7 @@ import Spacing from "@components/common/Spacing";
 import Tag from "@components/common/Tag";
 import Text from "@components/common/Text";
 import { getTripDetailRange } from "../../../../application/utils/getDate";
+import ProgressBar from "@components/common/ProgressBar";
 
 const TripCard = ({ travelInfo }: any) => {
   return (
@@ -48,6 +49,20 @@ const TripCard = ({ travelInfo }: any) => {
         </div>
         <Icon icon={travelInfo.isInStorage ? "FilledHeart" : "UnFilledHeart"} />
       </MainWrapper>
+      {travelInfo.dDay.includes("-") && (
+        <>
+          <Spacing size={15} />
+          <ProgressBar
+            max={"100"}
+            value={"25"}
+            percent={false}
+            percentNumber={100}
+            size="small"
+            startColor="#06DCA8"
+            finishColor="#00B494"
+          />
+        </>
+      )}
     </TripCardWrapper>
   );
 };
@@ -68,6 +83,7 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
 
   .trip-info {
     display: flex;

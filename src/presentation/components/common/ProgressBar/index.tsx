@@ -87,6 +87,10 @@ const ProgressBarWrapper = styled.div<{
   finishColor?: string;
 }>`
   width: 100%;
+  height: ${({ size }) =>
+    css`
+      ${size === "large" ? "16" : "6"}px;
+    `};
   #progress {
     appearance: none;
     width: 100%;
