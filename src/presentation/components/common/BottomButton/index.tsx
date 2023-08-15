@@ -42,7 +42,7 @@ const BottomButtonWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   align-items: center;
 `;
 const Button = styled.button`
@@ -50,7 +50,7 @@ const Button = styled.button`
   height: 54px;
 
   border: none;
-  border-radius: 16px;
+  border-radius: 8px;
   background-color: ${({ disabled }) =>
     disabled ? COLOR.GRAY_200 : COLOR.MAIN_GREEN};
   outline: none;

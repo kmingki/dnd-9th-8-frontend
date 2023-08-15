@@ -12,6 +12,7 @@ import {
 } from "../../../application/reducer/slices/createTrip/createTripSlice";
 import BottomButton from "../common/BottomButton";
 import { useNavigate } from "react-router-dom";
+import Text from "@components/common/Text";
 
 const Step1 = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,13 @@ const Step1 = () => {
             어떤 여행을 준비하고 계신가요?
           </div>
         </TextBox>
-        <div className="sub-text">여행지 유형을 선택해주세요</div>
+        <Text
+          text="여행지 유형에 따라 기본 체크리스트가 제공돼요"
+          color={COLOR.GRAY_600}
+          fontSize={16}
+          fontWeight={600}
+          lineHeight="132%"
+        />
       </TextContainer>
       <Spacing size={38} />
       <OnboardingButtonContainer>
@@ -80,18 +87,11 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  .sub-text {
-    color: ${COLOR.GRAY_600};
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 132%;
-  }
 `;
 const OnboardingButtonContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 10px;
+  flex-direction: column;
+  gap: 12px;
 `;
 
 export default Step1;

@@ -1,7 +1,7 @@
 import client from "@api/index";
 
-export const getTripInfo = async (id: string) =>
+export const logout = async () =>
   await client
-    .get(`/travels/${id}`)
+    .delete("/auth/logout")
     .then(({ data }) => data)
     .catch((err) => err.response);
