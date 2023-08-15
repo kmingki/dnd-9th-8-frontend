@@ -5,7 +5,7 @@
             "@assets/*":["src/assets/*"],
             "@hooks/*":["src/application/hooks/*"],
             "@reducer/*":["src/application/reducer/*"],
-            "@utils":["src/application/utils"],
+            "@utils/*":["src/application/utils/*"],
             "@store":["src/application/store"],
             "@type/*":["src/application/type/*"],
             "@constants":["src/application/constants"],
