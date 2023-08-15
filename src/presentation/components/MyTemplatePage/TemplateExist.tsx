@@ -3,45 +3,68 @@ import Icon from "@components/common/Icon";
 import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
 import { styled } from "styled-components";
+import Text from "@components/common/Text";
+import { getTripDetailRange } from "../../../application/utils/getDate";
 
-const TemplateExist = ({ isEdit }: { isEdit: boolean }) => {
-  // isEdit -> true면 편집 중이므로 헤더에는 "삭제" 버튼
+const TemplateExist = () => {
   const templateData = [
-    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
+    {
+      travelId: 2,
+      Title: "고성 여름",
+      startDate: "2023-08-18T14:32:33",
+      endDate: "2023-08-21T14:32:33",
+      isInStorage: true,
+    },
+    {
+      travelId: 3,
+      Title: "고성 여름",
+      startDate: "2023-07-16T14:32:33",
+      endDate: "2023-07-18T14:32:33",
+      isInStorage: false,
+    },
+    {
+      travelId: 5,
+      Title: "부산 여행",
+      startDate: "2023-07-16T14:32:33",
+      endDate: "2023-07-18T14:32:33",
+      isInStorage: false,
+    },
+    {
+      travelId: 3,
+      Title: "유럽",
+      startDate: "2023-08-18T14:32:33",
+      endDate: "2023-08-21T14:32:33",
+      isInStorage: true,
+    },
   ];
 
   return (
     <TemplateExistWrapper>
       <Spacing size={15} />
       <TripWrapper>
-        {templateData.map(
-          (
-            template: { icon: string; name: string; range: string },
-            index: number
-          ) => (
-            <div className="template-container" key={index}>
-              <div className="template-inner">
-                <Icon icon={template.icon} />
-                <div className="trip-info">
-                  <div className="trip-name">{template.name}</div>
-                  <div className="trip-range">{template.range}</div>
-                </div>
-              </div>
-              {isEdit && (
-                <div className="check-box">
-                  <Icon icon="UnCheckedBox" />
-                </div>
-              )}
+        {templateData.map((travel: any) => (
+          <div className="template-container" key={travel.travelId}>
+            <div className="trip-info">
+              <Text
+                text={travel.Title}
+                color={COLOR.GRAY_900}
+                fontSize={16}
+                fontWeight={600}
+                lineHeight="140%"
+              />
+              <Text
+                text={`${getTripDetailRange(
+                  travel.startDate
+                )} ~ ${getTripDetailRange(travel.endDate)}`}
+                color={COLOR.GRAY_600}
+                fontSize={14}
+                fontWeight={600}
+                lineHeight="145%"
+              />
             </div>
-          )
-        )}
+            <Icon icon={travel.isInStorage ? "FilledHeart" : "UnFilledHeart"} />
+          </div>
+        ))}
       </TripWrapper>
     </TemplateExistWrapper>
   );
@@ -59,34 +82,17 @@ const TripWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    padding: 14px 12px;
-    border: none;
+    padding: 14px 18px;
+    border: 2px solid ${COLOR.GRAY_100};
     border-radius: 8px;
     background: ${COLOR.WHITE};
+    box-shadow: 0px 2px 100px 1px rgba(150, 150, 150, 0.1);
 
-    .template-inner {
+    .trip-info {
       display: flex;
-      flex-direction: row;
-      gap: 12px;
-      align-items: center;
-      .trip-info {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        text-align: left;
-        .trip-name {
-          color: ${COLOR.BASE_100};
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 140%;
-        }
-        .trip-range {
-          color: ${COLOR.BASE_80};
-          font-size: 14px;
-          font-weight: 600;
-          line-height: 145%;
-        }
-      }
+      flex-direction: column;
+      gap: 4px;
+      text-align: left;
     }
   }
 `;

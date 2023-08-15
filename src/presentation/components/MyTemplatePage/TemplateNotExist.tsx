@@ -10,7 +10,7 @@ const TemplateNotExist = () => {
       <div className="main">
         <Icon icon="Template" />
         <Text
-          text="저장된 템플릿이 없어요"
+          text="저장된 여행이 없어요"
           color={COLOR.GRAY_700}
           fontSize={18}
           fontWeight={600}
