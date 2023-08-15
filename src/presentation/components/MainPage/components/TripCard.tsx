@@ -10,7 +10,7 @@ import ProgressBar from "@components/common/ProgressBar";
 
 const TripCard = ({ travelInfo }: any) => {
   return (
-    <TripCardWrapper>
+    <TripCardWrapper progress={travelInfo.dDay.includes("-") ? true : false}>
       <TopWrapper>
         <Tag
           text={travelInfo.dDay}
@@ -53,13 +53,21 @@ const TripCard = ({ travelInfo }: any) => {
         <>
           <Spacing size={15} />
           <ProgressBar
-            max={"100"}
-            value={"25"}
+            max={String(travelInfo.finished + travelInfo.unfinished)}
+            value={String(travelInfo.finished)}
             percent={false}
             percentNumber={100}
             size="small"
             startColor="#06DCA8"
             finishColor="#00B494"
+          />
+          <Spacing size={6} />
+          <Text
+            text={`잔여 리스트 총 ${travelInfo.unfinished}개`}
+            color={COLOR.GRAY_700}
+            fontSize={12}
+            fontWeight={600}
+            lineHeight="14px"
           />
         </>
       )}
@@ -67,9 +75,8 @@ const TripCard = ({ travelInfo }: any) => {
   );
 };
 
-const TripCardWrapper = styled.div`
-  padding: 22px 18px;
-
+const TripCardWrapper = styled.div<{ progress: boolean }>`
+  padding: ${({ progress }) => (progress ? "22px 19px 12px 19px" : "22px 19px")};
   border: 2px solid ${COLOR.GRAY_100};
   border-radius: 8px;
   background: ${COLOR.WHITE};

@@ -61,7 +61,7 @@ const ListExist = () => {
   return (
     <ListExistWrapper>
       <Spacing size={20} />
-      <Button
+      {/* <Button
         radius={8}
         background={COLOR.MAIN_GREEN}
         padding="11px 12px"
@@ -81,7 +81,7 @@ const ListExist = () => {
           <Icon icon="Chevron" color={COLOR.WHITE} fill={COLOR.WHITE} />
         </RemindButton>
       </Button>
-      <Spacing size={28} />
+      <Spacing size={28} /> */}
       <TripList />
       <IconWrapper>
         {isShowModal ? (
