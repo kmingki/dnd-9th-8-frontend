@@ -12,6 +12,14 @@ export const editUserNickName = async (newNickname: string) =>
     .then(({ data }) => data)
     .catch((err) => err.response);
 
+export const editUserProfile = async (formData: any) =>
+  await client
+    .put("/members/profile-images", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+    .then(({ data }) => data)
+    .catch((err) => err.response);
+
 export const logout = async () =>
   await client
     .delete("/auth/logout")

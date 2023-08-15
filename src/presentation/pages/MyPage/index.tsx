@@ -46,8 +46,8 @@ const MyPage = () => {
           <MembersWrapper>
             <Spacing size={38} />
             <InfoWrapper>
-              <div className="icon-wrapper">
-                <Icon icon="Profile" width={80} height={80} />
+              <div className="profile-wrapper">
+                <img src={data.data.profileImageUrl} alt="프로필 이미지" />
                 <div className="edit-icon">
                   <Icon icon="EditProfile" onClick={handleClickEditInfo} />
                 </div>
@@ -129,8 +129,13 @@ const InfoWrapper = styled.div`
   gap: 20px;
   align-items: center;
 
-  .icon-wrapper {
+  .profile-wrapper {
     position: relative;
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 100%;
+    }
     .edit-icon {
       position: absolute;
       left: 0;
