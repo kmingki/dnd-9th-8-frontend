@@ -11,9 +11,9 @@ import Toast from "@components/common/Toast";
 const ShareModal = ({ closeModal }: { closeModal: () => void }) => {
   const navigate = useNavigate();
 
-  const handleClickLogout = () => {
+  const onClickKakaoShare = () => {
     closeModal();
-    navigate("/login");
+    //shareKakao(route, title)}
   };
 
   return (
@@ -28,7 +28,7 @@ const ShareModal = ({ closeModal }: { closeModal: () => void }) => {
       <Spacing size={23} />
       <ButtonWrapper>
         <TextWrapper>
-          <Icon icon="KakaoLogo" />
+          <Icon icon="KakaoLogo" onClick={onClickKakaoShare}/>
           <Text
           text="카카오톡"
           color={COLOR.GRAY_800}

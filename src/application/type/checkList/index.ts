@@ -1,14 +1,14 @@
 export interface listItem {
-    //checkListId : number;
-    id : number;
-    isChecked : boolean;
+    itemId : number;
     title : string;
+    order : number;
+    isChecked : boolean;
     
 }
 
 export interface checkList {
-    id: number; 
-    name: string; 
-    list: listItem[];
-    emoji: string;
+    checkListId : number;
+    title: string; 
+    order: number;
+    itemDtoList: listItem[];
 }

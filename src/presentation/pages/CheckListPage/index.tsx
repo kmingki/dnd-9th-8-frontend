@@ -29,6 +29,7 @@ interface State {
 
 const CheckListPage = () => {
     
+    /*
     const [newCheckList, setNewCheckList] = useState<State>({ checkListState : []}); 
 
 
@@ -145,6 +146,9 @@ const CheckListPage = () => {
         </AddButtonWrapper>
       </GreyTemplate>
     );
+    */
+
+    return(<></>);
   };
 
 

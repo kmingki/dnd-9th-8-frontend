@@ -7,7 +7,7 @@ import Color from '@styles/colors';
 
 type CheckItemType = {
     checkListId : number,
-    id :number,
+    itemId :number,
     isChecked: boolean,
     title: string, 
     onChangeCheckItem : any,
@@ -16,13 +16,13 @@ type CheckItemType = {
 };
 
 
-const CheckItem = ({ checkListId, id, isChecked, title, onChangeCheckItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: CheckItemType) => {
+const CheckItem = ({ checkListId, itemId, isChecked, title, onChangeCheckItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: CheckItemType) => {
 
     const [value, setValue] = useState('');
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>)=> {
 
-        onChangeCheckItemTitle(checkListId, id, e.target.value);
+        onChangeCheckItemTitle(checkListId, itemId, e.target.value);
         setValue(e.target.value);
     }
     
@@ -31,7 +31,7 @@ const CheckItem = ({ checkListId, id, isChecked, title, onChangeCheckItem, onCha
             <CheckItemWrapper>
                 <CheckBox checked={isChecked}>
                     <HiddenCheckbox type="checkbox"
-                    onChange={()=>onChangeCheckItem(checkListId, id, isChecked)} />
+                    onChange={()=>onChangeCheckItem(checkListId, itemId, isChecked)} />
                     {isChecked && <Icon icon='Checked' width={10} height={10} color={Color.WHITE}/> }
                 </CheckBox>
                 <Description isChecked={isChecked}>
@@ -39,7 +39,7 @@ const CheckItem = ({ checkListId, id, isChecked, title, onChangeCheckItem, onCha
                 </Description>
             </CheckItemWrapper>
             <CheckItemWrapper>
-                <IconWrapper onClick={()=>onClickDeleteCheckItem(checkListId, id)}>
+                <IconWrapper onClick={()=>onClickDeleteCheckItem(checkListId, itemId)}>
                     <Icon icon='Delete'/>
                 </IconWrapper>
                 <IconWrapper>

@@ -54,25 +54,27 @@ const CheckList = () => {
 }
 */
 
-type checkListType = { id: number; name: string; list: listItem[], emoji:string ,onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
+type checkListType = { checkListId: number; order: number; title: string; itemDtoList: listItem[], onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
 
 
-const AddCheckList = ({id, name, list, emoji, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
+const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
 
-    const [title, setTitle] = useState('');
+    //const [title, setTitle] = useState(title);
     const [isOpen, setIsOpen] = useState(true);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [titleEmoji, setTitleEmoji] = useState(emoji);
+    //const [isModalOpen, setIsModalOpen] = useState(false); 이전 이모티콘 디자인 관련
 
     const onClickOpenCheckList = () => {
         setIsOpen(prev=>!prev);
     };
 
-    //모달에서 아이콘 클릭했을때
+    
+    // 이전 디자인 이모티콘(?) 관련
+    /*
     const onClickModalIcon = (e: React.MouseEvent<HTMLButtonElement>) => {
      
         setTitleEmoji(e.currentTarget.id);
     };
+    */
 
     // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
     const onDragEnd = ({ source, destination }: DropResult) => {
@@ -80,19 +82,17 @@ const AddCheckList = ({id, name, list, emoji, onChangeCheckItem, onClickPlusItem
         console.log('>>> destination', destination);
     };
     
-
-
     return (
         <>
         <CheckListWrapper>
             <Head>
                 <Title>
-                    <TitleIconWrapper onClick={()=>{setIsModalOpen(prev=>!prev)}}>
+                    <TitleIconWrapper>
                         <Icon icon='Calendar'/>
                     </TitleIconWrapper>
-                    <InputWrapper placeholder={name} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{setTitle(e.target.value)}} value={title}/>
+                    <InputWrapper placeholder={title} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{/*setTitle(e.target.value)*/}} value={title}/>
                     <TitleLeft>
-                    <Indicator>{list.filter((item) => item.isChecked === true).length}/{list.length}</Indicator>
+                    <Indicator>{itemDtoList.filter((item) => item.isChecked === true).length}/{itemDtoList.length}</Indicator>
                     {isOpen? 
                     <IconWrapper>
                         <Icon icon='UpOutlined' onClick={onClickOpenCheckList}/>
@@ -110,8 +110,8 @@ const AddCheckList = ({id, name, list, emoji, onChangeCheckItem, onClickPlusItem
                     <Droppable droppableId="droppable">
                         {(provided: any) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
-                            {list.map((item, index) => (
-                            <Draggable key={item.id} draggableId={String(item.id)} index={index}>
+                            {itemDtoList.map((item, index) => (
+                            <Draggable key={item.itemId} draggableId={String(item.itemId)} index={index}>
                                 {(provided : any) => (
                                 <div
                                     ref={provided.innerRef}
@@ -119,8 +119,8 @@ const AddCheckList = ({id, name, list, emoji, onChangeCheckItem, onClickPlusItem
                                     {...provided.dragHandleProps}
                                 >
                                     <CheckItem 
-                                    checkListId={id} 
-                                    id={item.id} 
+                                    checkListId={checkListId} 
+                                    itemId={item.itemId} 
                                     isChecked={item.isChecked} 
                                     title={item.title} 
                                     onChangeCheckItem={onChangeCheckItem} 
@@ -136,7 +136,7 @@ const AddCheckList = ({id, name, list, emoji, onChangeCheckItem, onClickPlusItem
                         )}
                     </Droppable>
                 </DragDropContext>
-                <AddCheckItem checkListId={id} id={list.length} onClickPlusItem={onClickPlusItem}/>
+                <AddCheckItem checkListId={checkListId} id={itemDtoList.length} onClickPlusItem={onClickPlusItem}/>
                 <FinishButtonWrapper>
                     <FinishButton>
                         완료
@@ -145,50 +145,8 @@ const AddCheckList = ({id, name, list, emoji, onChangeCheckItem, onClickPlusItem
             </CheckItemWrapper>
             }
         </CheckListWrapper>
-
-        {isModalOpen && 
-        <ModalOverlay>
-            <ModalWindow>
-                <Content>
-                    <ContentWrapper id={'Bus'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
-                        <Icon icon='Bus' />
-                    </ContentWrapper>
-                    <ContentWrapper id={'Plane'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
-                        <Icon icon='Plane' />
-                    </ContentWrapper>
-                    <ContentWrapper id={'dfs'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
-                        <Icon icon='Plane' />
-                    </ContentWrapper>
-                    <ContentWrapper id={'de'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
-                        <Icon icon='Plane' />
-                    </ContentWrapper>
-                    <ContentWrapper id={'dne'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
-                        <Icon icon='Bus' />
-                    </ContentWrapper>
-                    <ContentWrapper id={'Pdne'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
-                        <Icon icon='Bus' />
-                    </ContentWrapper>
-                    <ContentWrapper id={'Pde'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
-                        <Icon icon='Bus' />
-                    </ContentWrapper>
-                    <ContentWrapper id={'Pddfne'} onClick={onClickModalIcon} titleEmoji={titleEmoji}>
-                        <Icon icon='Bus' />
-                    </ContentWrapper>
-                </Content>
-                <ButtonContainer>
-                    <ModalDeleteButton>
-                        지우기
-                    </ModalDeleteButton>
-                    <Space />
-                    <ModalSaveButton>
-                        저장
-                    </ModalSaveButton>
-                </ButtonContainer>
-            </ModalWindow>
-        </ModalOverlay>
-        }
         </>
     );
 }
 
-export { /*CheckList,*/ AddCheckList };
+export { AddCheckList };
