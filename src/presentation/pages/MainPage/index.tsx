@@ -17,24 +17,18 @@ const MainPage = () => {
   return (
     <>
       {data && (
-        <MainPageWrapper data={false}>
-          <Header data={false} />
-          {false ? <ListExist /> : <ListNotExist nickname={data?.data.nickname} />}
+        <MainPageWrapper>
+          <Header />
+          {true ? <ListExist /> : <ListNotExist nickname={data?.data.nickname} />}
         </MainPageWrapper>
       )}
     </>
   );
 };
 
-const MainPageWrapper = styled.div<{ data: boolean }>`
+const MainPageWrapper = styled.div`
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    ${({ data }) => (data ? COLOR.GREEN_500 : COLOR.GRAY_50)} 0%,
-    ${({ data }) => (data ? COLOR.GREEN_500 : COLOR.GRAY_50)} 30%,
-    ${COLOR.GRAY_50} 30%,
-    ${COLOR.GRAY_50} 100%
-  );
+  background-color: ${COLOR.GRAY_50};
 `;
 
 export default MainPage;
