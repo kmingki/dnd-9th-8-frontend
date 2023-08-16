@@ -27,10 +27,10 @@ export { default as Folder } from "./Folder";
 export { default as User } from "./User";
 
 export { default as NotExistCheckList } from "./NotExistCheckList";
-export { default as CreateButton } from "./CreateButton";
+export { default as TripCreateButton } from "./TripCreateButton";
 export { default as MenuXButton } from "./MenuXButton";
-export { default as LoadMenu } from "./LoadMenu";
-export { default as CreateMenu } from "./CreateMenu";
+export { default as Clip } from "./Clip";
+export { default as PlusCircle } from "./PlusCircle";
 
 export { default as Chevron } from "./Chevron";
 export { default as Complate } from "./Complate";
@@ -46,3 +46,5 @@ export { default as Template } from "./Template";
 export { CheckedBox, UnCheckedBox } from "./CheckBox";
 export { default as Remind } from "./Remind";
 export { default as CloseOutlined } from "./CloseOutlined";
+export { default as LoudSpeaker } from "./LoudSpeaker";
+export { FilledHeart, UnFilledHeart } from "./Heart";

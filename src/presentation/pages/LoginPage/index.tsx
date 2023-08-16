@@ -13,15 +13,15 @@ const LoginPage = () => {
   return (
     <LoginPageWrapper>
       <MainWrapper>
+        <Icon icon="AuthLogo" />
+        <Spacing size={9} />
         <Text
-          text="마음 편한 여행"
-          color={COLOR.WHITE}
-          fontSize={24}
+          text="빈틈없는 여행 준비"
+          color={COLOR.MAIN_GREEN}
+          fontSize={23}
           fontWeight={600}
           lineHeight="139%"
         />
-        <Spacing size={5} />
-        <Icon icon="AuthLogo" />
         <Spacing size={40} />
         <Icon icon="LogoIcon" />
       </MainWrapper>
@@ -44,13 +44,7 @@ const LoginPageWrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    ${COLOR.MAIN_GREEN} 0%,
-    ${COLOR.MAIN_GREEN} 70%,
-    ${COLOR.WHITE} 70%,
-    ${COLOR.WHITE} 100%
-  );
+  background-color: ${COLOR.WHITE};
 `;
 
 const MainWrapper = styled.div`

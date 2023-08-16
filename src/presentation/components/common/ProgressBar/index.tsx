@@ -6,7 +6,7 @@ type ProgressBarType = {
   max: string;
   value: string;
   percent: boolean; //프로그레스바위에 퍼센트 표시 유무
-  percentNumber: Number; //프로그레스바위에 퍼센트 표시
+  percentNumber?: Number; //프로그레스바위에 퍼센트 표시
   size: string; //large / small
   startColor: string;
   finishColor?: string; //linear gradient 를 위한 타입
@@ -87,6 +87,10 @@ const ProgressBarWrapper = styled.div<{
   finishColor?: string;
 }>`
   width: 100%;
+  height: ${({ size }) =>
+    css`
+      ${size === "large" ? "16" : "6"}px;
+    `};
   #progress {
     appearance: none;
     width: 100%;

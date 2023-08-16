@@ -10,9 +10,9 @@ type CheckItemType = {
     itemId :number,
     isChecked: boolean,
     title: string, 
-    onChangeCheckItem : any,
-    onChangeCheckItemTitle : any,
-    onClickDeleteCheckItem: any
+    onChangeCheckItem?: any,
+    onChangeCheckItemTitle?: any,
+    onClickDeleteCheckItem?: any
 };
 
 

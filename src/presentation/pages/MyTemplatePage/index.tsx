@@ -1,26 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import TemplateExist from "@components/MyTemplatePage/TemplateExist";
 import TemplateNotExist from "@components/MyTemplatePage/TemplateNotExist";
-import EditHeader from "@components/MyTemplatePage/components/EditHeader";
 import BackHeader from "@components/common/BackHeader";
 import COLOR from "@styles/colors";
 import styled from "styled-components";
+import useGetMyInfo from "../../../application/hooks/queries/user/useGetMyInfo";
+import useGetStorage from "../../../application/hooks/queries/storage/useGetStorage";
 
 const MyTemplatePage = () => {
-  const data = true;
-  const [isEdit, setIsEdit] = useState(false);
+  const { data: userData } = useGetMyInfo();
+  const memberId = userData?.memberId;
+  const { data: storageData } = useGetStorage(memberId);
+
   return (
     <MyTemplatePageWrapper>
-      {data ? (
-        <EditHeader
-          mainText="저장된 템플릿"
-          rightOnClick={() => setIsEdit((prev) => !prev)}
-          rightText={isEdit ? "삭제" : "편집"}
-        />
+      <BackHeader text="저장된 여행" />
+      {storageData && storageData.length > 0 ? (
+        <TemplateExist storageData={storageData} memberId={memberId} />
       ) : (
-        <BackHeader text="저장된 템플릿" />
+        <TemplateNotExist />
       )}
-      {data ? <TemplateExist isEdit={isEdit} /> : <TemplateNotExist />}
     </MyTemplatePageWrapper>
   );
 };

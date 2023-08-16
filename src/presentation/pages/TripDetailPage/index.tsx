@@ -10,7 +10,7 @@ import Text from '@components/common/Text';
 import COLOR from "@styles/colors";
 import useModal from "../../../application/hooks/useModal";
 import { ShareModal, DeleteModal } from "@components/domain/TripDetail";
-import useGetTripInfo from "@hooks/queries/trip/useGetTripInfo";
+import useGetTravelDetail from "@hooks/queries/trip/useGetTravelDetail";
 import { AddCheckList } from "@components/domain/CheckList"; 
 import { useParams } from "react-router-dom";
 import { checkList } from "@type/checkList";
@@ -46,7 +46,7 @@ interface State {
 const TripDetailPage = () => {
 
     const { tripId } = useParams();
-    const { data, isLoading, error } = useGetTripInfo(String(tripId));
+    const { data, isLoading, error } = useGetTravelDetail(String(tripId));
     const [ tripInfo, setTripInfo ] = 
     useState<TripType>({ 
         title : data?.title, 

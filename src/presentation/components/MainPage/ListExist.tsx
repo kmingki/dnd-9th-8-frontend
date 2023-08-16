@@ -1,6 +1,5 @@
 import Spacing from "@components/common/Spacing";
 import { styled } from "styled-components";
-import ListMain from "./components/ListMain";
 import Icon from "@components/common/Icon";
 import TripList from "./components/TripList";
 import useModal from "../../../application/hooks/useModal";
@@ -60,30 +59,31 @@ const ListExist = () => {
   return (
     <ListExistWrapper>
       <Spacing size={20} />
-      <ListMain />
-      <Spacing size={28} />
       <TripList />
       <IconWrapper>
         {isShowModal ? (
           <Modal isVisible={isShowModal} closeModal={closeModal}>
             <MainMenu>
-              <div className="menu-box">
-                새로 만들기
-                <Icon icon="CreateMenu" onClick={handleClickCreateBtn} />
+              <div className="button-wrapper">
+                <div className="menu-box" onClick={handleClickLoadBtn}>
+                  <Icon icon="Clip" />
+                  여행 불러오기
+                </div>
+                <div className="menu-box" onClick={handleClickCreateBtn}>
+                  <Icon icon="PlusCircle" />
+                  새로 만들기
+                </div>
               </div>
-              <div className="menu-box">
-                불러오기
-                <Icon icon="LoadMenu" onClick={handleClickLoadBtn} />
-              </div>
-              <div className="menu-box">
+              <div className="menu-box" style={{ justifyContent: "flex-end" }}>
                 <Icon icon="MenuXButton" onClick={handleClickMenu} />
               </div>
             </MainMenu>
           </Modal>
         ) : (
-          <Icon icon="CreateButton" onClick={handleClickMenu} />
+          <Icon icon="TripCreateButton" onClick={handleClickMenu} />
         )}
       </IconWrapper>
+
       <BottomSheet isVisible={isShowTemplate} closeModal={closeTemplate}>
         {!clicked ? (
           <TemplateModal setClicked={setClicked} />
@@ -110,16 +110,31 @@ const MainMenu = styled.div`
   right: 10px;
   width: fit-content;
 
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  .button-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 18px 17px;
+    margin-right: 4px;
+    border-radius: 10px;
+    background-color: ${COLOR.WHITE};
+  }
   .menu-box {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-end;
+    gap: 8px;
 
-    color: ${COLOR.WHITE};
+    color: ${COLOR.GRAY_800};
     font-size: 16px;
-    font-weight: 700;
-    line-height: 140%;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: -0.08px;
   }
 `;
 export default ListExist;

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import Icon from "../Icon";
+import COLOR from "@styles/colors";
 
 type BackHeaderType = {
   text?: string;
@@ -32,10 +33,10 @@ const BackHeaderWrapper = styled.div<{ color?: string }>`
 
   padding: 20px 0;
 
-  color: ${({ color }) => (color ? color : "#292929")};
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 22px;
+  color: ${({ color }) => (color ? color : COLOR.GRAY_900)};
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 140%;
 
   .text {
     flex-grow: 1;

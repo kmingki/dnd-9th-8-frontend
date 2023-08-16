@@ -8,9 +8,9 @@ const TextBox = ({ children }: { children: React.ReactNode }) => {
 
 const TextBoxWrapper = styled.div`
   color: ${COLOR.GRAY_900};
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
-  line-height: 30px;
-  letter-spacing: -0.11px;
+  line-height: 28px;
+  letter-spacing: -0.1px;
 `;
 export default TextBox;

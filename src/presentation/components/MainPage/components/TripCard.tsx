@@ -1,114 +1,130 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import Icon from "@components/common/Icon";
 import COLOR from "@styles/colors";
 import Spacing from "@components/common/Spacing";
+import Tag from "@components/common/Tag";
+import Text from "@components/common/Text";
+import { getTripDetailRange } from "../../../../application/utils/getDate";
 import ProgressBar from "@components/common/ProgressBar";
+import { useNavigate } from "react-router-dom";
+import { toggleStorageValue } from "../../../../infrastructure/api/storage";
 
-const TripCard = () => {
-  const dummy = {
-    date: "D-24",
-    tripname: "양양 여름",
-    range: "8월 21일 ~ 8월 24일",
+const TripCard = ({ travelInfo, memberId }: any) => {
+  const navigate = useNavigate();
+  const [stored, setStored] = useState(travelInfo.isInStorage);
+
+  useEffect(() => {
+    setStored(travelInfo.isInStorage);
+  }, [travelInfo.isInStorage]);
+
+  const handleClickTravelDetail = () => {
+    navigate(`/trip/${travelInfo.travelId}`);
   };
-  const checkProgress = {
-    curr: "24",
-    max: "38",
+
+  const handleClickStore = async (e: any) => {
+    e.stopPropagation();
+    setStored((prev: boolean) => !prev);
+    await toggleStorageValue({
+      travelId: travelInfo.travelId,
+      memberId: memberId,
+    });
   };
+
   return (
-    <TripCardWrapper>
+    <TripCardWrapper
+      progress={travelInfo.dDay.includes("-") ? true : false}
+      onClick={handleClickTravelDetail}
+    >
       <TopWrapper>
-        <div className="d-day">D-24</div>
-        <div className="count">
-          2개
-          <Icon icon="Chevron" />
-        </div>
-      </TopWrapper>
-      <Spacing size={13} />
-      <MainWrapper>
-        <div className="icon">
-          <Icon icon="Beach" />
-        </div>
-        <div className="trip-info">
-          <div className="trip-name">{dummy.tripname}</div>
-          <div className="trip-range">{dummy.range}</div>
-        </div>
-      </MainWrapper>
-      <Spacing size={14} />
-      <BottomWrapper>
-        <ProgressBar
-          max={checkProgress.max}
-          value={checkProgress.curr}
-          percent={false}
-          percentNumber={100}
-          size="small"
-          startColor="#06DCA8"
-          finishColor="#00B494"
+        <Tag
+          text={travelInfo.dDay}
+          backgroundColor={
+            travelInfo.dDay.includes("-") ? COLOR.MAIN_GREEN : COLOR.GRAY_300
+          }
+          color={COLOR.WHITE}
         />
-        <Spacing size={14} />
-        <div className="text">
-          {`완료까지 ${
-            Number(checkProgress.max) - Number(checkProgress.curr)
-          }개의 항목이 남아있어요`}
+        <Tag
+          text={travelInfo.destinationType === "OVERSEAS" ? "해외" : "국내"}
+          backgroundColor={
+            travelInfo.destinationType === "OVERSEAS" ? "#5F8BFB" : "#FE984E"
+          }
+          color={COLOR.WHITE}
+        />
+      </TopWrapper>
+      <Spacing size={11} />
+      <MainWrapper>
+        <div className="trip-info">
+          <Text
+            text={travelInfo.title}
+            color={COLOR.GRAY_900}
+            fontSize={18}
+            fontWeight={600}
+            lineHeight="18px"
+          />
+          <Text
+            text={`${getTripDetailRange(
+              travelInfo.startDate
+            )} ~ ${getTripDetailRange(travelInfo.endDate)}`}
+            color={COLOR.GRAY_600}
+            fontSize={14}
+            fontWeight={500}
+            lineHeight="14px"
+          />
         </div>
-      </BottomWrapper>
+        <Icon
+          icon={stored ? "FilledHeart" : "UnFilledHeart"}
+          onClick={handleClickStore}
+        />
+      </MainWrapper>
+      {travelInfo.dDay.includes("-") && (
+        <>
+          <Spacing size={15} />
+          <ProgressBar
+            max={String(travelInfo.finished + travelInfo.unfinished)}
+            value={String(travelInfo.finished)}
+            percent={false}
+            percentNumber={100}
+            size="small"
+            startColor="#06DCA8"
+            finishColor="#00B494"
+          />
+          <Spacing size={6} />
+          <Text
+            text={`잔여 리스트 총 ${travelInfo.unfinished}개`}
+            color={COLOR.GRAY_700}
+            fontSize={12}
+            fontWeight={600}
+            lineHeight="14px"
+          />
+        </>
+      )}
     </TripCardWrapper>
   );
 };
 
-const TripCardWrapper = styled.div`
-  padding: 18px;
-  border-radius: 11px;
+const TripCardWrapper = styled.div<{ progress: boolean }>`
+  padding: ${({ progress }) => (progress ? "22px 19px 12px 19px" : "22px 19px")};
+  border: 2px solid ${COLOR.GRAY_100};
+  border-radius: 8px;
   background: ${COLOR.WHITE};
 `;
 const TopWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-
-  .d-day {
-    color: ${COLOR.MAIN_GREEN};
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 14px;
-  }
-  .count {
-    display: flex;
-    flex-direction: row;
-  }
+  gap: 6px;
 `;
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 8px;
-  .icon {
-    width: fit-content;
-  }
+  justify-content: space-between;
+  align-items: flex-start;
+
   .trip-info {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    .trip-name {
-      color: ${COLOR.GRAY_800};
-      font-size: 18px;
-      font-weight: 600;
-      line-height: 18px;
-      letter-spacing: -0.09px;
-    }
-    .trip-range {
-      color: ${COLOR.GRAY_600};
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 14px;
-    }
   }
 `;
-const BottomWrapper = styled.div`
-  .text {
-    color: #397cff;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: normal;
-  }
-`;
+
 export default TripCard;
