@@ -37,7 +37,7 @@ const TripRemindPage = () => {
 const Container = styled.div`
     padding: 0 20px;  
     height: 100%;
-    background-color: #F7F9FC;
+    background-color: ${COLOR.GRAY_50};
 `
 
 const ContentContainer = styled.div`

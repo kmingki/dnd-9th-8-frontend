@@ -45,3 +45,4 @@ export { default as Template } from "./Template";
 
 export { CheckedBox, UnCheckedBox } from "./CheckBox";
 export { default as Remind } from "./Remind";
+export { default as CloseOutlined } from "./CloseOutlined";

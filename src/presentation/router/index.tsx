@@ -11,6 +11,8 @@ import EditMyInfoPage from "../pages/EditMyInfoPage";
 import MyTemplatePage from "../pages/MyTemplatePage";
 import EditTripInfoPage from "@pages/EditTripInfoPage";
 import TripRemindPage from "@pages/TripRemindPage";
+import DoubleCheckPage from "@pages/DoubleCheckPage";
+
 
 const Router = () => {
   return (
@@ -28,6 +30,7 @@ const Router = () => {
         <Route path="/my-template" element={<MyTemplatePage />} />
         <Route path="/checklist/:id" element={<CheckListPage />} />
         <Route path="/remind/:id" element={<TripRemindPage />} />
+        <Route path="/doublecheck/:id" element={<DoubleCheckPage />} />
 
       </Routes>
     </BrowserRouter>
