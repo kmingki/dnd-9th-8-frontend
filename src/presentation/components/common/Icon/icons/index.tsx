@@ -44,3 +44,4 @@ export { default as EditProfile } from "./EditProfile";
 export { default as Template } from "./Template";
 
 export { CheckedBox, UnCheckedBox } from "./CheckBox";
+export { default as Remind } from "./Remind";
