@@ -21,11 +21,11 @@ const TripList = () => {
 
   const getTrips = async (option: string) => {
     if (option === "예정된 여행") {
-      const res = await getUpcomingTravles(data?.data.memberId);
+      const res = await getUpcomingTravles(data.memberId);
       setTravelData(res.data);
       setRecentTravel(res.data[0]);
     } else {
-      const res = await getPastTravles(data?.data.memberId);
+      const res = await getPastTravles(data.memberId);
       setTravelData(res.data);
     }
   };

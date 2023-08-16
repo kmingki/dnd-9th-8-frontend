@@ -47,16 +47,16 @@ const MyPage = () => {
             <Spacing size={38} />
             <InfoWrapper>
               <div className="profile-wrapper">
-                <img src={data.data.profileImageUrl} alt="프로필 이미지" />
+                <img src={data.profileImageUrl} alt="프로필 이미지" />
                 <div className="edit-icon">
                   <Icon icon="EditProfile" onClick={handleClickEditInfo} />
                 </div>
               </div>
               <div className="info-text">
                 <div>
-                  <span className="name">{data.data.nickname}</span>님
+                  <span className="name">{data.nickname}</span>님
                 </div>
-                <span className="email">{data.data.email}</span>
+                <span className="email">{data.email}</span>
               </div>
             </InfoWrapper>
             <Spacing size={23} />
@@ -77,7 +77,7 @@ const MyPage = () => {
                 />
                 |
                 <Text
-                  text="00개"
+                  text={`${data.travelCount}개`}
                   fontSize={22}
                   fontWeight={500}
                   lineHeight="22px"

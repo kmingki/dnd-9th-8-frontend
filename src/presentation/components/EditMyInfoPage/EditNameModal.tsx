@@ -5,16 +5,15 @@ import Input from "@components/common/Input";
 import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
 import styled from "styled-components";
-import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import useEditName from "../../../application/hooks/queries/user/useEditName";
+import useGetMyInfo from "../../../application/hooks/queries/user/useGetMyInfo";
 
 const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
   const mutate = useEditName();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const userData: any = queryClient.getQueryData("user");
-  const [nickName, setNickName] = useState(userData.data.nickname);
+  const { data: userData } = useGetMyInfo();
+  const [nickName, setNickName] = useState(userData.nickname);
   const [isError, setIsError] = useState(false);
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +58,7 @@ const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
         maxLength={5}
         error={isError ? "true" : "false"}
         success={
-          !isError && nickName !== userData.data.nickname && nickName.length > 0
+          !isError && nickName !== userData.nickname && nickName.length > 0
             ? "true"
             : "false"
         }
@@ -68,7 +67,7 @@ const EditNameModal = ({ closeModal }: { closeModal: () => void }) => {
         text="완료"
         onClick={handleClickNextBtn}
         disabled={
-          !(!isError && nickName !== userData.data.nickname && nickName.length > 0)
+          !(!isError && nickName !== userData.nickname && nickName.length > 0)
         }
       />
     </EditNameModalWrapper>
