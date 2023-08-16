@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import Icon from "@components/common/Icon";
 import COLOR from "@styles/colors";
@@ -8,11 +8,27 @@ import Text from "@components/common/Text";
 import { getTripDetailRange } from "../../../../application/utils/getDate";
 import ProgressBar from "@components/common/ProgressBar";
 import { useNavigate } from "react-router-dom";
+import { toggleStorageValue } from "../../../../infrastructure/api/storage";
 
-const TripCard = ({ travelInfo }: any) => {
+const TripCard = ({ travelInfo, memberId }: any) => {
   const navigate = useNavigate();
+  const [stored, setStored] = useState(travelInfo.isInStorage);
+
+  useEffect(() => {
+    setStored(travelInfo.isInStorage);
+  }, [travelInfo.isInStorage]);
+
   const handleClickTravelDetail = () => {
     navigate(`/trip/${travelInfo.travelId}`);
+  };
+
+  const handleClickStore = async (e: any) => {
+    e.stopPropagation();
+    setStored((prev: boolean) => !prev);
+    await toggleStorageValue({
+      travelId: travelInfo.travelId,
+      memberId: memberId,
+    });
   };
 
   return (
@@ -56,7 +72,10 @@ const TripCard = ({ travelInfo }: any) => {
             lineHeight="14px"
           />
         </div>
-        <Icon icon={travelInfo.isInStorage ? "FilledHeart" : "UnFilledHeart"} />
+        <Icon
+          icon={stored ? "FilledHeart" : "UnFilledHeart"}
+          onClick={handleClickStore}
+        />
       </MainWrapper>
       {travelInfo.dDay.includes("-") && (
         <>

@@ -1,48 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "@components/common/Icon";
 import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
 import { styled } from "styled-components";
 import Text from "@components/common/Text";
 import { getTripDetailRange } from "../../../application/utils/getDate";
+import { toggleStorageValue } from "../../../infrastructure/api/storage";
+import useGetStorage from "../../../application/hooks/queries/storage/useGetStorage";
 
-const TemplateExist = () => {
-  const templateData = [
-    {
-      travelId: 2,
-      Title: "고성 여름",
-      startDate: "2023-08-18T14:32:33",
-      endDate: "2023-08-21T14:32:33",
-      isInStorage: true,
-    },
-    {
-      travelId: 3,
-      Title: "고성 여름",
-      startDate: "2023-07-16T14:32:33",
-      endDate: "2023-07-18T14:32:33",
-      isInStorage: false,
-    },
-    {
-      travelId: 5,
-      Title: "부산 여행",
-      startDate: "2023-07-16T14:32:33",
-      endDate: "2023-07-18T14:32:33",
-      isInStorage: false,
-    },
-    {
-      travelId: 3,
-      Title: "유럽",
-      startDate: "2023-08-18T14:32:33",
-      endDate: "2023-08-21T14:32:33",
-      isInStorage: true,
-    },
-  ];
+const TemplateExist = ({ storageData, memberId }: any) => {
+  const { refetch } = useGetStorage(memberId);
+  const [stored, setStored] = useState(
+    storageData.reduce((acc: any, travel: any) => {
+      acc[travel.travelId] = true;
+      return acc;
+    }, {})
+  );
+
+  const handleClickStore = async ({ travelId, memberId }: any) => {
+    setStored((prev: any) => ({
+      ...prev,
+      [travelId]: !prev[travelId],
+    }));
+    await toggleStorageValue({
+      travelId: travelId,
+      memberId: memberId,
+    });
+    refetch();
+  };
 
   return (
     <TemplateExistWrapper>
       <Spacing size={15} />
       <TripWrapper>
-        {templateData.map((travel: any) => (
+        {storageData.map((travel: any) => (
           <div className="template-container" key={travel.travelId}>
             <div className="trip-info">
               <Text
@@ -62,7 +53,12 @@ const TemplateExist = () => {
                 lineHeight="145%"
               />
             </div>
-            <Icon icon={travel.isInStorage ? "FilledHeart" : "UnFilledHeart"} />
+            <Icon
+              icon={stored[travel.travelId] ? "FilledHeart" : "UnFilledHeart"}
+              onClick={() =>
+                handleClickStore({ travelId: travel.travelId, memberId })
+              }
+            />
           </div>
         ))}
       </TripWrapper>

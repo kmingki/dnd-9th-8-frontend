@@ -14,12 +14,17 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(initializeCreateTripInfo());
   }, []);
+
   return (
     <>
       {data && (
         <MainPageWrapper>
           <Header />
-          {true ? <ListExist /> : <ListNotExist nickname={data?.data.nickname} />}
+          {data.travelCount > 0 ? (
+            <ListExist />
+          ) : (
+            <ListNotExist nickname={data.nickname} />
+          )}
         </MainPageWrapper>
       )}
     </>

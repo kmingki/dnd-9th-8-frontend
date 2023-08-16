@@ -3,10 +3,7 @@ import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
 import { styled } from "styled-components";
 import TripCard from "./TripCard";
-import {
-  getPastTravles,
-  getUpcomingTravles,
-} from "../../../../infrastructure/api/travel";
+import { getUpcomingTravles } from "../../../../infrastructure/api/travel";
 import useGetMyInfo from "../../../../application/hooks/queries/user/useGetMyInfo";
 import Text from "@components/common/Text";
 import Button from "@components/common/Button";
