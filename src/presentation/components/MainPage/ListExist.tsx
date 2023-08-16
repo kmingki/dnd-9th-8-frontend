@@ -15,8 +15,6 @@ import {
 import BottomSheet from "@components/common/BottomSheet";
 import { useEffect, useState } from "react";
 import CalendarModal from "./components/CalendarModal";
-import Button from "@components/common/Button";
-import Text from "@components/common/Text";
 
 const ListExist = () => {
   const dispatch = useDispatch();
@@ -61,27 +59,6 @@ const ListExist = () => {
   return (
     <ListExistWrapper>
       <Spacing size={20} />
-      {/* <Button
-        radius={8}
-        background={COLOR.MAIN_GREEN}
-        padding="11px 12px"
-        border="none"
-      >
-        <RemindButton>
-          <div className="remind">
-            <Icon icon="LoudSpeaker" />
-            <Text
-              text="도쿄 여행이 12일 남았어요"
-              color={COLOR.WHITE}
-              fontSize={16}
-              fontWeight={600}
-              lineHeight="16px"
-            />
-          </div>
-          <Icon icon="Chevron" color={COLOR.WHITE} fill={COLOR.WHITE} />
-        </RemindButton>
-      </Button>
-      <Spacing size={28} /> */}
       <TripList />
       <IconWrapper>
         {isShowModal ? (
@@ -120,18 +97,6 @@ const ListExist = () => {
 
 const ListExistWrapper = styled.div`
   padding: 0 20px;
-`;
-const RemindButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  .remind {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-    align-items: center;
-  }
 `;
 const IconWrapper = styled.div`
   position: fixed;

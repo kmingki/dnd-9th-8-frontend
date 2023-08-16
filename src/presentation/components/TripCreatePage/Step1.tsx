@@ -19,7 +19,7 @@ const Step1 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data } = useGetMyInfo();
-  const userName = data?.data.nickname;
+  const userName = data.nickname;
 
   const { tripType } = useSelector((state: RootState) => state.createTrip);
   const tripObj = [

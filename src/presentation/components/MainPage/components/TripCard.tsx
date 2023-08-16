@@ -7,10 +7,19 @@ import Tag from "@components/common/Tag";
 import Text from "@components/common/Text";
 import { getTripDetailRange } from "../../../../application/utils/getDate";
 import ProgressBar from "@components/common/ProgressBar";
+import { useNavigate } from "react-router-dom";
 
 const TripCard = ({ travelInfo }: any) => {
+  const navigate = useNavigate();
+  const handleClickTravelDetail = () => {
+    navigate(`/trip/${travelInfo.travelId}`);
+  };
+
   return (
-    <TripCardWrapper progress={travelInfo.dDay.includes("-") ? true : false}>
+    <TripCardWrapper
+      progress={travelInfo.dDay.includes("-") ? true : false}
+      onClick={handleClickTravelDetail}
+    >
       <TopWrapper>
         <Tag
           text={travelInfo.dDay}

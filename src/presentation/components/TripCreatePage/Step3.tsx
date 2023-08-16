@@ -20,7 +20,7 @@ const Step3 = () => {
   const createTrip = useSelector((state: RootState) => state.createTrip);
   const handleClickNextBtn = async () => {
     const travelInfo = {
-      memberId: data?.data.memberId,
+      memberId: data.memberId,
       title: createTrip.tripName || "",
       destinationType: createTrip.tripType || "",
       startDate: createTrip.tripRange?.start || "",
