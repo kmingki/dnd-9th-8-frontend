@@ -22,8 +22,10 @@ client.interceptors.response.use(
   async (error: any) => {
     const { config, response } = error;
 
-    if (response.data.errorCode === "AT-C-0002") {
-      const refreshToken = getCookie("refreshToken");
+    if (
+      response.data.errorCode === "AT-C-0002" ||
+      response.data.errorCode === "AT-C-0001"
+    ) {
       const originalRequest = config;
 
       await axios({
@@ -32,13 +34,9 @@ client.interceptors.response.use(
         },
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/auth/refresh`,
-        data: {
-          refreshToken: refreshToken,
-        },
       })
         .then(({ data }: { data: any }) => {
           setCookie("accessToken", data.data.newAccessToken, 1);
-          setCookie("refreshToken", data.data.refreshToken, 30);
           originalRequest.headers.Authorization = `Bearer ${data.data.newAccessToken}`;
         })
         .catch((err: any) => {
