@@ -11,32 +11,26 @@ import useGetMyInfo from "../../../../application/hooks/queries/user/useGetMyInf
 import Text from "@components/common/Text";
 import Button from "@components/common/Button";
 import Icon from "@components/common/Icon";
+import useGetMyTravel from "../../../../application/hooks/queries/travel/useGetMyTravel";
 
 const TripList = () => {
-  const { data } = useGetMyInfo();
+  const { data: userData } = useGetMyInfo();
   const filterList = ["예정된 여행", "지난 여행"];
   const [tripFilter, setTripFilter] = useState("예정된 여행");
-  const [travelData, setTravelData] = useState<any>([]);
   const [recentTravel, setRecentTravel] = useState<any>();
 
-  const getTrips = async (option: string) => {
-    if (option === "예정된 여행") {
-      const res = await getUpcomingTravles(data.memberId);
-      setTravelData(res.data);
-      setRecentTravel(res.data[0]);
-    } else {
-      const res = await getPastTravles(data.memberId);
-      setTravelData(res.data);
-    }
-  };
+  const { data: travelData } = useGetMyTravel(tripFilter);
 
   const handleClickFilter = async (option: string) => {
     setTripFilter(option);
-    getTrips(option);
   };
 
   useEffect(() => {
-    getTrips(tripFilter);
+    const getRecentTravel = async () => {
+      const recent = await getUpcomingTravles(userData.memberId);
+      setRecentTravel(recent.data[0]);
+    };
+    getRecentTravel();
   }, []);
 
   return (
@@ -83,9 +77,10 @@ const TripList = () => {
       </PeriodFilter>
       <Spacing size={18} />
       <TripListContainer>
-        {travelData.map((travel: any, index: number) => (
-          <TripCard key={index} travelInfo={travel} />
-        ))}
+        {travelData &&
+          travelData.map((travel: any, index: number) => (
+            <TripCard key={index} travelInfo={travel} memberId={userData.memberId} />
+          ))}
       </TripListContainer>
     </TripListWrapper>
   );
