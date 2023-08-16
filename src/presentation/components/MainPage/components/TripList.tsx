@@ -1,60 +1,118 @@
+import React, { useEffect, useState } from "react";
 import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
-import React from "react";
 import { styled } from "styled-components";
 import TripCard from "./TripCard";
+import { getUpcomingTravles } from "../../../../infrastructure/api/travel";
+import useGetMyInfo from "../../../../application/hooks/queries/user/useGetMyInfo";
+import Text from "@components/common/Text";
+import Button from "@components/common/Button";
+import Icon from "@components/common/Icon";
+import useGetMyTravel from "../../../../application/hooks/queries/travel/useGetMyTravel";
 
 const TripList = () => {
-  const tripFilter = [{}];
+  const { data: userData } = useGetMyInfo();
+  const filterList = ["예정된 여행", "지난 여행"];
+  const [tripFilter, setTripFilter] = useState("예정된 여행");
+  const [recentTravel, setRecentTravel] = useState<any>();
+
+  const { data: travelData } = useGetMyTravel(tripFilter);
+
+  const handleClickFilter = async (option: string) => {
+    setTripFilter(option);
+  };
+
+  useEffect(() => {
+    const getRecentTravel = async () => {
+      const recent = await getUpcomingTravles(userData.memberId);
+      setRecentTravel(recent.data[0]);
+    };
+    getRecentTravel();
+  }, []);
+
   return (
     <TripListWrapper>
+      <Button
+        radius={8}
+        background={COLOR.MAIN_GREEN}
+        padding="11px 12px"
+        border="none"
+      >
+        <RemindButton>
+          <div className="remind">
+            <Icon icon="LoudSpeaker" />
+            <Text
+              text={`${recentTravel?.title}이 ${
+                recentTravel?.dDay.split("D-")[1]
+              }일 남았어요`}
+              color={COLOR.WHITE}
+              fontSize={16}
+              fontWeight={600}
+              lineHeight="16px"
+            />
+          </div>
+          <Icon icon="Chevron" color={COLOR.WHITE} fill={COLOR.WHITE} />
+        </RemindButton>
+      </Button>
+      <Spacing size={28} />
       <PeriodFilter>
-        <OptionPeriodFilter clicked={true}>예정된 여행</OptionPeriodFilter>
-        <OptionPeriodFilter clicked={false}>지난 여행</OptionPeriodFilter>
+        {filterList.map((option) => (
+          <OptionPeriodFilter
+            key={option}
+            clicked={tripFilter === option}
+            onClick={() => handleClickFilter(option)}
+          >
+            <Text
+              text={option}
+              fontSize={18}
+              fontWeight={600}
+              lineHeight="140%"
+              color={tripFilter === option ? COLOR.GRAY_800 : COLOR.GRAY_500}
+            />
+          </OptionPeriodFilter>
+        ))}
       </PeriodFilter>
-      <Spacing size={8} />
-      <DestFilter>
-        <OptionDestFilter clicked={true}>국내</OptionDestFilter>|
-        <OptionDestFilter clicked={false}>해외</OptionDestFilter>
-      </DestFilter>
-      <Spacing size={15} />
+      <Spacing size={18} />
       <TripListContainer>
-        <TripCard />
+        {travelData &&
+          travelData.map((travel: any, index: number) => (
+            <TripCard key={index} travelInfo={travel} memberId={userData.memberId} />
+          ))}
       </TripListContainer>
     </TripListWrapper>
   );
 };
 
 const TripListWrapper = styled.div``;
+const RemindButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .remind {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+  }
+`;
 const PeriodFilter = styled.div`
   display: flex;
   flex-direction: row;
   gap: 15px;
 
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 140%;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  border-bottom: 1px solid ${COLOR.GRAY_100};
 `;
 const OptionPeriodFilter = styled.span<{ clicked: boolean }>`
-  color: ${({ clicked }) => (clicked ? COLOR.GRAY_800 : COLOR.GRAY_500)};
   text-decoration: ${({ clicked }) => (clicked ? "underline" : "none")};
   text-underline-offset: 6px;
 `;
-const DestFilter = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 6px;
-  justify-content: flex-end;
 
-  color: ${COLOR.GRAY_400};
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 140%;
-`;
-
-const OptionDestFilter = styled.span<{ clicked: boolean }>`
-  color: ${({ clicked }) => (clicked ? COLOR.GRAY_800 : COLOR.GRAY_500)};
-`;
 const TripListContainer = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,47 +1,66 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "@components/common/Icon";
 import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
 import { styled } from "styled-components";
+import Text from "@components/common/Text";
+import { getTripDetailRange } from "../../../application/utils/getDate";
+import { toggleStorageValue } from "../../../infrastructure/api/storage";
+import useGetStorage from "../../../application/hooks/queries/storage/useGetStorage";
 
-const TemplateExist = ({ isEdit }: { isEdit: boolean }) => {
-  // isEdit -> true면 편집 중이므로 헤더에는 "삭제" 버튼
-  const templateData = [
-    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Family", name: "가족여행(양양)", range: "9월 18일 ~ 9월 21일" },
-    { icon: "Beach", name: "코타키나발루", range: "9월 18일 ~ 9월 21일" },
-  ];
+const TemplateExist = ({ storageData, memberId }: any) => {
+  const { refetch } = useGetStorage(memberId);
+  const [stored, setStored] = useState(
+    storageData.reduce((acc: any, travel: any) => {
+      acc[travel.travelId] = true;
+      return acc;
+    }, {})
+  );
+
+  const handleClickStore = async ({ travelId, memberId }: any) => {
+    setStored((prev: any) => ({
+      ...prev,
+      [travelId]: !prev[travelId],
+    }));
+    await toggleStorageValue({
+      travelId: travelId,
+      memberId: memberId,
+    });
+    refetch();
+  };
 
   return (
     <TemplateExistWrapper>
       <Spacing size={15} />
       <TripWrapper>
-        {templateData.map(
-          (
-            template: { icon: string; name: string; range: string },
-            index: number
-          ) => (
-            <div className="template-container" key={index}>
-              <div className="template-inner">
-                <Icon icon={template.icon} />
-                <div className="trip-info">
-                  <div className="trip-name">{template.name}</div>
-                  <div className="trip-range">{template.range}</div>
-                </div>
-              </div>
-              {isEdit && (
-                <div className="check-box">
-                  <Icon icon="UnCheckedBox" />
-                </div>
-              )}
+        {storageData.map((travel: any) => (
+          <div className="template-container" key={travel.travelId}>
+            <div className="trip-info">
+              <Text
+                text={travel.Title}
+                color={COLOR.GRAY_900}
+                fontSize={16}
+                fontWeight={600}
+                lineHeight="140%"
+              />
+              <Text
+                text={`${getTripDetailRange(
+                  travel.startDate
+                )} ~ ${getTripDetailRange(travel.endDate)}`}
+                color={COLOR.GRAY_600}
+                fontSize={14}
+                fontWeight={600}
+                lineHeight="145%"
+              />
             </div>
-          )
-        )}
+            <Icon
+              icon={stored[travel.travelId] ? "FilledHeart" : "UnFilledHeart"}
+              onClick={() =>
+                handleClickStore({ travelId: travel.travelId, memberId })
+              }
+            />
+          </div>
+        ))}
       </TripWrapper>
     </TemplateExistWrapper>
   );
@@ -59,34 +78,17 @@ const TripWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    padding: 14px 12px;
-    border: none;
+    padding: 14px 18px;
+    border: 2px solid ${COLOR.GRAY_100};
     border-radius: 8px;
     background: ${COLOR.WHITE};
+    box-shadow: 0px 2px 100px 1px rgba(150, 150, 150, 0.1);
 
-    .template-inner {
+    .trip-info {
       display: flex;
-      flex-direction: row;
-      gap: 12px;
-      align-items: center;
-      .trip-info {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        text-align: left;
-        .trip-name {
-          color: ${COLOR.BASE_100};
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 140%;
-        }
-        .trip-range {
-          color: ${COLOR.BASE_80};
-          font-size: 14px;
-          font-weight: 600;
-          line-height: 145%;
-        }
-      }
+      flex-direction: column;
+      gap: 4px;
+      text-align: left;
     }
   }
 `;

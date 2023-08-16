@@ -12,3 +12,12 @@ export interface TripRangeType {
   end: string;
   [key: string]: string;
 }
+
+// api 호출 시 사용할 매개변수 타입
+export interface CreateTripProps {
+  memberId: number;
+  title: string;
+  destinationType: string;
+  startDate: string;
+  endDate: string;
+}

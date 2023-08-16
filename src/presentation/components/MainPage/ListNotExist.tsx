@@ -6,11 +6,10 @@ import COLOR from "@styles/colors";
 import { styled } from "styled-components";
 import TextBox from "./components/TextBox";
 import { useNavigate } from "react-router-dom";
+import Text from "@components/common/Text";
 
-const ListNotExist = () => {
+const ListNotExist = ({ nickname }: { nickname: string }) => {
   const navigate = useNavigate();
-  const userName = "DND";
-
   const handleClickCreat = () => {
     navigate("/trip-create/1");
   };
@@ -18,25 +17,37 @@ const ListNotExist = () => {
     <ListNotExistWrapper>
       <Spacing size={36} />
       <TextBox>
-        {`안녕하세요 ${userName}님,`}
+        {`안녕하세요 ${nickname}님,`}
         <br />
         어디로 여행을 떠나시나요?
       </TextBox>
-      <Spacing size={26} />
+      <Spacing size={28} />
       <CheckListBox>
         <Icon icon="NotExistCheckList" />
         <Spacing size={18} />
-        <div className="text">아직 준비하고 있는 여행이 없어요</div>
-        <Spacing size={65} />
+        <Text
+          text="준비하고 있는 여행이 없어요"
+          color={COLOR.GRAY_700}
+          fontSize={18}
+          fontWeight={600}
+          lineHeight="132%"
+        />
+        <Spacing size={63} />
         <Button
-          radius={14}
+          radius={8}
           padding="14px 0"
           background={COLOR.MAIN_GREEN}
           color={COLOR.WHITE}
           border="none"
           onClick={handleClickCreat}
         >
-          <div className="button-text">체크리스트 만들기</div>
+          <Text
+            text="체크리스트 만들기"
+            color={COLOR.WHITE}
+            fontSize={18}
+            fontWeight={700}
+            lineHeight="132%"
+          />
         </Button>
       </CheckListBox>
     </ListNotExistWrapper>
@@ -51,21 +62,10 @@ const CheckListBox = styled.div`
   flex-direction: column;
   align-items: center;
 
-  padding: 76px 20px 20px;
-  border-radius: 16px;
+  padding: 76px 20px 23px;
+  border: 2px solid ${COLOR.GRAY_100};
+  border-radius: 8px;
   background-color: ${COLOR.WHITE};
   box-shadow: 0px 2px 100px 1px rgba(150, 150, 150, 0.1);
-
-  .text {
-    color: ${COLOR.GRAY_600};
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 132%;
-  }
-  .button-text {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 132%;
-  }
 `;
 export default ListNotExist;

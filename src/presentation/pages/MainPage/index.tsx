@@ -1,30 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import Header from "@components/MainPage/components/Header";
 import COLOR from "@styles/colors";
 import ListExist from "@components/MainPage/ListExist";
 import ListNotExist from "@components/MainPage/ListNotExist";
+import useGetMyInfo from "../../../application/hooks/queries/user/useGetMyInfo";
+import { useDispatch } from "react-redux";
+import { initializeCreateTripInfo } from "../../../application/reducer/slices/createTrip/createTripSlice";
 
 const MainPage = () => {
-  // 데이터 유무에 따라 색상 바뀜
-  const data = false;
+  const dispatch = useDispatch();
+  const { data } = useGetMyInfo();
+  useEffect(() => {
+    dispatch(initializeCreateTripInfo());
+  }, []);
+
   return (
-    <MainPageWrapper data={data}>
-      <Header data={data} />
-      {data ? <ListExist /> : <ListNotExist />}
-    </MainPageWrapper>
+    <>
+      {data && (
+        <MainPageWrapper>
+          <Header />
+          {data.travelCount > 0 ? (
+            <ListExist />
+          ) : (
+            <ListNotExist nickname={data.nickname} />
+          )}
+        </MainPageWrapper>
+      )}
+    </>
   );
 };
 
-const MainPageWrapper = styled.div<{ data: boolean }>`
+const MainPageWrapper = styled.div`
   min-height: 100vh;
-  background: linear-gradient(
-    to bottom,
-    ${({ data }) => (data ? COLOR.GREEN_500 : COLOR.GRAY_50)} 0%,
-    ${({ data }) => (data ? COLOR.GREEN_500 : COLOR.GRAY_50)} 30%,
-    ${COLOR.GRAY_50} 30%,
-    ${COLOR.GRAY_50} 100%
-  );
+  background-color: ${COLOR.GRAY_50};
 `;
 
 export default MainPage;

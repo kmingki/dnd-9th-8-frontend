@@ -5,6 +5,7 @@ import Calendar from "react-calendar";
 import "./Calendar.css";
 import { changeTripRange } from "../../../../application/reducer/slices/createTrip/createTripSlice";
 import Spacing from "../Spacing";
+import { toLocalISOString } from "../../../../application/utils/getDate";
 
 const CustomCalendar = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const CustomCalendar = () => {
       dispatch(
         changeTripRange({
           type: "end",
-          value: date.toISOString().slice(0, -1),
+          value: toLocalISOString(date),
         })
       );
     } else {
@@ -32,7 +33,7 @@ const CustomCalendar = () => {
       dispatch(
         changeTripRange({
           type: "start",
-          value: date.toISOString().slice(0, -1),
+          value: toLocalISOString(date),
         })
       );
       dispatch(

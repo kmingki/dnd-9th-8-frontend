@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import COLOR from "@styles/colors";
 import { styled } from "styled-components";
 import BackHeader from "@components/common/BackHeader";
@@ -8,20 +8,25 @@ import useModal from "../../../application/hooks/useModal";
 import Modal from "@components/common/Modal";
 import EditNameModal from "@components/EditMyInfoPage/EditNameModal";
 import { useDropzone } from "react-dropzone";
+import { useNavigate } from "react-router-dom";
+import useEditProfileImage from "../../../application/hooks/queries/user/useEditProfileImage";
 
 const EditMyInfoPage = () => {
+  const mutate = useEditProfileImage();
+  const navigate = useNavigate();
   const { isShowModal, toggleModal, closeModal } = useModal();
   const handleClickEditName = () => {
     toggleModal();
   };
 
-  const onDrop = async (acceptedFiles: File[]): Promise<void> => {
-    acceptedFiles.forEach(async (file) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      // 이미지 업로드 방식 정한 후 구현
-    });
-  };
+  const onDrop = useCallback(async (acceptedFiles: any) => {
+    const file = acceptedFiles[0];
+
+    const formData: any = new FormData();
+    formData.append("image", file);
+    mutate(formData);
+    navigate(-1);
+  }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
