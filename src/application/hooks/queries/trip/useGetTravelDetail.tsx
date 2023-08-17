@@ -11,7 +11,7 @@ const useGetTravelDetail = (travelId: string) => {
 
   const { data : responseData, isLoading, error } = useQuery(
     ["getTravelDetail"],
-    async () => await getTravelDetail(travelId, 3),
+    async () => await getTravelDetail(travelId, userData.memberId),
     {
       onSuccess : (data) => {
         

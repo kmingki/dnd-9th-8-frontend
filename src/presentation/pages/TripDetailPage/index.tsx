@@ -8,6 +8,7 @@ import Icon from '@components/common/Icon';
 import Tag from "@components/common/Tag";
 import Text from '@components/common/Text';
 import COLOR from "@styles/colors";
+import { getTripDetailRange } from "@utils/getDate";
 import useModal from "../../../application/hooks/useModal";
 import { ShareModal, DeleteModal } from "@components/domain/TripDetail";
 import useGetTravelDetail from "@hooks/queries/trip/useGetTravelDetail";
@@ -52,7 +53,11 @@ const TripDetailPage = () => {
 
     const [dropdownVisibility, setDropdownVisibility] = useState(false);
 
-    
+    useEffect(()=>{
+        if (data) {
+            setCheckList({ checkListState : data?.checkListDtoList});
+        }
+    }, [data]);
 
     const {
         isShowModal: isShowShareModal,
@@ -73,13 +78,24 @@ const TripDetailPage = () => {
         toggleDeleteModal();
     }
 
+    //checklist 추가
     const onClickAdd = () => {
-        
         setCheckList(prev => produce(prev, draft => {
-            draft?.checkListState.push({checkListId: checklist.checkListState.length,  order : checklist.checkListState.length, title : '', itemDtoList:[]});
+            draft?.checkListState.push({checkListId: checklist.checkListState.length+1,  order : checklist.checkListState.length+1, title : '', itemDtoList:[]});
             return draft;
         }));
     }
+
+    //checklist 삭제
+    const onClickDeleteCheckList = (checkListId: number) => {
+        setCheckList(prev => produce(prev , draft => {
+            draft.checkListState = draft?.checkListState.filter((checklisttmp)=>{
+                return checklisttmp.checkListId !== checkListId;
+                    })
+            })
+        );
+    }
+
     const onClickPlusItem = (checkListId: number, id: number) => {
         
         setCheckList(prev => produce(prev , draft => {
@@ -151,7 +167,7 @@ const TripDetailPage = () => {
                 </Title>
                 <Spacing size={5} />
                 <DescriptionWrapper>
-                    <Description>{data?.startDate}&nbsp;~&nbsp;{data?.endDate}</Description>
+                    <Description>{getTripDetailRange(data?.startDate)}&nbsp;~&nbsp;{getTripDetailRange(data?.endDate)}</Description>
                     <IconWrapper onClick={(e: React.MouseEvent) => {setDropdownVisibility(!dropdownVisibility)}}>
                     <Icon icon="EllipsisOutlined" fill="#8B95A1"/>
                     {dropdownVisibility &&
@@ -170,12 +186,13 @@ const TripDetailPage = () => {
         <ContentContainer>
         <ContentWrapper>
             <CheckListWrapper>
-                {data?.checkListDtoList && (data?.checkListDtoList?.map((list: any, index: any) => (
+                {checklist?.checkListState && (checklist?.checkListState?.map((list: any, index: any) => (
                 <AddCheckList 
                 checkListId={list?.checkListId}
                 order={list?.order} 
                 title={list?.title} 
-                itemDtoList={list?.itemDtoList} 
+                itemDtoList={list?.itemDtoList}
+                onClickDeleteCheckList={onClickDeleteCheckList} 
                 onChangeCheckItem={onChangeCheckItem} 
                 onClickPlusItem={onClickPlusItem}
                 onChangeCheckItemTitle={onChangeCheckItemTitle}

@@ -40,10 +40,10 @@ const ContentContainer = styled.div`
 ;
  
 const Description = styled.div`
-    font-weight : 600;
+    font-weight : 500;
     font-size: 14px;
     line-height: 20px;
-    color: ${COLOR.GRAY_800};
+    color: ${COLOR.GRAY_600};
 `;
 
 const IconWrapper = styled.button`

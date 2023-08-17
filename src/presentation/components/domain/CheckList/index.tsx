@@ -28,38 +28,10 @@ import {
     Space
 } from "./style"
 
-/*
-const CheckList = () => {
+type checkListType = { checkListId: number; order: number; title: string; itemDtoList: listItem[], onClickDeleteCheckList:any, onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
 
 
-    return (
-        <CheckListWrapper>
-            <Head>
-                <Title>
-                    <Icon icon='Calendar'/>
-                    {'확인'}
-                </Title>
-                <TitleLeft>
-                    <Indicator>0/5</Indicator>
-                    <Icon icon='MoreOutlined'/>
-                    <Icon icon='DownOutlined'/>
-                </TitleLeft>
-
-            </Head>
-            <CheckItemWrapper>
-            {list.map((item, index) =>
-                <CheckItem id={item.id} isChecked={item.isChecked} title={item.title}/>
-            )}
-            </CheckItemWrapper>
-        </CheckListWrapper>
-    );
-}
-*/
-
-type checkListType = { checkListId: number; order: number; title: string; itemDtoList: listItem[], onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
-
-
-const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
+const AddCheckList = ({checkListId, order, title, itemDtoList, onClickDeleteCheckList, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
 
     //const [title, setTitle] = useState(title);
     const [isOpen, setIsOpen] = useState(false);
@@ -97,10 +69,10 @@ const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem
                         <Indicator>{itemDtoList.filter((item) => item.isChecked === true).length}/{itemDtoList.length}</Indicator>
                         {isOpen? 
                         <IconWrapper>
-                            <Icon icon='UpOutlined' onClick={onClickOpenCheckList}/>
+                            <Icon icon='UpOutlined' fill="#5C5F64" onClick={onClickOpenCheckList}/>
                         </IconWrapper>:
                         <IconWrapper>
-                            <Icon icon='DownOutlined' onClick={onClickOpenCheckList}/>
+                            <Icon icon='DownOutlined' fill="#5C5F64" onClick={onClickOpenCheckList}/>
                         </IconWrapper>}
                     </TitleLeft>
                 </Title>
@@ -138,10 +110,10 @@ const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem
                         )}
                     </Droppable>
                 </DragDropContext>
-                <AddCheckItem checkListId={checkListId} id={itemDtoList.length} onClickPlusItem={onClickPlusItem}/>
+                <AddCheckItem checkListId={checkListId} id={itemDtoList.length+1} onClickPlusItem={onClickPlusItem}/>
                 <FinishButtonWrapper>
-                    <FinishButton>
-                        완료
+                    <FinishButton onClick={()=>onClickDeleteCheckList(checkListId)}>
+                        리스트 삭제
                     </FinishButton>
                 </FinishButtonWrapper>
             </CheckItemWrapper>

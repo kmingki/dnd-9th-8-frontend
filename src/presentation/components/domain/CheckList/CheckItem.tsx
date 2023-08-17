@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Icon from "@components/common/Icon";
 import {AddCheckItemWrapper, CheckItemContainer , CheckItemWrapper, CheckBox, HiddenCheckbox, Description, IconWrapper, InputWrapper} from "./checkItemStyle";
 import Color from '@styles/colors';
+import Text from "@components/common/Text";
+import Spacing from "@components/common/Spacing";
+import COLOR from "@styles/colors";
 
 
 
@@ -40,10 +43,10 @@ const CheckItem = ({ checkListId, itemId, isChecked, title, onChangeCheckItem, o
             </CheckItemWrapper>
             <CheckItemWrapper>
                 <IconWrapper onClick={()=>onClickDeleteCheckItem(checkListId, itemId)}>
-                    <Icon icon='Delete'/>
+                    <Icon icon='Delete' fill={COLOR.GRAY_500}/>
                 </IconWrapper>
                 <IconWrapper>
-                    <Icon icon='SwapOutlined'/>
+                    <Icon icon='SwapOutlined' fill={COLOR.GRAY_500}/>
                 </IconWrapper>    
             </CheckItemWrapper>
             
@@ -62,9 +65,10 @@ const AddCheckItem = ({ checkListId, id, onClickPlusItem }: AddCheckItemType) =>
     return (
         <AddCheckItemWrapper onClick={()=>{onClickPlusItem(checkListId, id)}}>
             <IconWrapper>
-                <Icon icon='Plus' width={14} height={14} fill={Color.GRAY_500}/>
+                <Icon icon='Plus' width={14} height={14} fill="#8B95A1"/>
             </IconWrapper>
-            항목추가하기
+            <Text text="항목추가하기" color={Color.GRAY_400} fontSize={15} lineHeight="15px" fontWeight={500}/>
+            
         </AddCheckItemWrapper>
     );
 }
