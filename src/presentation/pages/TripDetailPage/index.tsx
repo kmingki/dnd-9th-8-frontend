@@ -1,99 +1,212 @@
-import { BlueTemplate } from "@styles/templates";
+import React, { useState, useEffect } from 'react';
+import { DefaultTemplate } from "@styles/templates";
 import BackHeader from "@components/common/BackHeader";
 import Spacing from "@components/common/Spacing";
-import styled from "styled-components";
-import TodoCard from '@components/domain/TodoCard';
+import Modal from "@components/common/Modal";
+//import TodoCard from '@components/domain/TodoCard';
 import Icon from '@components/common/Icon';
+import Tag from "@components/common/Tag";
+import Text from '@components/common/Text';
+import COLOR from "@styles/colors";
+import useModal from "../../../application/hooks/useModal";
+import { ShareModal, DeleteModal } from "@components/domain/TripDetail";
+import useGetTravelDetail from "@hooks/queries/trip/useGetTravelDetail";
+import { AddCheckList } from "@components/domain/CheckList"; 
+import { useParams } from "react-router-dom";
+import { checkList } from "@type/checkList";
+import { DESTINATION } from "@constants";
+import { 
+    ContentWrapper,
+    TripInfo,
+    TextContainer,
+    Title,
+    ContentContainer,
+    DescriptionWrapper,
+    Description,
+    IconWrapper,
+    DropDown,
+    DropDownButton,
+    CheckListWrapper,
+    AddTodoButton
+} from "./style";
+import { produce } from "immer";
+
+interface TripType {
+    title?: string;
+    dDay?: string;
+    destinationType: string;
+    startDate?: string;
+    endDate?: string;
+}
+
+interface State {
+    checkListState: checkList[];
+}
 
 const TripDetailPage = () => {
 
-    const dummyData = {
-        title : '미국 여행',
-        startDate : '2023.02.21',
-        finishDate : '2023.02.24',
-        people : '2',
-        photo: ''
+    const { tripId } = useParams();
+    const { data, isLoading, error } = useGetTravelDetail(String(tripId));
+    const [ tripInfo, setTripInfo ] = 
+    useState<TripType>({ 
+        title : data?.title, 
+        dDay: data?.dDay, 
+        destinationType: data?.destinationType,
+        startDate: data?.startDate,
+        endDate: data?.endDate}); 
+    const [ checklist, setCheckList] = useState<State>({ checkListState : data?.checkListDtoList}); 
+
+    const [dropdownVisibility, setDropdownVisibility] = useState(false);
+
+    
+
+    const {
+        isShowModal: isShowShareModal,
+        toggleModal: toggleShareModal,
+        closeModal: closeShareModal,
+      } = useModal();
+      const {
+        isShowModal: isShowDeleteModal,
+        toggleModal: toggleDeleteModal,
+        closeModal: closeDeleteModal,
+      } = useModal();
+
+    const onClickShareButton = () => {
+        toggleShareModal();
     }
 
-    const list = [{},{}]; 
+    const onClickDeleteButton = () => {
+        toggleDeleteModal();
+    }
+
+    const onClickAdd = () => {
+        
+        setCheckList(prev => produce(prev, draft => {
+            draft?.checkListState.push({checkListId: checklist.checkListState.length,  order : checklist.checkListState.length, title : '', itemDtoList:[]});
+            return draft;
+        }));
+    }
+    const onClickPlusItem = (checkListId: number, id: number) => {
+        
+        setCheckList(prev => produce(prev , draft => {
+            draft?.checkListState.forEach((checklist)=>{
+                if (checklist.checkListId === checkListId) {
+                    checklist.itemDtoList.push({itemId : id, title : '', order: id, isChecked: false, });
+                }
+            })
+        }));
+
+        
+    }
+
+    const onChangeCheckItem = (checkListId:number, id:number, isChecked:boolean) => {
+
+        setCheckList(prev => produce(prev , draft => {
+            draft?.checkListState.forEach((checklist)=>{
+                if (checklist.checkListId === checkListId) {
+                    checklist.itemDtoList.forEach((item)=>{
+                        item.itemId === id && (item.isChecked = !isChecked);
+                    })
+                }
+            })
+        }));
+
+    };
+
+    const onChangeCheckItemTitle = (checkListId:number, id:number, title:string) => {
+
+        setCheckList(prev => produce(prev , draft => {
+            draft?.checkListState.forEach((checklist)=>{
+                if (checklist.checkListId === checkListId) {
+                    checklist.itemDtoList.forEach((item)=>{
+                        item.itemId === id && (item.title = title);
+                    })
+                }
+            })
+        }));
+    };
+    
+
+    const onClickDeleteCheckItem = (checkListId: number, id:number) => {
+        setCheckList(prev => produce(prev , draft => {
+            draft?.checkListState.forEach((checklist)=>{
+                if (checklist.checkListId === checkListId) {
+                    checklist.itemDtoList = checklist.itemDtoList.filter((item)=>{
+                        return item.itemId !== id;
+                    })
+                }
+            })
+        }));
+    };
+
 
     return (
-        <BlueTemplate>
-            <BackHeader />
-            <TripInfo>
-                <Image src={dummyData.photo} />
-                <TextContainer>
-                    <Title>
-                        {dummyData.title}
-                    </Title>
-                    <Spacing size={5} />
-                    <Description>
-                        {dummyData.startDate}&nbsp;~&nbsp;{dummyData.finishDate},&nbsp;{dummyData.people}명
-                    </Description>
-                </TextContainer>
-                
-            </TripInfo>
-            <Line />
-            <Spacing size={28} />
-            {list.map((item, index) => (
-          <TodoCard {...item} />
-       ))}
-        <AddTodoButton>
+        <>
+        
+        <>
+        <TripInfo>
+        <BackHeader />
+            <Tag text={String(tripInfo.dDay)} backgroundColor={COLOR.MAIN_GREEN} color={COLOR.WHITE}/>
+            <Tag text={String(DESTINATION[tripInfo.destinationType])} backgroundColor="#6B5FFB" color={COLOR.WHITE}/>
+            <Spacing size={15} />
+            <TextContainer>
+                <Title>
+                    {tripInfo?.title}
+                </Title>
+                <Spacing size={5} />
+                <DescriptionWrapper>
+                    <Description>{tripInfo?.startDate}&nbsp;~&nbsp;{tripInfo?.endDate}</Description>
+                    <IconWrapper onClick={(e: React.MouseEvent) => {setDropdownVisibility(!dropdownVisibility)}}>
+                    <Icon icon="EllipsisOutlined" fill="#8B95A1"/>
+                    {dropdownVisibility &&
+                    <DropDown>
+                        <DropDownButton onClick={onClickDeleteButton}>여행 삭제</DropDownButton>
+                        <DropDownButton onClick={onClickShareButton}>여행 공유</DropDownButton>
+                        
+                    </DropDown>}
+                    </IconWrapper>
+                    
+                    
+                </DescriptionWrapper>
+            </TextContainer>
+        </TripInfo>
+        <Spacing size={25.5} />
+        <ContentContainer>
+        <ContentWrapper>
+            <CheckListWrapper>
+                {checklist && (checklist?.checkListState?.map((list, index) => (
+                <AddCheckList 
+                checkListId={list?.checkListId}
+                order={list?.order} 
+                title={list?.title} 
+                itemDtoList={list?.itemDtoList} 
+                onChangeCheckItem={onChangeCheckItem} 
+                onClickPlusItem={onClickPlusItem}
+                onChangeCheckItemTitle={onChangeCheckItemTitle}
+                onClickDeleteCheckItem={onClickDeleteCheckItem}
+                />  
+            )))}
+            </CheckListWrapper>   
+        </ContentWrapper> 
+        
+        <Modal isVisible={isShowShareModal} closeModal={closeShareModal}>
+        <ShareModal closeModal={closeShareModal} />
+      </Modal>
+      <Modal isVisible={isShowDeleteModal} closeModal={closeDeleteModal}>
+        <DeleteModal closeModal={closeDeleteModal} />
+      </Modal>
+
+        <AddTodoButton onClick={onClickAdd}>
             <IconWrapper>
                 <Icon icon="Plus" />
             </IconWrapper>
+            <Text text="리스트 추가하기" color={COLOR.WHITE} fontSize={14} lineHeight="30" fontWeight={700}></Text>
         </AddTodoButton>
-        </BlueTemplate>
-    )
+
+        </ContentContainer>
+        </>
+        </>
+    )  
 };
-
-
-const TripInfo = styled.div`
-    width : 100%;
-    height : 73px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const Image = styled.img`
-  height : 44px;
-  width : 44px;
-  border-radius: 50%;
-`;
-
-const TextContainer = styled.div`
-    width:100%;
-    margin-left: 15px;
-`;
-
-const Title = styled.div`
-    font-weight : 700;
-    font-size: 26px;
-`;
-
-const Description = styled.div`
-    font-weight : 500;
-    font-size: 15px;
-    color: #A5A5A5;
-`;
-
-
-const Line = styled.hr`
-    border: 1px solid #D9D9D9;
-`;
-
-const AddTodoButton = styled.div`
-    padding : 12px;
-    border: 1.5px dashed #D9D9D9;
-    border-radius: 8px;
-`;
-
-const IconWrapper = styled.div`
-    padding : 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
 
 export default TripDetailPage;

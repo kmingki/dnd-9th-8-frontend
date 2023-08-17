@@ -18,6 +18,9 @@ export { default as UpOutlined } from "./UpOutlined";
 export { default as DownOutlined } from "./DownOutlined";
 export { default as Delete } from "./Delete";
 export { default as SwapOutlined } from "./SwapOutlined";
+export { default as EllipsisOutlined } from "./EllipsisOutlined";
+export { default as KakaoLogo } from "./KakaoLogo";
+export { default as LinkOutlined } from "./LinkOutlined";
 
 export { default as Logo } from "./Logo";
 export { default as Folder } from "./Folder";
@@ -41,5 +44,7 @@ export { default as EditProfile } from "./EditProfile";
 export { default as Template } from "./Template";
 
 export { CheckedBox, UnCheckedBox } from "./CheckBox";
+export { default as Remind } from "./Remind";
+export { default as CloseOutlined } from "./CloseOutlined";
 export { default as LoudSpeaker } from "./LoudSpeaker";
 export { FilledHeart, UnFilledHeart } from "./Heart";

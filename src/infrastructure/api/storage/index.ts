@@ -1,4 +1,4 @@
-import client from "@api";
+import client from "@api/index";
 
 export const getStorageTravels = async (memberId: number) =>
   await client

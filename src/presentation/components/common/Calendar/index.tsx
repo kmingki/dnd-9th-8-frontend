@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { styled } from "styled-components";
 import Calendar from "react-calendar";
@@ -7,7 +7,12 @@ import { changeTripRange } from "../../../../application/reducer/slices/createTr
 import Spacing from "../Spacing";
 import { toLocalISOString } from "../../../../application/utils/getDate";
 
-const CustomCalendar = () => {
+type CustomCalendarProps = {
+  defaultStartDay?: number[];
+  defaultEndDay?: number[];
+};
+
+const CustomCalendar = ({ defaultStartDay, defaultEndDay} : CustomCalendarProps) => {
   const dispatch = useDispatch();
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
 
@@ -57,17 +62,32 @@ const CustomCalendar = () => {
 
   return (
     <CalendarWrapper>
+      {(defaultStartDay && defaultEndDay) ?
       <Calendar
+      calendarType="hebrew"
+      locale="ko-KR"
+      selectRange={true}
+      formatMonthYear={formatMonthYear}
+      formatDay={formatDay}
+      onClickDay={updateDateRange}
+      tileClassName={titleClassName}
+      next2Label={null}
+      prev2Label={null}
+      defaultValue={[new Date(defaultStartDay[0],defaultStartDay[1],defaultStartDay[2]), new Date(defaultEndDay[0],defaultEndDay[1],defaultEndDay[2])]}
+    /> :
+    <Calendar
         calendarType="hebrew"
         locale="ko-KR"
         selectRange={true}
         formatMonthYear={formatMonthYear}
         formatDay={formatDay}
         onClickDay={updateDateRange}
-        tileClassName={titleClassName}
+        tileClassName={titleClassName}  
         next2Label={null}
         prev2Label={null}
       />
+
+    }
       <Spacing size={16} />
     </CalendarWrapper>
   );

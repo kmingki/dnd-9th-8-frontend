@@ -9,6 +9,10 @@ import CreateComplatePage from "../pages/CreateComplatePage";
 import MyPage from "../pages/MyPage";
 import EditMyInfoPage from "../pages/EditMyInfoPage";
 import MyTemplatePage from "../pages/MyTemplatePage";
+import EditTripInfoPage from "@pages/EditTripInfoPage";
+import TripRemindPage from "@pages/TripRemindPage";
+import DoubleCheckPage from "@pages/DoubleCheckPage";
+
 
 const Router = () => {
   return (
@@ -19,10 +23,15 @@ const Router = () => {
         <Route path="/login/complate" element={<LoginCompletePage />} />
         <Route path="/trip-create/:step" element={<TripCreatePage />} />
         <Route path="/trip-create/complate" element={<CreateComplatePage />} />
-        <Route path="/trip/:trip-id" element={<TripDetailPage />} />
+        <Route path="/trip-update/:tripId" element={<EditTripInfoPage />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/trip/:tripId" element={<TripDetailPage />} />
         <Route path="/mypage/edit" element={<EditMyInfoPage />} />
         <Route path="/my-template" element={<MyTemplatePage />} />
+        <Route path="/checklist/:id" element={<CheckListPage />} />
+        <Route path="/remind/:id" element={<TripRemindPage />} />
+        <Route path="/doublecheck/:id" element={<DoubleCheckPage />} />
+
       </Routes>
     </BrowserRouter>
   );
