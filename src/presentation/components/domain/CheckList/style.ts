@@ -1,6 +1,12 @@
 import { styled } from "styled-components";
 import Color from '@styles/colors';
-
+import COLOR from "@styles/colors";
+const Dot = styled.div`
+    border-radius : 50%;
+    background-color: ${COLOR.MAIN_GREEN};
+    height: 5px;
+    width: 5px;
+`
 const FinishButtonWrapper = styled.div`
     display : flex;
     justify-content: flex-end;
@@ -21,6 +27,7 @@ const CheckListWrapper = styled.div`
     margin-bottom: 20px;
     background-color: ${Color.WHITE};
     border-radius: 12px;
+    border : 1px solid #E9ECF0;
 `;
 
 const Head = styled.div`
@@ -28,11 +35,6 @@ const Head = styled.div`
     justify-content: space-between;
 `;
 
-const Title = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    width : 100%;
-`;
 
 const Indicator = styled.div`
     width: 41px;
@@ -46,9 +48,21 @@ const Indicator = styled.div`
     margin-right : 9px;
 `;
 
+
+const Title = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width : 100%;
+`;
+
+
 const TitleLeft = styled.div`
     display: flex;
     align-items: center;
+`;
+
+const TitleRight = styled.div`
+    display: flex;
 `;
 
 const CheckItemWrapper = styled.div`
@@ -64,6 +78,10 @@ const InputWrapper = styled.input`
     &:focus {
         outline:none;
     }
+    font-weight :600;
+    font-size: 16px;
+    line-height: 21.12px;
+    color: ${COLOR.GRAY_800};
 `;
 
 
@@ -170,6 +188,7 @@ const Space = styled.div`
 `;
 
 export { 
+    Dot,
     FinishButtonWrapper, 
     FinishButton, 
     CheckListWrapper, 
@@ -177,6 +196,7 @@ export {
     Title, 
     Indicator, 
     TitleLeft, 
+    TitleRight,
     CheckItemWrapper, 
     InputWrapper, 
     IconWrapper, 

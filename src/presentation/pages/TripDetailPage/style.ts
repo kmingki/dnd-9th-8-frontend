@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import COLOR from "@styles/colors";
 
+const TagWrapper = styled.div`
+    display:flex;
+    align-items: center;
+    gap: 4.56px;
+`;
 const ContentWrapper = styled.div`
     padding-top: 21px;
     background-color: #F6F7F9;
@@ -53,6 +58,14 @@ const AddTodoButton = styled.button`
     padding : 6px 20px;
     box-shadow: 0px 0px 10px 0px #8585852E;
     border-radius: 8px;
+    display: flex;
+    background-color: ${COLOR.WHITE};
+    gap : 10px;
+    bottom: 0px;
+    position: fixed;
+    bottom: 59px;
+    left: 50%; //좌측에서 우측으로 50% 이동하고(left:50%), 다음으로 x축 방향(왼쪽)으로 50% 이동하여 중앙정렬
+    transform: translate(-50%, 0);
 `;
 
 const DropDown = styled.div`
@@ -84,6 +97,7 @@ const CheckListWrapper = styled.div`
 `;
 
 export { 
+    TagWrapper,
     ContentWrapper,
     TripInfo,
     TextContainer,

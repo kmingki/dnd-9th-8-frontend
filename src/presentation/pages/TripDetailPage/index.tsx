@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 import { checkList } from "@type/checkList";
 import { DESTINATION } from "@constants";
 import { 
+    TagWrapper,
     ContentWrapper,
     TripInfo,
     TextContainer,
@@ -47,13 +48,6 @@ const TripDetailPage = () => {
 
     const { tripId } = useParams();
     const { data, isLoading, error } = useGetTravelDetail(String(tripId));
-    const [ tripInfo, setTripInfo ] = 
-    useState<TripType>({ 
-        title : data?.title, 
-        dDay: data?.dDay, 
-        destinationType: data?.destinationType,
-        startDate: data?.startDate,
-        endDate: data?.endDate}); 
     const [ checklist, setCheckList] = useState<State>({ checkListState : data?.checkListDtoList}); 
 
     const [dropdownVisibility, setDropdownVisibility] = useState(false);
@@ -146,16 +140,18 @@ const TripDetailPage = () => {
         <>
         <TripInfo>
         <BackHeader />
-            <Tag text={String(tripInfo.dDay)} backgroundColor={COLOR.MAIN_GREEN} color={COLOR.WHITE}/>
-            <Tag text={String(DESTINATION[tripInfo.destinationType])} backgroundColor="#6B5FFB" color={COLOR.WHITE}/>
+            <TagWrapper>
+            <Tag text={String(data?.dDay)} backgroundColor={COLOR.MAIN_GREEN} color={COLOR.WHITE}/>
+            <Tag text={String(DESTINATION[data?.destinationType])} backgroundColor="#6B5FFB" color={COLOR.WHITE}/>
+            </TagWrapper>
             <Spacing size={15} />
             <TextContainer>
                 <Title>
-                    {tripInfo?.title}
+                    {data?.title}
                 </Title>
                 <Spacing size={5} />
                 <DescriptionWrapper>
-                    <Description>{tripInfo?.startDate}&nbsp;~&nbsp;{tripInfo?.endDate}</Description>
+                    <Description>{data?.startDate}&nbsp;~&nbsp;{data?.endDate}</Description>
                     <IconWrapper onClick={(e: React.MouseEvent) => {setDropdownVisibility(!dropdownVisibility)}}>
                     <Icon icon="EllipsisOutlined" fill="#8B95A1"/>
                     {dropdownVisibility &&
@@ -174,7 +170,7 @@ const TripDetailPage = () => {
         <ContentContainer>
         <ContentWrapper>
             <CheckListWrapper>
-                {checklist && (checklist?.checkListState?.map((list, index) => (
+                {data?.checkListDtoList && (data?.checkListDtoList?.map((list: any, index: any) => (
                 <AddCheckList 
                 checkListId={list?.checkListId}
                 order={list?.order} 
@@ -188,22 +184,19 @@ const TripDetailPage = () => {
             )))}
             </CheckListWrapper>   
         </ContentWrapper> 
-        
-        <Modal isVisible={isShowShareModal} closeModal={closeShareModal}>
-        <ShareModal closeModal={closeShareModal} />
-      </Modal>
-      <Modal isVisible={isShowDeleteModal} closeModal={closeDeleteModal}>
-        <DeleteModal closeModal={closeDeleteModal} />
-      </Modal>
-
         <AddTodoButton onClick={onClickAdd}>
-            <IconWrapper>
                 <Icon icon="Plus" />
-            </IconWrapper>
-            <Text text="리스트 추가하기" color={COLOR.WHITE} fontSize={14} lineHeight="30" fontWeight={700}></Text>
+                <Text text="리스트 추가하기" color={COLOR.MAIN_GREEN} fontSize={14} lineHeight="30px" fontWeight={700}></Text>
         </AddTodoButton>
-
         </ContentContainer>
+        
+
+        <Modal isVisible={isShowShareModal} closeModal={closeShareModal}>
+            <ShareModal closeModal={closeShareModal} />
+        </Modal>
+        <Modal isVisible={isShowDeleteModal} closeModal={closeDeleteModal}>
+            <DeleteModal closeModal={closeDeleteModal} />
+        </Modal>
         </>
         </>
     )  

@@ -35,7 +35,7 @@ const CheckItem = ({ checkListId, itemId, isChecked, title, onChangeCheckItem, o
                     {isChecked && <Icon icon='Checked' width={10} height={10} color={Color.WHITE}/> }
                 </CheckBox>
                 <Description isChecked={isChecked}>
-                <InputWrapper placeholder="항목을 작성해주세요" onChange={onChange} value={value} isChecked={isChecked}/>
+                <InputWrapper placeholder="항목을 작성해주세요" onChange={onChange} value={title} isChecked={isChecked}/>
                 </Description>
             </CheckItemWrapper>
             <CheckItemWrapper>

@@ -11,10 +11,12 @@ import {
     Head, 
     Title, 
     Indicator, 
-    TitleLeft, 
+    TitleLeft,
+    TitleRight, 
     CheckItemWrapper, 
     InputWrapper, 
     IconWrapper, 
+    Dot,
     TitleIconWrapper, 
     ModalOverlay,
     ModalWindow,
@@ -60,7 +62,7 @@ type checkListType = { checkListId: number; order: number; title: string; itemDt
 const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
 
     //const [title, setTitle] = useState(title);
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     //const [isModalOpen, setIsModalOpen] = useState(false); 이전 이모티콘 디자인 관련
 
     const onClickOpenCheckList = () => {
@@ -87,20 +89,20 @@ const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem
         <CheckListWrapper>
             <Head>
                 <Title>
-                    <TitleIconWrapper>
-                        <Icon icon='Calendar'/>
-                    </TitleIconWrapper>
-                    <InputWrapper placeholder={title} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{/*setTitle(e.target.value)*/}} value={title}/>
+                    <TitleRight>
+                        <InputWrapper placeholder={title} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{/*setTitle(e.target.value)*/}} value={title}/>
+                        <Dot />
+                    </TitleRight>
                     <TitleLeft>
-                    <Indicator>{itemDtoList.filter((item) => item.isChecked === true).length}/{itemDtoList.length}</Indicator>
-                    {isOpen? 
-                    <IconWrapper>
-                        <Icon icon='UpOutlined' onClick={onClickOpenCheckList}/>
-                    </IconWrapper>:
-                    <IconWrapper>
-                        <Icon icon='DownOutlined' onClick={onClickOpenCheckList}/>
-                    </IconWrapper>}
-                </TitleLeft>
+                        <Indicator>{itemDtoList.filter((item) => item.isChecked === true).length}/{itemDtoList.length}</Indicator>
+                        {isOpen? 
+                        <IconWrapper>
+                            <Icon icon='UpOutlined' onClick={onClickOpenCheckList}/>
+                        </IconWrapper>:
+                        <IconWrapper>
+                            <Icon icon='DownOutlined' onClick={onClickOpenCheckList}/>
+                        </IconWrapper>}
+                    </TitleLeft>
                 </Title>
             </Head>
 
