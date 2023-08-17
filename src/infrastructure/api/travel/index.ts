@@ -7,6 +7,24 @@ export const createTravel = async (travelInfo: CreateTripProps) =>
     .then(({ data }) => data)
     .catch((err) => err.response);
 
+export const modifyTravel = async ({ travelId, travelInfo }: any) =>
+  await client
+    .patch(`/travels/${travelId}`, {
+      data: {
+        title: travelInfo.title,
+        startDate: travelInfo.startDate,
+        endDate: travelInfo.endDate,
+      },
+    })
+    .then(({ data }) => data)
+    .catch((err) => err.response);
+
+export const deleteTravel = async (travelId: string) =>
+  await client
+    .delete(`/travels/${travelId}`)
+    .then(({ data }) => data)
+    .catch((err) => err.response);
+
 export const getUpcomingTravles = async (memberId: number) =>
   await client
     .get("/travels/upcoming", { params: { memberId } })
@@ -19,11 +37,8 @@ export const getPastTravles = async (memberId: number) =>
     .then(({ data }) => data)
     .catch((err) => err.response);
 
-
-
-export const getTravelDetail = async (travelId: string, memberId:number) =>
-await client
-  .get(`travels/${travelId}`, { params: { memberId } })
-  .then(({ data }) => data)
-  .catch((err) => err.response);
-  
+export const getTravelDetail = async (travelId: string, memberId: number) =>
+  await client
+    .get(`travels/${travelId}`, { params: { memberId } })
+    .then(({ data }) => data)
+    .catch((err) => err.response);
