@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { DefaultTemplate } from "@styles/templates";
 import BackHeader from "@components/common/BackHeader";
 import Spacing from "@components/common/Spacing";
@@ -12,6 +12,7 @@ import { getTripDetailRange } from "@utils/getDate";
 import useModal from "../../../application/hooks/useModal";
 import { ShareModal, DeleteModal } from "@components/domain/TripDetail";
 import useGetTravelDetail from "@hooks/queries/trip/useGetTravelDetail";
+import usePostNewChecklist from "@hooks/queries/checklist/usePostNewChecklist";
 import { AddCheckList } from "@components/domain/CheckList"; 
 import { useParams } from "react-router-dom";
 import { checkList } from "@type/checkList";
@@ -26,6 +27,7 @@ import {
     DescriptionWrapper,
     Description,
     IconWrapper,
+    IconStyleDiv,
     DropDown,
     DropDownButton,
     CheckListWrapper,
@@ -49,6 +51,7 @@ const TripDetailPage = () => {
 
     const { tripId } = useParams();
     const { data, isLoading, error } = useGetTravelDetail(String(tripId));
+    const { mutate: postNewChecklistMutate /*data , isLoading, error*/ } = usePostNewChecklist();
     const [ checklist, setCheckList] = useState<State>({ checkListState : data?.checkListDtoList}); 
 
     const [dropdownVisibility, setDropdownVisibility] = useState(false);
@@ -57,6 +60,7 @@ const TripDetailPage = () => {
         if (data) {
             setCheckList({ checkListState : data?.checkListDtoList});
         }
+        console.log(data);
     }, [data]);
 
     const {
@@ -79,12 +83,15 @@ const TripDetailPage = () => {
     }
 
     //checklist 추가
-    const onClickAdd = () => {
+    const onClickAdd = useCallback(() => {
+
+        postNewChecklistMutate({ travelId: data.travelId, title: ""});
+        
         setCheckList(prev => produce(prev, draft => {
             draft?.checkListState.push({checkListId: checklist.checkListState.length+1,  order : checklist.checkListState.length+1, title : '', itemDtoList:[]});
             return draft;
         }));
-    }
+    },[postNewChecklistMutate])
 
     //checklist 삭제
     const onClickDeleteCheckList = (checkListId: number) => {
@@ -168,16 +175,19 @@ const TripDetailPage = () => {
                 <Spacing size={5} />
                 <DescriptionWrapper>
                     <Description>{getTripDetailRange(data?.startDate)}&nbsp;~&nbsp;{getTripDetailRange(data?.endDate)}</Description>
-                    <IconWrapper onClick={(e: React.MouseEvent) => {setDropdownVisibility(!dropdownVisibility)}}>
-                    <Icon icon="EllipsisOutlined" fill="#8B95A1"/>
+                    
+                    <IconWrapper >
+                    <Icon icon="FilledHeart" fill="#8B95A1"/>
+                    <IconStyleDiv>
+                    <Icon icon="EllipsisOutlined" fill="#8B95A1" onClick={(e: React.MouseEvent) => {setDropdownVisibility(!dropdownVisibility)}}/>
+                    </IconStyleDiv>
                     {dropdownVisibility &&
                     <DropDown>
+                        <DropDownButton onClick={onClickDeleteButton}>여행 수정</DropDownButton>
                         <DropDownButton onClick={onClickDeleteButton}>여행 삭제</DropDownButton>
                         <DropDownButton onClick={onClickShareButton}>여행 공유</DropDownButton>
-                        
                     </DropDown>}
                     </IconWrapper>
-                    
                     
                 </DescriptionWrapper>
             </TextContainer>

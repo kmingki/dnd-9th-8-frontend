@@ -1,26 +1,27 @@
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { postNewChecklist } from "@api/checklist";
 
-const usePostNewChecklist = (travelId: string) => {
+interface MutationProps {
+  travelId: number;
+  title: string;
+}
 
-  const { data : responseData, isLoading, error } = useQuery(
-    ["postNewChecklist"],
-    async () => await postNewChecklist(travelId),
+const usePostNewChecklist = () => {
+
+  const queryClient = useQueryClient();
+  const { mutate, data : responseData, isLoading, error } = useMutation(
+    async ({ travelId, title } : MutationProps) => await postNewChecklist(String(travelId), title),
     {
       onSuccess : (data) => {
-        
+        queryClient.invalidateQueries(["getTravelDetail"]); //여행 정보 refetch
       },
       onError : (error) => {
-        console.log("에러")
-        console.error(error);
       },
-      staleTime: 1000 * 60 * 5,
-      cacheTime: 1000 * 60 * 30,
     }
   );
   const data = responseData?.data;
-  return { data, isLoading, error };
+  return { mutate, data , isLoading, error };
 };
 
 export default usePostNewChecklist;

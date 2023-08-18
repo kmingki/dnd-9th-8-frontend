@@ -1,16 +1,18 @@
 
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { postNewItem } from "@api/item";
 
 const usePostNewChecklist = (travelId: string, checkListId: string, title:string ) => {
+
+  const queryClient = useQueryClient();
 
   const { data : responseData, isLoading, error } = useQuery(
     ["deleteChecklist"],
     async () => await postNewItem(travelId, checkListId, title),
     {
       onSuccess : (data) => {
-        
+        queryClient.invalidateQueries(['todos',])
       },
       onError : (error) => {
         console.log("에러")

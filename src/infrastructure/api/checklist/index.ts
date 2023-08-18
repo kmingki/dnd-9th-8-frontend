@@ -1,8 +1,8 @@
 import client from "@api/index";
 
-export const postNewChecklist = async (travelId: string) =>
+export const postNewChecklist = async (travelId: string, title: string) =>
   await client
-    .post(`travels/${travelId}/check-lists`)
+    .post(`travels/${travelId}/check-lists`, { title : title })
     .then(({ data }) => data)
     .catch((err) => err.response);
 

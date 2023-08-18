@@ -39,6 +39,6 @@ export const getPastTravles = async (memberId: number) =>
 
 export const getTravelDetail = async (travelId: string, memberId: number) =>
   await client
-    .get(`travels/${travelId}`, { params: { memberId } })
+    .get(`/travels/${travelId}`, { params: { memberId } })
     .then(({ data }) => data)
     .catch((err) => err.response);

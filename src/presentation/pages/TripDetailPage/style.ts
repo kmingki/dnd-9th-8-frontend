@@ -50,7 +50,16 @@ const IconWrapper = styled.button`
     all : unset;
     border : 0px;
     position: relative;
+    display: flex;
+    gap : 8.28px;
 `;
+
+const IconStyleDiv = styled.div`
+    border-radius : 50%;
+    width:24px;
+    height: 24px;
+    background-color: ${COLOR.GRAY_100};
+`
 
 const AddTodoButton = styled.button`
     all : unset;
@@ -71,9 +80,10 @@ const AddTodoButton = styled.button`
 const DropDown = styled.div`
     padding : 16px 0px;
     margin-top: 1.5px;
-    width : 113px;
+    width : 93px;
     border-radius: 10px;
     position: absolute;
+    top: 30px;
     right : 0px; // icon wrapper 기준으로 right 0px 
     background-color: ${COLOR.WHITE};
     box-shadow: 0px 0px 10px 0px #85858561;
@@ -106,6 +116,7 @@ export {
     DescriptionWrapper,
     Description,
     IconWrapper,
+    IconStyleDiv,
     DropDown,
     DropDownButton,
     CheckListWrapper,
