@@ -137,5 +137,8 @@ const ContentContainer = styled.div`
 
 const CalendarWrapper = styled.div`
   padding: 16px;
+  margin-top: 11.47px;
+  border-radius : 14px;
+  box-shadow: 0px 0px 9.899947166442871px 0px #8585852B;
 `;
 export default EditTripInfoPage;
