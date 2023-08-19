@@ -25,20 +25,20 @@ export const deleteTravel = async (travelId: string) =>
     .then(({ data }) => data)
     .catch((err) => err.response);
 
-export const getUpcomingTravles = async (memberId: number) =>
+export const getUpcomingTravles = async () =>
   await client
-    .get("/travels/upcoming", { params: { memberId } })
+    .get("/travels/upcoming")
     .then(({ data }) => data)
     .catch((err) => err.response);
 
-export const getPastTravles = async (memberId: number) =>
+export const getPastTravles = async () =>
   await client
-    .get("/travels/past", { params: { memberId } })
+    .get("/travels/past")
     .then(({ data }) => data)
     .catch((err) => err.response);
 
-export const getTravelDetail = async (travelId: string, memberId: number) =>
+export const getTravelDetail = async (travelId: string) =>
   await client
-    .get(`travels/${travelId}`, { params: { memberId } })
+    .get(`travels/${travelId}`)
     .then(({ data }) => data)
     .catch((err) => err.response);

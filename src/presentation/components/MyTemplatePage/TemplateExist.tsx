@@ -9,7 +9,7 @@ import { toggleStorageValue } from "../../../infrastructure/api/storage";
 import useGetStorage from "../../../application/hooks/queries/storage/useGetStorage";
 
 const TemplateExist = ({ storageData, memberId }: any) => {
-  const { refetch } = useGetStorage(memberId);
+  const { refetch } = useGetStorage();
   const [stored, setStored] = useState(
     storageData.reduce((acc: any, travel: any) => {
       acc[travel.travelId] = true;

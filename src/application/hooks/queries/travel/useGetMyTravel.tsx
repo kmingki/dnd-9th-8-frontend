@@ -7,7 +7,6 @@ import {
 } from "../../../../infrastructure/api/travel";
 
 const useGetMyTravel = (filter: string) => {
-  const { data: userData } = useGetMyInfo();
   const {
     data: responseData,
     refetch,
@@ -15,10 +14,10 @@ const useGetMyTravel = (filter: string) => {
     error,
   } = useQuery(["mytravels", filter], async () => {
     if (filter === "예정된 여행") {
-      const res = await getUpcomingTravles(userData.memberId);
+      const res = await getUpcomingTravles();
       return res;
     } else {
-      const res = await getPastTravles(userData.memberId);
+      const res = await getPastTravles();
       return res;
     }
   });
