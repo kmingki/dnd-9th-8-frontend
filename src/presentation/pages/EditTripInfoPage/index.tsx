@@ -96,12 +96,10 @@ const EditTripInfoPage = () => {
           onChangeEndDay={onChangeEndDay}/>
         </CalendarWrapper>
         }
-        
+      <Spacing size={100} />
       </ContentContainer>
-      <BottomButton
-                text="수정하기"
-                onClick={onClickEditButton}
-            />
+      
+      <BottomButton text="수정하기" onClick={onClickEditButton} />
     </WhiteTemplate>
   );
 };
@@ -138,7 +136,11 @@ const ContentContainer = styled.div`
 const CalendarWrapper = styled.div`
   padding: 16px;
   margin-top: 11.47px;
+  margin-right: 17.5px;
+  margin-left: 17.5px;
   border-radius : 14px;
   box-shadow: 0px 0px 9.899947166442871px 0px #8585852B;
 `;
+
+
 export default EditTripInfoPage;
