@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { DefaultTemplate } from "@styles/templates";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BackHeader from "@components/common/BackHeader";
 import Spacing from "@components/common/Spacing";
 import Modal from "@components/common/Modal";
-//import TodoCard from '@components/domain/TodoCard';
 import Icon from '@components/common/Icon';
 import Tag from "@components/common/Tag";
 import Text from '@components/common/Text';
@@ -18,8 +18,8 @@ import useDeleteTravel from "@hooks/queries/travel/useDeleteTravel";
 import usePostNewItem from "@hooks/queries/item/usePostNewItem";
 import useItemCheck from "@hooks/queries/item/useItemCheck";
 import useDeleteItem from "@hooks/queries/item/useDeleteItem";
+
 import { AddCheckList } from "@components/domain/CheckList"; 
-import { useParams } from "react-router-dom";
 import { checkList } from "@type/checkList";
 import { DESTINATION } from "@constants";
 import { 
@@ -40,14 +40,6 @@ import {
 } from "./style";
 import { produce } from "immer";
 
-interface TripType {
-    title?: string;
-    dDay?: string;
-    destinationType: string;
-    startDate?: string;
-    endDate?: string;
-}
-
 interface State {
     checkListState: checkList[];
 }
@@ -55,7 +47,8 @@ interface State {
 const TripDetailPage = () => {
 
     const { tripId } = useParams();
-    const { data, isLoading, error } = useGetTravelDetail(String(tripId));
+    const navigate = useNavigate();
+    const { data, isLoading, error } = useGetTravelDetail(String(tripId)); //여행 상세 조회 
     const { mutate: postNewChecklistMutate /*data , isLoading, error*/ } = usePostNewChecklist();
     const { mutate: deleteChecklistMutate /*data , isLoading, error*/ } = useDeleteChecklist();
     const { mutate: deleteTravelMutate /*data , isLoading, error*/ } = useDeleteTravel();
@@ -71,7 +64,6 @@ const TripDetailPage = () => {
         if (data) {
             setCheckList({ checkListState : data?.checkListDtoList});
         }
-        console.log(`<<<<useeffect>>>>`);
         console.log(data);
     }, [data]);
 
@@ -80,12 +72,11 @@ const TripDetailPage = () => {
         toggleModal: toggleShareModal,
         closeModal: closeShareModal,
       } = useModal();
-      const {
-        isShowModal: isShowDeleteModal,
-        toggleModal: toggleDeleteModal,
-        closeModal: closeDeleteModal,
-      } = useModal();
-
+    const {
+    isShowModal: isShowDeleteModal,
+    toggleModal: toggleDeleteModal,
+    closeModal: closeDeleteModal,
+    } = useModal();
 
     /*여행 공유, 삭제부분*/
     const onClickShareButton = () => {
@@ -95,9 +86,12 @@ const TripDetailPage = () => {
     const onClickDeleteButton = () => {
         toggleDeleteModal();
         deleteTravelMutate({ travelId: Number(tripId)})// travelId 수정 필요
-
     }
 
+    //여행 수정 페이지로 이동
+    const onClickUpdateButton = () => {
+        navigate(`/trip-update/${Number(tripId)}`); // 여행 상세 페이지로 이동
+    }
     //checklist 추가
     const onClickAdd = useCallback(() => {
 
@@ -212,7 +206,7 @@ const TripDetailPage = () => {
                     </IconStyleDiv>
                     {dropdownVisibility &&
                     <DropDown>
-                        <DropDownButton onClick={onClickDeleteButton}>여행 수정</DropDownButton>
+                        <DropDownButton onClick={onClickUpdateButton}>여행 수정</DropDownButton>
                         <DropDownButton onClick={onClickDeleteButton}>여행 삭제</DropDownButton>
                         <DropDownButton onClick={onClickShareButton}>여행 공유</DropDownButton>
                     </DropDown>}

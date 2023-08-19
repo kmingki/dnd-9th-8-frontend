@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { WhiteTemplate } from "@styles/templates"
 import CustomCalendar from "@components/common/Calendar";
 import CalendarRange from "@components/common/CalendarRange";
@@ -11,15 +12,51 @@ import Spacing from "@components/common/Spacing";
 import Icon from "@components/common/Icon";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
-import { getMonthandDate } from "@utils/getDate";
+import { getMonthandDate, getMonthandDateList } from "@utils/getDate";
+import useGetTravelDetail from "@hooks/queries/trip/useGetTravelDetail";
+
+interface TripType {
+  title?: string;
+  dDay?: string;
+  destinationType: string;
+  startDate?: string;
+  endDate?: string;
+}
 
 
 const EditTripInfoPage = () => {
+  const { tripId } = useParams();
+  const { data, isLoading, error } = useGetTravelDetail(String(tripId)); //여행 상세 조회
+  const [ title, setTitle ] = useState(data?.title); 
+  const [ startDate, setStartDate ] = useState(data?.startDate); 
+  const [ endDate, setEndDate ] = useState(data?.endDate); 
 
-  const [title, setTitle] = useState("");
+  const [ travel, setTravelInfo ] = useState<TripType>(data);
+  
   const [ isOpenCalendar, setIsOpenCalendar ] = useState(false); 
-  const { tripRange } = useSelector((state: RootState) => state.createTrip);
- 
+
+  useEffect(()=>{
+    if (data) {
+      setTravelInfo(data);
+      setTitle(data?.title);
+      setStartDate(data?.startDate);
+      setEndDate(data?.endDate);
+    }
+
+}, [data]);
+
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  }
+
+  const onChangeStartDay = (date:string) => {
+    setStartDate(date);
+  }
+
+  const onChangeEndDay = (date:string) => {
+    setEndDate(date);
+  }
+
   return (
     <WhiteTemplate>
       <BackHeader text="여행 수정하기" />
@@ -27,24 +64,28 @@ const EditTripInfoPage = () => {
       <ContentContainer>
         <Text text="여행 이름" color={COLOR.GRAY_500} fontSize={15} lineHeight="21px" fontWeight={600} />
         <Spacing size={5.53}/>
-        <Input placeholder="" onChange={()=>{}} value={title} />
+        <Input placeholder="" onChange={onChangeTitle} value={String(travel?.title)} />
         <Spacing size={23.98}/>
         <Text text="여행 일정" color={COLOR.GRAY_500} fontSize={15} lineHeight="21px" fontWeight={600} />
         <Spacing size={5.53}/>
         <InputWrapper>
         <DateButton onClick={()=>{setIsOpenCalendar(prev=>!prev)}}>
-          <Text text={getMonthandDate(tripRange?.start) || "08월 01일 (수)"} color={COLOR.GRAY_800} fontSize={15} lineHeight="18px" fontWeight={600} />
+          <Text text={getMonthandDate(startDate)} color={COLOR.GRAY_800} fontSize={15} lineHeight="18px" fontWeight={600} />
           <Icon icon="Calendar"/>
         </DateButton>
         <Bar />
         <DateButton onClick={()=>{setIsOpenCalendar(prev=>!prev)}}>
-          <Text text={getMonthandDate(tripRange?.end) || "08월 01일 (수)"} color={COLOR.GRAY_800} fontSize={15} lineHeight="18px" fontWeight={600} />
+          <Text text={getMonthandDate(endDate)} color={COLOR.GRAY_800} fontSize={15} lineHeight="18px" fontWeight={600} />
           <Icon icon="Calendar"/>
         </DateButton>
         </InputWrapper>
         {isOpenCalendar && 
         <CalendarWrapper>
-          <CustomCalendar defaultStartDay={[2023, 0, 1]} defaultEndDay={[2023, 0,15]} />
+          <CustomCalendar 
+          defaultStartDay={getMonthandDateList(startDate)} 
+          defaultEndDay={getMonthandDateList(endDate)}
+          onChangeStartDay={onChangeStartDay}
+          onChangeEndDay={onChangeEndDay}/>
         </CalendarWrapper>
         }
         
