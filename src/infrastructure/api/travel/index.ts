@@ -19,7 +19,7 @@ export const modifyTravel = async ({ travelId, travelInfo }: any) =>
     .then(({ data }) => data)
     .catch((err) => err.response);
 
-export const deleteTravel = async (travelId: string) =>
+export const deleteTravel = async (travelId: number) =>
   await client
     .delete(`/travels/${travelId}`)
     .then(({ data }) => data)

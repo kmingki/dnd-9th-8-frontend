@@ -1,29 +1,30 @@
 
 import React from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { postNewItem } from "@api/item";
 
-const usePostNewChecklist = (travelId: string, checkListId: string, title:string ) => {
+
+interface MutationProps {
+  travelId: number;
+  checkListId: number;
+  title: string;
+}
+
+const usePostNewItem = () => {
 
   const queryClient = useQueryClient();
-
-  const { data : responseData, isLoading, error } = useQuery(
-    ["deleteChecklist"],
-    async () => await postNewItem(travelId, checkListId, title),
+  const { mutate, data : responseData, isLoading, error } = useMutation(
+    async ({ travelId, checkListId, title } : MutationProps) => await postNewItem(travelId, checkListId, title),
     {
       onSuccess : (data) => {
-        queryClient.invalidateQueries(['todos',])
+        queryClient.invalidateQueries(["getTravelDetail"]); //여행 정보 refetch
       },
       onError : (error) => {
-        console.log("에러")
-        console.error(error);
       },
-      staleTime: 1000 * 60 * 5,
-      cacheTime: 1000 * 60 * 30,
     }
   );
   const data = responseData?.data;
-  return { data, isLoading, error };
+  return { mutate, data , isLoading, error };
 };
 
-export default usePostNewChecklist;
+export default usePostNewItem;

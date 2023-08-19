@@ -1,19 +1,20 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { deleteItem } from "@api/item";
-
+import { updateChecklist } from "@api/checklist";
 
 interface MutationProps {
   travelId: number;
-  checkListId: number;
-  itemId: number;
+  checklistId: number;
+  title: string;
 }
 
-const useDeleteItem = () => {
+/*백엔드 api 개발중 */
+
+const useUpdateChecklist = () => {
 
   const queryClient = useQueryClient();
   const { mutate, data : responseData, isLoading, error } = useMutation(
-    async ({ travelId, checkListId, itemId } : MutationProps) => await deleteItem(travelId, checkListId, itemId),
+    async ({ travelId, checklistId, title } : MutationProps) => await updateChecklist(travelId, checklistId, title),
     {
       onSuccess : (data) => {
         queryClient.invalidateQueries(["getTravelDetail"]); //여행 정보 refetch
@@ -26,4 +27,4 @@ const useDeleteItem = () => {
   return { mutate, data , isLoading, error };
 };
 
-export default useDeleteItem;
+export default useUpdateChecklist;

@@ -1,19 +1,24 @@
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { deleteItem } from "@api/item";
+import { changeItemOrder } from "@api/item";
 
+/* 아이템 순서 변경을 위한 인터페이스*/
+interface changeItemProps {
+    id : number;
+    order : number;
+}
 
 interface MutationProps {
   travelId: number;
   checkListId: number;
-  itemId: number;
+  data : changeItemProps[];
 }
 
-const useDeleteItem = () => {
+const useChangeOrderItem = () => {
 
   const queryClient = useQueryClient();
   const { mutate, data : responseData, isLoading, error } = useMutation(
-    async ({ travelId, checkListId, itemId } : MutationProps) => await deleteItem(travelId, checkListId, itemId),
+    async ({ travelId, checkListId, data } : MutationProps) => await changeItemOrder(travelId, checkListId, data),
     {
       onSuccess : (data) => {
         queryClient.invalidateQueries(["getTravelDetail"]); //여행 정보 refetch
@@ -26,4 +31,4 @@ const useDeleteItem = () => {
   return { mutate, data , isLoading, error };
 };
 
-export default useDeleteItem;
+export default useChangeOrderItem;

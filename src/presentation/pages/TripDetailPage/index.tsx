@@ -13,6 +13,11 @@ import useModal from "../../../application/hooks/useModal";
 import { ShareModal, DeleteModal } from "@components/domain/TripDetail";
 import useGetTravelDetail from "@hooks/queries/trip/useGetTravelDetail";
 import usePostNewChecklist from "@hooks/queries/checklist/usePostNewChecklist";
+import useDeleteChecklist from "@hooks/queries/checklist/useDeleteChecklist";
+import useDeleteTravel from "@hooks/queries/travel/useDeleteTravel";
+import usePostNewItem from "@hooks/queries/item/usePostNewItem";
+import useItemCheck from "@hooks/queries/item/useItemCheck";
+import useDeleteItem from "@hooks/queries/item/useDeleteItem";
 import { AddCheckList } from "@components/domain/CheckList"; 
 import { useParams } from "react-router-dom";
 import { checkList } from "@type/checkList";
@@ -52,6 +57,12 @@ const TripDetailPage = () => {
     const { tripId } = useParams();
     const { data, isLoading, error } = useGetTravelDetail(String(tripId));
     const { mutate: postNewChecklistMutate /*data , isLoading, error*/ } = usePostNewChecklist();
+    const { mutate: deleteChecklistMutate /*data , isLoading, error*/ } = useDeleteChecklist();
+    const { mutate: deleteTravelMutate /*data , isLoading, error*/ } = useDeleteTravel();
+    const { mutate: postNewItemMutate /*data , isLoading, error*/ } = usePostNewItem();
+    const { mutate: itemCheckMutate /*data , isLoading, error*/ } = useItemCheck();
+    const { mutate: deleteItemMutate /*data , isLoading, error*/ } = useDeleteItem();
+
     const [ checklist, setCheckList] = useState<State>({ checkListState : data?.checkListDtoList}); 
 
     const [dropdownVisibility, setDropdownVisibility] = useState(false);
@@ -60,6 +71,7 @@ const TripDetailPage = () => {
         if (data) {
             setCheckList({ checkListState : data?.checkListDtoList});
         }
+        console.log(`<<<<useeffect>>>>`);
         console.log(data);
     }, [data]);
 
@@ -74,27 +86,34 @@ const TripDetailPage = () => {
         closeModal: closeDeleteModal,
       } = useModal();
 
+
+    /*여행 공유, 삭제부분*/
     const onClickShareButton = () => {
         toggleShareModal();
     }
 
     const onClickDeleteButton = () => {
         toggleDeleteModal();
+        deleteTravelMutate({ travelId: Number(tripId)})// travelId 수정 필요
+
     }
 
     //checklist 추가
     const onClickAdd = useCallback(() => {
 
-        postNewChecklistMutate({ travelId: data.travelId, title: ""});
+        postNewChecklistMutate({ travelId: Number(tripId), title: ""}); // travelId 수정 필요
         
         setCheckList(prev => produce(prev, draft => {
-            draft?.checkListState.push({checkListId: checklist.checkListState.length+1,  order : checklist.checkListState.length+1, title : '', itemDtoList:[]});
+            draft?.checkListState.push({checkListId: checklist.checkListState.length+1,  order : checklist.checkListState.length+1, title : '', itemDtoList:[], essential:false});
             return draft;
         }));
-    },[postNewChecklistMutate])
+    }, [postNewChecklistMutate])
 
     //checklist 삭제
     const onClickDeleteCheckList = (checkListId: number) => {
+
+        deleteChecklistMutate({ travelId: 2, checkListId: checkListId}); // travelId 수정 필요
+
         setCheckList(prev => produce(prev , draft => {
             draft.checkListState = draft?.checkListState.filter((checklisttmp)=>{
                 return checklisttmp.checkListId !== checkListId;
@@ -103,8 +122,11 @@ const TripDetailPage = () => {
         );
     }
 
+    //item 추가
     const onClickPlusItem = (checkListId: number, id: number) => {
         
+        postNewItemMutate({ travelId: Number(tripId), checkListId: checkListId, title: ''}); // travelId 수정 필요
+
         setCheckList(prev => produce(prev , draft => {
             draft?.checkListState.forEach((checklist)=>{
                 if (checklist.checkListId === checkListId) {
@@ -112,11 +134,27 @@ const TripDetailPage = () => {
                 }
             })
         }));
-
-        
     }
 
+    //item 삭제
+    const onClickDeleteCheckItem = (checkListId: number, id:number) => {
+
+        deleteItemMutate({ travelId: Number(tripId) , checkListId: checkListId, itemId: id }); // travelId 수정 필요
+        setCheckList(prev => produce(prev , draft => {
+            draft?.checkListState.forEach((checklist)=>{
+                if (checklist.checkListId === checkListId) {
+                    checklist.itemDtoList = checklist.itemDtoList.filter((item)=>{
+                        return item.itemId !== id;
+                    })
+                }
+            })
+        }));
+    };
+
+    //item 체크 할때
     const onChangeCheckItem = (checkListId:number, id:number, isChecked:boolean) => {
+
+        itemCheckMutate({ travelId: Number(tripId), checkListId: checkListId, itemId: id});
 
         setCheckList(prev => produce(prev , draft => {
             draft?.checkListState.forEach((checklist)=>{
@@ -130,6 +168,7 @@ const TripDetailPage = () => {
 
     };
 
+    //item 내용 수정할때
     const onChangeCheckItemTitle = (checkListId:number, id:number, title:string) => {
 
         setCheckList(prev => produce(prev , draft => {
@@ -144,17 +183,7 @@ const TripDetailPage = () => {
     };
     
 
-    const onClickDeleteCheckItem = (checkListId: number, id:number) => {
-        setCheckList(prev => produce(prev , draft => {
-            draft?.checkListState.forEach((checklist)=>{
-                if (checklist.checkListId === checkListId) {
-                    checklist.itemDtoList = checklist.itemDtoList.filter((item)=>{
-                        return item.itemId !== id;
-                    })
-                }
-            })
-        }));
-    };
+    
 
 
     return (
@@ -198,6 +227,8 @@ const TripDetailPage = () => {
             <CheckListWrapper>
                 {checklist?.checkListState && (checklist?.checkListState?.map((list: any, index: any) => (
                 <AddCheckList 
+                tripData={data}
+                list={list}
                 checkListId={list?.checkListId}
                 order={list?.order} 
                 title={list?.title} 

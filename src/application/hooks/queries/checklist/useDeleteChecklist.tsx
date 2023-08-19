@@ -1,19 +1,19 @@
+
 import React from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { deleteItem } from "@api/item";
-
+import { deleteChecklist } from "@api/checklist";
 
 interface MutationProps {
   travelId: number;
   checkListId: number;
-  itemId: number;
 }
 
-const useDeleteItem = () => {
+const useDeleteChecklist = () => {
 
   const queryClient = useQueryClient();
+
   const { mutate, data : responseData, isLoading, error } = useMutation(
-    async ({ travelId, checkListId, itemId } : MutationProps) => await deleteItem(travelId, checkListId, itemId),
+    async ({ travelId, checkListId } : MutationProps) => await deleteChecklist(travelId, checkListId),
     {
       onSuccess : (data) => {
         queryClient.invalidateQueries(["getTravelDetail"]); //여행 정보 refetch
@@ -23,7 +23,7 @@ const useDeleteItem = () => {
     }
   );
   const data = responseData?.data;
-  return { mutate, data , isLoading, error };
+  return { mutate, data, isLoading, error };
 };
 
-export default useDeleteItem;
+export default useDeleteChecklist;
