@@ -42,3 +42,9 @@ export const getTravelDetail = async (travelId: string) =>
     .get(`travels/${travelId}`)
     .then(({ data }) => data)
     .catch((err) => err.response);
+
+export const postStorageTravel = async (travelId: any, travelInfo: any) =>
+  await client
+    .post(`travels/bring/${travelId}`, travelInfo)
+    .then(({ data }) => data)
+    .catch((err) => err.response);

@@ -4,7 +4,8 @@ export interface CreateTripType {
   tripRange?: TripRangeType;
   checkCount?: string;
   state?: string;
-  [key: string]: string | TripRangeType | undefined;
+  tripId?: number;
+  [key: string]: number | string | TripRangeType | undefined;
 }
 
 export interface TripRangeType {

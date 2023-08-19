@@ -9,14 +9,28 @@ import { styled } from "styled-components";
 import { RootState } from "@store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { postStorageTravel } from "@api/travel";
+import { useDispatch } from "react-redux";
+import { initializeCreateTripInfo } from "@reducer/slices/createTrip/createTripSlice";
 
 const CalendarModal = ({ closeModal, setClicked }: any) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { tripRange } = useSelector((state: RootState) => state.createTrip);
-  const handleClickTripRange = () => {
-    closeModal();
-    setClicked();
-    navigate("/trip"); // 여행 상세 페이지로 이동
+  const createTrip = useSelector((state: RootState) => state.createTrip);
+
+  const handleClickTripRange = async () => {
+    const res = await postStorageTravel(createTrip.tripId, {
+      title: createTrip.tripName,
+      startDate: createTrip.tripRange?.start,
+      endDate: createTrip.tripRange?.end,
+    });
+    if (res.message === "여행 불러오기 후 생성에 성공했습니다") {
+      closeModal();
+      setClicked(false);
+      dispatch(initializeCreateTripInfo());
+      navigate(`/trip/${res.data}`); // 여행 상세 페이지로 이동
+    }
   };
   return (
     <CalendarModalWrapper>
