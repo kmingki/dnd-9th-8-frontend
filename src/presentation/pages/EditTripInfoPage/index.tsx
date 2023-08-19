@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { WhiteTemplate } from "@styles/templates"
 import CustomCalendar from "@components/common/Calendar";
 import CalendarRange from "@components/common/CalendarRange";
@@ -9,11 +9,13 @@ import styled from "styled-components";
 import Text from "@components/common/Text";
 import Input from "@components/common/Input";
 import Spacing from "@components/common/Spacing";
+import BottomButton from "@components/common/BottomButton";
 import Icon from "@components/common/Icon";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import { getMonthandDate, getMonthandDateList } from "@utils/getDate";
 import useGetTravelDetail from "@hooks/queries/trip/useGetTravelDetail";
+import useUpdateTravel from "@hooks/queries/travel/useUpdateTravel";
 
 interface TripType {
   title?: string;
@@ -26,7 +28,9 @@ interface TripType {
 
 const EditTripInfoPage = () => {
   const { tripId } = useParams();
+  const navigate = useNavigate();
   const { data, isLoading, error } = useGetTravelDetail(String(tripId)); //여행 상세 조회
+  const { mutate: updateTravelMutate /*data , isLoading, error*/ } = useUpdateTravel();
   const [ title, setTitle ] = useState(data?.title); 
   const [ startDate, setStartDate ] = useState(data?.startDate); 
   const [ endDate, setEndDate ] = useState(data?.endDate); 
@@ -57,6 +61,10 @@ const EditTripInfoPage = () => {
     setEndDate(date);
   }
 
+  const onClickEditButton = ()=> {
+    updateTravelMutate({ travelId : Number(tripId), travelInfo : { title, startDate, endDate }} ); 
+    navigate(`/trip/${Number(tripId)}`)
+  }
   return (
     <WhiteTemplate>
       <BackHeader text="여행 수정하기" />
@@ -64,7 +72,7 @@ const EditTripInfoPage = () => {
       <ContentContainer>
         <Text text="여행 이름" color={COLOR.GRAY_500} fontSize={15} lineHeight="21px" fontWeight={600} />
         <Spacing size={5.53}/>
-        <Input placeholder="" onChange={onChangeTitle} value={String(travel?.title)} />
+        <Input placeholder="" onChange={onChangeTitle} value={title} />
         <Spacing size={23.98}/>
         <Text text="여행 일정" color={COLOR.GRAY_500} fontSize={15} lineHeight="21px" fontWeight={600} />
         <Spacing size={5.53}/>
@@ -90,6 +98,10 @@ const EditTripInfoPage = () => {
         }
         
       </ContentContainer>
+      <BottomButton
+                text="수정하기"
+                onClick={onClickEditButton}
+            />
     </WhiteTemplate>
   );
 };
