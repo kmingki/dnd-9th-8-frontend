@@ -9,6 +9,7 @@ const useGetTravelDetail = (travelId: string) => {
 
   const { data: userData } = useGetMyInfo();
 
+  console.log("getTravelDetail");
   const { data : responseData, isLoading, error } = useQuery(
     ["getTravelDetail"],
     async () => await getTravelDetail(travelId, 3),

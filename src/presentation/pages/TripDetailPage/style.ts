@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import COLOR from "@styles/colors";
 
+const TagWrapper = styled.div`
+    display:flex;
+    align-items: center;
+    gap: 4.56px;
+`;
 const ContentWrapper = styled.div`
     padding-top: 21px;
     background-color: #F6F7F9;
@@ -35,17 +40,26 @@ const ContentContainer = styled.div`
 ;
  
 const Description = styled.div`
-    font-weight : 600;
+    font-weight : 500;
     font-size: 14px;
     line-height: 20px;
-    color: ${COLOR.GRAY_800};
+    color: ${COLOR.GRAY_600};
 `;
 
 const IconWrapper = styled.button`
     all : unset;
     border : 0px;
     position: relative;
+    display: flex;
+    gap : 8.28px;
 `;
+
+const IconStyleDiv = styled.div`
+    border-radius : 50%;
+    width:24px;
+    height: 24px;
+    background-color: ${COLOR.GRAY_100};
+`
 
 const AddTodoButton = styled.button`
     all : unset;
@@ -53,14 +67,23 @@ const AddTodoButton = styled.button`
     padding : 6px 20px;
     box-shadow: 0px 0px 10px 0px #8585852E;
     border-radius: 8px;
+    display: flex;
+    background-color: ${COLOR.WHITE};
+    gap : 10px;
+    bottom: 0px;
+    position: fixed;
+    bottom: 59px;
+    left: 50%; //좌측에서 우측으로 50% 이동하고(left:50%), 다음으로 x축 방향(왼쪽)으로 50% 이동하여 중앙정렬
+    transform: translate(-50%, 0);
 `;
 
 const DropDown = styled.div`
     padding : 16px 0px;
     margin-top: 1.5px;
-    width : 113px;
+    width : 93px;
     border-radius: 10px;
     position: absolute;
+    top: 30px;
     right : 0px; // icon wrapper 기준으로 right 0px 
     background-color: ${COLOR.WHITE};
     box-shadow: 0px 0px 10px 0px #85858561;
@@ -84,6 +107,7 @@ const CheckListWrapper = styled.div`
 `;
 
 export { 
+    TagWrapper,
     ContentWrapper,
     TripInfo,
     TextContainer,
@@ -92,6 +116,7 @@ export {
     DescriptionWrapper,
     Description,
     IconWrapper,
+    IconStyleDiv,
     DropDown,
     DropDownButton,
     CheckListWrapper,

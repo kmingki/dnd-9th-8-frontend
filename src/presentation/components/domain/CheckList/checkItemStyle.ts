@@ -1,13 +1,15 @@
 import { styled } from "styled-components";
 import Color from '@styles/colors';
+import COLOR from "@styles/colors";
 
 const AddCheckItemWrapper = styled.button`
     all : unset;
-    border : 1px solid ${Color.GRAY_400};
+    border : 2px solid #E9ECF0;
     height: 40px;
     border-radius: 8px;
     display : flex;
     align-items : center;
+    gap: 9px;
     color: ${Color.GRAY_500};
     padding-left : 13px;
 `;
@@ -15,7 +17,7 @@ const AddCheckItemWrapper = styled.button`
 
 const CheckItemContainer = styled.div<{ isChecked : boolean }>`
     height: 40px;
-    border : 1px solid ${Color.GRAY_400};
+    border : 2px solid #E9ECF0;
     border-radius: 8px;
     display : flex;
     align-items : center;
@@ -48,7 +50,7 @@ const CheckBox = styled.label<{ checked: boolean }>`
     display: inline-block;
     width: 14px;
     height: 14px;
-    border: 1px solid ${({ checked }) => (checked ? `${Color.MAIN_GREEN}` : `${Color.GRAY_400}`)};
+    border: 1.7px solid ${({ checked }) => (checked ? `${Color.MAIN_GREEN}` : `#E9ECF0`)};
     border-radius: 4px;
     background: ${({ checked }) => (checked && `${Color.MAIN_GREEN}`)};
     cursor: pointer;
@@ -97,14 +99,14 @@ const InputWrapper = styled.input<{ isChecked : boolean }>`
         outline:none;
     }
 
-    &::placeholder {
-        font-weight : 500;
-        font-size : 15px;
-        line-height : 15px;
-        color: ${Color.GRAY_300};
-    }
+    
+    font-weight : 500;
+    font-size : 15px;
+    line-height : 15px;
+    color: ${COLOR.GRAY_900};
+
     ${({ isChecked }) => isChecked && `text-decoration:line-through` };
-    ${({ isChecked }) => isChecked ? `color: ${Color.GRAY_500}` : `color: ${Color.MAIN_BLACK}` };
+    ${({ isChecked }) => isChecked ? `color: ${Color.GRAY_400}` : `color: ${Color.MAIN_BLACK}` };
 
 `;
 

@@ -19,7 +19,7 @@ export const modifyTravel = async ({ travelId, travelInfo }: any) =>
     .then(({ data }) => data)
     .catch((err) => err.response);
 
-export const deleteTravel = async (travelId: string) =>
+export const deleteTravel = async (travelId: number) =>
   await client
     .delete(`/travels/${travelId}`)
     .then(({ data }) => data)
@@ -39,6 +39,6 @@ export const getPastTravles = async (memberId: number) =>
 
 export const getTravelDetail = async (travelId: string, memberId: number) =>
   await client
-    .get(`travels/${travelId}`, { params: { memberId } })
+    .get(`/travels/${travelId}`, { params: { memberId } })
     .then(({ data }) => data)
     .catch((err) => err.response);

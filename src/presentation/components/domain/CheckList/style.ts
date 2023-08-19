@@ -1,6 +1,12 @@
 import { styled } from "styled-components";
 import Color from '@styles/colors';
-
+import COLOR from "@styles/colors";
+const Dot = styled.div`
+    border-radius : 50%;
+    background-color: ${COLOR.MAIN_GREEN};
+    height: 5px;
+    width: 5px;
+`
 const FinishButtonWrapper = styled.div`
     display : flex;
     justify-content: flex-end;
@@ -11,9 +17,10 @@ const FinishButton = styled.button`
     all : unset;
     border : 0px;
     font-weight: 500;
-    font-size : 16px;
-    line-height: 16px;
-    color : ${Color.MAIN_GREEN};
+    font-size : 13px;
+    line-height: 15px;
+    text-decoration : underline;
+    color : ${Color.GRAY_700};
 `;
 
 const CheckListWrapper = styled.div`
@@ -21,6 +28,7 @@ const CheckListWrapper = styled.div`
     margin-bottom: 20px;
     background-color: ${Color.WHITE};
     border-radius: 12px;
+    border : 2px solid #E9ECF0;
 `;
 
 const Head = styled.div`
@@ -28,11 +36,6 @@ const Head = styled.div`
     justify-content: space-between;
 `;
 
-const Title = styled.div`
-    display: flex;
-    justify-content: flex-end;
-    width : 100%;
-`;
 
 const Indicator = styled.div`
     width: 41px;
@@ -42,13 +45,30 @@ const Indicator = styled.div`
     align-items: center;
     background-color: ${Color.WHITE};
     border-radius: 38px;
-    box-shadow: 0px 0px 4px 0px #0000001A;
     margin-right : 9px;
+    border: 1.5px solid #E9ECF0;
+
+    color: ${COLOR.GRAY_700};
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
 `;
+
+
+const Title = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width : 100%;
+`;
+
 
 const TitleLeft = styled.div`
     display: flex;
     align-items: center;
+`;
+
+const TitleRight = styled.div`
+    display: flex;
 `;
 
 const CheckItemWrapper = styled.div`
@@ -64,6 +84,10 @@ const InputWrapper = styled.input`
     &:focus {
         outline:none;
     }
+    font-weight :600;
+    font-size: 16px;
+    line-height: 21.12px;
+    color: ${COLOR.GRAY_800};
 `;
 
 
@@ -170,6 +194,7 @@ const Space = styled.div`
 `;
 
 export { 
+    Dot,
     FinishButtonWrapper, 
     FinishButton, 
     CheckListWrapper, 
@@ -177,6 +202,7 @@ export {
     Title, 
     Indicator, 
     TitleLeft, 
+    TitleRight,
     CheckItemWrapper, 
     InputWrapper, 
     IconWrapper, 
