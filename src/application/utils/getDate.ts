@@ -52,3 +52,15 @@ export const getTripDetailRange = (date: any) => {
 
   return `${newMonth}월 ${newDate}일`;
 };
+
+//캘린더 디폴트값 설정할때 기본값 넣어주는 포맷
+export const getMonthandDateList = (date: any) => {
+  if (!date) {
+    return [];
+  }
+  const newDateValue = new Date(date);
+  const NewYear = newDateValue.getFullYear();
+  const newMonth = String(newDateValue.getMonth());
+  const newDate = String(newDateValue.getDate());
+  return [NewYear, Number(newMonth), Number(newDate)];
+};

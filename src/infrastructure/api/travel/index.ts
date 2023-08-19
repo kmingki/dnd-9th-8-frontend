@@ -10,11 +10,9 @@ export const createTravel = async (travelInfo: CreateTripProps) =>
 export const modifyTravel = async ({ travelId, travelInfo }: any) =>
   await client
     .patch(`/travels/${travelId}`, {
-      data: {
         title: travelInfo.title,
         startDate: travelInfo.startDate,
         endDate: travelInfo.endDate,
-      },
     })
     .then(({ data }) => data)
     .catch((err) => err.response);
