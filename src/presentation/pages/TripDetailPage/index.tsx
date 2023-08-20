@@ -37,8 +37,12 @@ import {
   DropDownButton,
   CheckListWrapper,
   AddTodoButton,
+  PopupInner,
 } from "./style";
 import { produce } from "immer";
+import { useSelector } from "react-redux";
+import { RootState } from "@store";
+import Toast from "@components/common/Toast";
 
 interface State {
   checkListState: checkList[];
@@ -47,6 +51,7 @@ interface State {
 const TripDetailPage = () => {
   const { tripId } = useParams();
   const navigate = useNavigate();
+  const { state } = useSelector((state: RootState) => state.createTrip);
   const { data, isLoading, error } = useGetTravelDetail(String(tripId)); //여행 상세 조회
   const { mutate: postNewChecklistMutate /*data , isLoading, error*/ } =
     usePostNewChecklist();
@@ -81,6 +86,8 @@ const TripDetailPage = () => {
     toggleModal: toggleDeleteModal,
     closeModal: closeDeleteModal,
   } = useModal();
+
+  const { closeModal: popupCloseModal } = useModal();
 
   /*여행 공유, 삭제부분*/
   const onClickShareButton = () => {
@@ -219,7 +226,7 @@ const TripDetailPage = () => {
     <>
       <>
         <TripInfo>
-          <BackHeader />
+          <BackHeader type="tripDetail" />
           <TagWrapper>
             <Tag
               text={String(data?.dDay)}
@@ -243,7 +250,7 @@ const TripDetailPage = () => {
               </Description>
 
               <IconWrapper>
-                <Icon icon="FilledHeart" fill="#8B95A1" />
+                <Icon icon={data?.isInStorage ? "FilledHeart" : "UnFilledHeart"} />
                 <IconStyleDiv>
                   <Icon
                     icon="EllipsisOutlined"
@@ -310,6 +317,14 @@ const TripDetailPage = () => {
         <Modal isVisible={isShowDeleteModal} closeModal={closeDeleteModal}>
           <DeleteModal closeModal={closeDeleteModal} />
         </Modal>
+        {state !== "main" && (
+          <Toast close={popupCloseModal}>
+            <PopupInner>
+              <Icon icon="Check" />
+              리스트 생성 완료
+            </PopupInner>
+          </Toast>
+        )}
       </>
     </>
   );

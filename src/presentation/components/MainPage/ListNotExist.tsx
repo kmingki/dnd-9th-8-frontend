@@ -7,10 +7,19 @@ import { styled } from "styled-components";
 import TextBox from "./components/TextBox";
 import { useNavigate } from "react-router-dom";
 import Text from "@components/common/Text";
+import { useDispatch } from "react-redux";
+import { changeCreateTripState } from "@reducer/slices/createTrip/createTripSlice";
 
 const ListNotExist = ({ nickname }: { nickname: string }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleClickCreat = () => {
+    dispatch(
+      changeCreateTripState({
+        type: "state",
+        value: "main",
+      })
+    );
     navigate("/trip-create/1");
   };
   return (

@@ -7,13 +7,18 @@ import COLOR from "@styles/colors";
 type BackHeaderType = {
   text?: string;
   color?: string;
+  type?: string;
 };
 
-const BackHeader = ({ text, color }: BackHeaderType) => {
+const BackHeader = ({ text, color, type }: BackHeaderType) => {
   const navigate = useNavigate();
 
   const handleClickBack = () => {
-    navigate(-1);
+    if (type === "tripDetail") {
+      navigate("/", { replace: true });
+    } else {
+      navigate(-1);
+    }
   };
 
   return (
