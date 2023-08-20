@@ -15,11 +15,12 @@ type CheckItemType = {
     title: string, 
     onChangeCheckItem?: any,
     onChangeCheckItemTitle?: any,
-    onClickDeleteCheckItem?: any
+    onClickDeleteCheckItem?: any,
+    isDoubleCheckMode?: boolean;
 };
 
 
-const CheckItem = ({ checkListId, itemId, isChecked, title, onChangeCheckItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: CheckItemType) => {
+const CheckItem = ({ checkListId, itemId, isChecked, title, onChangeCheckItem, onChangeCheckItemTitle, onClickDeleteCheckItem, isDoubleCheckMode}: CheckItemType) => {
 
     const [value, setValue] = useState('');
 
@@ -41,6 +42,7 @@ const CheckItem = ({ checkListId, itemId, isChecked, title, onChangeCheckItem, o
                 <InputWrapper placeholder="항목을 작성해주세요" onChange={onChange} value={title} isChecked={isChecked}/>
                 </Description>
             </CheckItemWrapper>
+            {!isDoubleCheckMode &&
             <CheckItemWrapper>
                 <IconWrapper onClick={()=>onClickDeleteCheckItem(checkListId, itemId)}>
                     <Icon icon='Delete' fill={COLOR.GRAY_500}/>
@@ -49,6 +51,7 @@ const CheckItem = ({ checkListId, itemId, isChecked, title, onChangeCheckItem, o
                     <Icon icon='SwapOutlined' fill={COLOR.GRAY_500}/>
                 </IconWrapper>    
             </CheckItemWrapper>
+            }
             
         </CheckItemContainer>
     );

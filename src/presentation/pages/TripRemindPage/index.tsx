@@ -1,14 +1,16 @@
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Icon from "@components/common/Icon";
 import Text from "@components/common/Text";
 import Spacing from "@components/common/Spacing";
-import React, { useState } from "react";
 import styled from "styled-components";
 import COLOR from "@styles/colors";
 import Button from "@components/common/Button";
 import BottomButton from "@components/common/BottomButton";
 
 const TripRemindPage = () => {
-
+    const navigate = useNavigate();
+    const { tripId } = useParams();
     const [title, setTitle] = useState("");
     const [ isOpenCalendar, setIsOpenCalendar ] = useState(false); 
    
@@ -24,9 +26,9 @@ const TripRemindPage = () => {
         <div>
             <BottomButton
                 text="다시 체크하기"
-                onClick={()=>{}}
+                onClick={()=>{navigate(`/doublecheck/${tripId}`)}}
                 textButton={true}
-                textButtonOnClick={()=>{}}
+                textButtonOnClick={()=>{navigate("/")}}
                 textButtonChild="안할래요"
             />
         </div>
