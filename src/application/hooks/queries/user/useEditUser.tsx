@@ -1,12 +1,13 @@
 import React from "react";
+import { editUser } from "@api/user";
 import { useMutation, useQueryClient } from "react-query";
-import { editUserNickName } from "../../../../infrastructure/api/user";
 
-const useEditName = () => {
+const useEditUser = () => {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation(
-    (newNickname: string) => editUserNickName(newNickname),
+    ({ nickname, image }: { nickname: string; image: string }) =>
+      editUser({ nickname, image }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries("user");
@@ -17,4 +18,4 @@ const useEditName = () => {
   return mutate;
 };
 
-export default useEditName;
+export default useEditUser;

@@ -4,15 +4,16 @@ import { styled } from "styled-components";
 import BackHeader from "@components/common/BackHeader";
 import Spacing from "@components/common/Spacing";
 import { useNavigate } from "react-router-dom";
-import useEditProfileImage from "../../../application/hooks/queries/user/useEditProfileImage";
+
 import useGetMyInfo from "@hooks/queries/user/useGetMyInfo";
 import Text from "@components/common/Text";
 import { profileData } from "../../../application/data/profileData";
 import Icon from "@components/common/Icon";
 import Button from "@components/common/Button";
+import useEditUser from "@hooks/queries/user/useEditUser";
 
 const EditMyInfoPage = () => {
-  const mutate = useEditProfileImage();
+  const mutate = useEditUser();
   const navigate = useNavigate();
   const { data: userData } = useGetMyInfo();
   const [nickName, setNickName] = useState(userData.nickname);
@@ -41,6 +42,14 @@ const EditMyInfoPage = () => {
     setNickName(value);
   };
 
+  const handleClickImage = (index: number) => {
+    setCurrProfileIdx(index);
+  };
+
+  const handleEditProfile = () => {
+    mutate({ nickname: nickName, image: profileData[currProfileIdx] });
+    navigate(-1);
+  };
   return (
     <EditMyInfoPageWrapper>
       <BackHeader text="프로필 편집" color="#191F28" />
@@ -78,6 +87,7 @@ const EditMyInfoPage = () => {
                     borderRadius: "100%",
                     margin: "0 auto",
                   }}
+                  onClick={() => handleClickImage(index)}
                 />
               )}
             </div>
@@ -105,7 +115,7 @@ const EditMyInfoPage = () => {
           border="none"
           background={COLOR.MAIN_GREEN}
           radius={10}
-          onClick={() => {}}
+          onClick={handleEditProfile}
           padding="15px 0"
         >
           <Text
