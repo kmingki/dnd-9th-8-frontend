@@ -278,7 +278,6 @@ const TripDetailPage = () => {
                 checklist?.checkListState?.map((list: any, index: any) => (
                   <AddCheckList
                     tripData={data}
-                    list={list}
                     checkListId={list?.checkListId}
                     order={list?.order}
                     title={list?.title}

@@ -1,4 +1,5 @@
-import React, { useState, useCallback, useParams } from "react";
+import React, { useState, useCallback} from "react";
+import { useParams } from "react-router-dom";
 import Icon from "@components/common/Icon";
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'; //drag and drop
 import Tag from "@components/common/Tag";
@@ -27,10 +28,10 @@ import {
     Space
 } from "./style";
 
-type checkListType = { checkListId: number; order: number; title: string; itemDtoList: listItem[], onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
+type checkListType = { tripData: any; checkListId: number; order: number; title: string; itemDtoList: listItem[], onClickDeleteCheckList: any, onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
 
 
-const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
+const AddCheckList = ({tripData, checkListId, order, title, itemDtoList, onClickDeleteCheckList,onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
     const { tripId } = useParams();
     const [checklisttitle, setTitle] = useState(title);
     const [isOpen, setIsOpen] = useState(true);
