@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <HeaderWrapper>
-      <Icon icon="Logo" fill={COLOR.GRAY_500} />
+      <Icon icon="Logo" fill={COLOR.GRAY_400} />
       <div className="user-side">
         <Link to="/my-template">
-          <Icon icon="Folder" fill={COLOR.GRAY_500} />
+          <Icon icon="Folder" fill={COLOR.GRAY_400} />
         </Link>
         <Link to="/mypage">
-          <Icon icon="User" fill={COLOR.GRAY_500} />
+          <Icon icon="User" />
         </Link>
       </div>
     </HeaderWrapper>
