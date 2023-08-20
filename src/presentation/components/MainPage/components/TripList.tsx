@@ -30,6 +30,16 @@ const TripList = () => {
     getRecentTravel();
   }, []);
 
+  const convertRemindText = (title: string) => {
+    if (!title) return false;
+    const lastChar = title[title.length - 1];
+    const uni = lastChar.charCodeAt(0);
+
+    if (uni < 0xac00 || uni > 0xd7a3) return false;
+    return (uni - 0xac00) % 28 !== 0;
+  };
+  const subject = convertRemindText(recentTravel?.title) ? "이" : "가";
+  const dDayNumber = recentTravel?.dDay.split("D-")[1];
   return (
     <TripListWrapper>
       <Button
@@ -42,9 +52,7 @@ const TripList = () => {
           <div className="remind">
             <Icon icon="LoudSpeaker" />
             <Text
-              text={`${recentTravel?.title}이 ${
-                recentTravel?.dDay.split("D-")[1]
-              }일 남았어요`}
+              text={`${recentTravel?.title}${subject} ${dDayNumber}일 남았어요`}
               color={COLOR.WHITE}
               fontSize={16}
               fontWeight={600}

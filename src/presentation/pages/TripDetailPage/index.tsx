@@ -317,7 +317,7 @@ const TripDetailPage = () => {
         <Modal isVisible={isShowDeleteModal} closeModal={closeDeleteModal}>
           <DeleteModal closeModal={closeDeleteModal} />
         </Modal>
-        {state !== "main" && (
+        {state === "main" && (
           <Toast close={popupCloseModal}>
             <PopupInner>
               <Icon icon="Check" />
