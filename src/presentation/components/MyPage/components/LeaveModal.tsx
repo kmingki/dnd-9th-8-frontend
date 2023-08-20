@@ -15,7 +15,6 @@ const LeaveModal = ({ closeModal }: { closeModal: () => void }) => {
     const result = await deleteUser();
     if (result.message === "성공적으로 회원 정보가 삭제되었습니다.") {
       deleteCookie("accessToken");
-      deleteCookie("refreshToken");
       closeModal();
       navigate("/login");
     }
