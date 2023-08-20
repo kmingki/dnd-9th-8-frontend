@@ -13,20 +13,28 @@ const LoginPage = () => {
   return (
     <LoginPageWrapper>
       <MainWrapper>
-        <Icon icon="AuthLogo" />
-        <Spacing size={9} />
         <Text
-          text="빈틈없는 여행 준비"
-          color={COLOR.MAIN_GREEN}
-          fontSize={23}
+          text="빈틈없는 여행을 위한"
+          color={COLOR.MAIN_BLACK}
+          fontSize={21}
           fontWeight={600}
           lineHeight="139%"
         />
-        <Spacing size={40} />
-        <Icon icon="LogoIcon" />
+        <Text
+          text="체크리스트"
+          color={COLOR.MAIN_BLACK}
+          fontSize={21}
+          fontWeight={600}
+          lineHeight="139%"
+        />
+        <Icon icon="AuthLogo" />
+        <Spacing size={91} />
+        <div className="icon">
+          <Icon icon="LogoIcon" />
+        </div>
       </MainWrapper>
+      <Spacing size={81} />
       <ButtonWrapper>
-        <div>SNS 계정으로 로그인하기</div>
         <ButtonContainer>
           <Link to={kakaoUrl}>
             <Icon icon="AuthKakao" />
@@ -41,37 +49,27 @@ const LoginPage = () => {
 };
 
 const LoginPageWrapper = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
+  overflow-y: hidden;
   background-color: ${COLOR.WHITE};
 `;
 
 const MainWrapper = styled.div`
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -30%);
-
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  margin-top: 30%;
+  margin-left: 40px;
 
-  .login-text {
-    color: ${COLOR.GRAY_700};
-    text-shadow: 0px 4px 3px rgba(255, 255, 255, 0.25);
-    font-size: 26px;
-    font-weight: 600;
-    line-height: normal;
+  .icon {
+    display: flex;
+    justify-content: flex-end;
+    width: 80vw;
   }
 `;
 
 const ButtonWrapper = styled.div`
-  position: fixed;
-  bottom: 6%;
-  left: 50%;
-  transform: translateX(-50%);
-
   display: flex;
   flex-direction: column;
   gap: 14px;

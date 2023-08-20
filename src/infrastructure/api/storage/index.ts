@@ -1,8 +1,8 @@
 import client from "@api/index";
 
-export const getStorageTravels = async (memberId: number) =>
+export const getStorageTravels = async () =>
   await client
-    .get("/storage", { params: { memberId } })
+    .get("/storage")
     .then(({ data }) => data)
     .catch((err) => err.response);
 

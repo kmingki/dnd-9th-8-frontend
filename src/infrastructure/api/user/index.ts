@@ -12,10 +12,10 @@ export const editUserNickName = async (newNickname: string) =>
     .then(({ data }) => data)
     .catch((err) => err.response);
 
-export const editUserProfile = async (formData: any) =>
+export const editUserProfile = async (newProfileImageUrl: string) =>
   await client
-    .put("/members/profile-images", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
+    .put("/members/profile-images", {
+      newProfileImageUrl,
     })
     .then(({ data }) => data)
     .catch((err) => err.response);

@@ -5,11 +5,14 @@ import { editUserProfile } from "../../../../infrastructure/api/user";
 const useEditProfileImage = () => {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation((formData: FormData) => editUserProfile(formData), {
-    onSuccess: () => {
-      queryClient.invalidateQueries("user");
-    },
-  });
+  const { mutate } = useMutation(
+    (profileImage: string) => editUserProfile(profileImage),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("user");
+      },
+    }
+  );
 
   return mutate;
 };

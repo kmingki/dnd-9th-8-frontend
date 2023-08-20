@@ -13,6 +13,7 @@ const initialState: CreateTripType = {
   },
   checkCount: "",
   state: "", // 여행 생성 시작한 페이지 알기 위해 (ex. main)
+  tripId: 0, // 템플릿 불러오기 후 여행 생성을 위해
 };
 
 export const createTripSlice = createSlice({

@@ -24,7 +24,7 @@ const TripList = () => {
 
   useEffect(() => {
     const getRecentTravel = async () => {
-      const recent = await getUpcomingTravles(userData.memberId);
+      const recent = await getUpcomingTravles();
       setRecentTravel(recent.data[0]);
     };
     getRecentTravel();

@@ -10,7 +10,7 @@ import useGetStorage from "../../../application/hooks/queries/storage/useGetStor
 const MyTemplatePage = () => {
   const { data: userData } = useGetMyInfo();
   const memberId = userData?.memberId;
-  const { data: storageData } = useGetStorage(memberId);
+  const { data: storageData } = useGetStorage();
 
   return (
     <MyTemplatePageWrapper>

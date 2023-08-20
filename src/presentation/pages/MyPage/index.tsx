@@ -6,10 +6,8 @@ import useGetMyInfo from "../../../application/hooks/queries/user/useGetMyInfo";
 import { useNavigate } from "react-router-dom";
 import useModal from "../../../application/hooks/useModal";
 import Spacing from "@components/common/Spacing";
-import Icon from "@components/common/Icon";
 import Button from "@components/common/Button";
 import Text from "@components/common/Text";
-import MyPageButton from "@components/MyPage/components/MyPageButton";
 import Modal from "@components/common/Modal";
 import LogoutModal from "@components/MyPage/components/LogoutModal";
 import LeaveModal from "@components/MyPage/components/LeaveModal";
@@ -44,50 +42,114 @@ const MyPage = () => {
         <MyPageWrapper>
           <BackHeader text="내 정보" color="#191F28" />
           <MembersWrapper>
-            <Spacing size={38} />
+            <Spacing size={10} />
             <InfoWrapper>
               <div className="profile-wrapper">
                 <img src={data.profileImageUrl} alt="프로필 이미지" />
-                <div className="edit-icon">
-                  <Icon icon="EditProfile" onClick={handleClickEditInfo} />
-                </div>
               </div>
               <div className="info-text">
                 <div>
                   <span className="name">{data.nickname}</span>님
                 </div>
+                <Spacing size={8} />
                 <span className="email">{data.email}</span>
+                <Spacing size={14} />
+                <Button
+                  width="fit-content"
+                  radius={29}
+                  padding="8px 16px"
+                  background={COLOR.WHITE}
+                  border={`1px solid ${COLOR.GRAY_500}`}
+                >
+                  <Text
+                    text="이메일 인증하기"
+                    fontSize={13}
+                    fontWeight={600}
+                    lineHeight="16px"
+                    color={COLOR.GRAY_800}
+                  />
+                </Button>
               </div>
             </InfoWrapper>
-            <Spacing size={23} />
-            <Button
-              radius={12}
-              padding="24px 30px"
-              background={COLOR.WHITE}
-              border="none"
-              onClick={() => {}}
-            >
-              <div className="template-button">
-                <Text
-                  text="생성된 여행 템플릿"
-                  fontSize={20}
-                  fontWeight={500}
-                  lineHeight="20px"
-                  color={COLOR.GRAY_900}
-                />
-                |
-                <Text
-                  text={`${data.travelCount}개`}
-                  fontSize={22}
-                  fontWeight={500}
-                  lineHeight="22px"
-                  color={COLOR.MAIN_GREEN}
-                />
-              </div>
-            </Button>
-            <Spacing size={21} />
-            <MyPageButton text="로그아웃" onClick={handleClickLogout} />
-            <LeaveButton onClick={handleClickLeave}>탈퇴하기</LeaveButton>
+            <Spacing size={17} />
+            <BottomWrapper>
+              <Spacing size={21} />
+              <Button
+                radius={12}
+                padding="24px 30px"
+                background={COLOR.WHITE}
+                border={`1px solid ${COLOR.GREEN_300}`}
+                onClick={() => {}}
+              >
+                <div className="template-button">
+                  <Text
+                    text="생성된 여행 템플릿"
+                    fontSize={20}
+                    fontWeight={500}
+                    lineHeight="20px"
+                    color={COLOR.GRAY_900}
+                  />
+                  |
+                  <Text
+                    text={`${data.travelCount}개`}
+                    fontSize={22}
+                    fontWeight={500}
+                    lineHeight="22px"
+                    color={COLOR.MAIN_GREEN}
+                  />
+                </div>
+              </Button>
+              <ButtonWrapper>
+                <Button
+                  width="100%"
+                  radius={8}
+                  padding="13px"
+                  background={COLOR.WHITE}
+                  border={`1px solid ${COLOR.GRAY_200}`}
+                  onClick={handleClickEditInfo}
+                >
+                  <Text
+                    text="프로필 편집"
+                    fontSize={18}
+                    fontWeight={500}
+                    lineHeight="30px"
+                    color={COLOR.GRAY_600}
+                  />
+                </Button>
+                <Button
+                  width="100%"
+                  radius={8}
+                  padding="13px"
+                  background={COLOR.WHITE}
+                  border={`1px solid ${COLOR.GRAY_200}`}
+                  onClick={handleClickLogout}
+                >
+                  <Text
+                    text="로그아웃"
+                    fontSize={18}
+                    fontWeight={500}
+                    lineHeight="30px"
+                    color={COLOR.GRAY_600}
+                  />
+                </Button>
+                <Button
+                  width="100%"
+                  radius={8}
+                  padding="13px"
+                  background={COLOR.WHITE}
+                  border={`1px solid ${COLOR.GRAY_200}`}
+                  onClick={handleClickLeave}
+                >
+                  <Text
+                    text="탈퇴하기"
+                    fontSize={18}
+                    fontWeight={500}
+                    lineHeight="30px"
+                    color={COLOR.GRAY_600}
+                  />
+                </Button>
+              </ButtonWrapper>
+            </BottomWrapper>
 
             <Modal isVisible={isShowLogoutModal} closeModal={closeLogoutModal}>
               <LogoutModal closeModal={closeLogoutModal} />
@@ -104,8 +166,9 @@ const MyPage = () => {
 
 const MyPageWrapper = styled.div`
   padding: 0 20px;
-  height: 100%;
-  background-color: ${COLOR.GRAY_50};
+  height: 100vh;
+  background-color: ${COLOR.WHITE};
+  overflow-y: hidden;
 `;
 const MembersWrapper = styled.div`
   display: flex;
@@ -125,27 +188,25 @@ const MembersWrapper = styled.div`
 
 const InfoWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 20px;
   align-items: center;
 
   .profile-wrapper {
-    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
     img {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       border-radius: 100%;
-    }
-    .edit-icon {
-      position: absolute;
-      left: 0;
-      bottom: 0;
     }
   }
   .info-text {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    text-align: center;
+    align-items: center;
 
     color: ${COLOR.GRAY_900};
     font-size: 22px;
@@ -164,18 +225,21 @@ const InfoWrapper = styled.div`
     }
   }
 `;
-const LeaveButton = styled.button`
-  position: fixed;
-  bottom: 10%;
-  right: 20px;
-
-  outline: none;
-  border: none;
-  background-color: transparent;
-
-  color: ${COLOR.GRAY_600};
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 14px;
+const BottomWrapper = styled.div`
+  position: relative;
+  margin: 0 -20px;
+  padding: 0 20px;
+  height: 100vh;
+  background-color: ${COLOR.GRAY_50};
 `;
+const ButtonWrapper = styled.div`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  bottom: 50px;
+
+  width: calc(100% - 40px);
+`;
+
 export default MyPage;
