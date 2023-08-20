@@ -10,9 +10,11 @@ import { toLocalISOString } from "../../../../application/utils/getDate";
 type CustomCalendarProps = {
   defaultStartDay?: number[];
   defaultEndDay?: number[];
+  onChangeStartDay?: any,
+  onChangeEndDay?: any,
 };
 
-const CustomCalendar = ({ defaultStartDay, defaultEndDay} : CustomCalendarProps) => {
+const CustomCalendar = ({ defaultStartDay, defaultEndDay, onChangeStartDay, onChangeEndDay} : CustomCalendarProps) => {
   const dispatch = useDispatch();
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
 
@@ -27,6 +29,7 @@ const CustomCalendar = ({ defaultStartDay, defaultEndDay} : CustomCalendarProps)
   const updateDateRange = (date: Date) => {
     if (dateRange[0] === dateRange[1] && date >= dateRange[0]) {
       setDateRange([dateRange[0], date]);
+      onChangeEndDay(date);
       dispatch(
         changeTripRange({
           type: "end",
@@ -35,6 +38,8 @@ const CustomCalendar = ({ defaultStartDay, defaultEndDay} : CustomCalendarProps)
       );
     } else {
       setDateRange([date, date]);
+      onChangeStartDay(date);
+      onChangeEndDay(date);
       dispatch(
         changeTripRange({
           type: "start",
@@ -61,7 +66,7 @@ const CustomCalendar = ({ defaultStartDay, defaultEndDay} : CustomCalendarProps)
   };
 
   return (
-    <CalendarWrapper>
+    <CalendarWrapper isEditMode={(defaultStartDay && defaultEndDay) ? true : false}>
       {(defaultStartDay && defaultEndDay) ?
       <Calendar
       calendarType="hebrew"
@@ -93,8 +98,8 @@ const CustomCalendar = ({ defaultStartDay, defaultEndDay} : CustomCalendarProps)
   );
 };
 
-const CalendarWrapper = styled.div`
-  border-bottom: 1px solid #dbdbdb;
+const CalendarWrapper = styled.div<{ isEditMode : boolean }>`
+  border-bottom: ${({ isEditMode}) => isEditMode? "" : "1px solid #dbdbdb"};
 `;
 
 export default CustomCalendar;

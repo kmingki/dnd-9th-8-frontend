@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Icon from "@components/common/Icon";
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'; //drag and drop
-import Tag from "@components/common/Tag";
+import useChangeOrderItem from "@hooks/queries/item/useChangeOrderItem";
+import Text from "@components/common/Text";
 import { CheckItem, AddCheckItem } from "./CheckItem";
 import { listItem , checkList } from "../../../../application/type/checkList";
 import { 
@@ -11,10 +12,12 @@ import {
     Head, 
     Title, 
     Indicator, 
-    TitleLeft, 
+    TitleLeft,
+    TitleRight, 
     CheckItemWrapper, 
     InputWrapper, 
     IconWrapper, 
+    Dot,
     TitleIconWrapper, 
     ModalOverlay,
     ModalWindow,
@@ -25,42 +28,16 @@ import {
     ButtonContainer,
     Space
 } from "./style"
+import COLOR from "@styles/colors";
 
-/*
-const CheckList = () => {
-
-
-    return (
-        <CheckListWrapper>
-            <Head>
-                <Title>
-                    <Icon icon='Calendar'/>
-                    {'확인'}
-                </Title>
-                <TitleLeft>
-                    <Indicator>0/5</Indicator>
-                    <Icon icon='MoreOutlined'/>
-                    <Icon icon='DownOutlined'/>
-                </TitleLeft>
-
-            </Head>
-            <CheckItemWrapper>
-            {list.map((item, index) =>
-                <CheckItem id={item.id} isChecked={item.isChecked} title={item.title}/>
-            )}
-            </CheckItemWrapper>
-        </CheckListWrapper>
-    );
-}
-*/
-
-type checkListType = { checkListId: number; order: number; title: string; itemDtoList: listItem[], onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
+type checkListType = { tripData: any; list: checkList; checkListId: number; order: number; title: string; itemDtoList: listItem[], onClickDeleteCheckList:any, onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle: any, onClickDeleteCheckItem: any};
 
 
-const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
+const AddCheckList = ({tripData, list, checkListId, order, title, itemDtoList, onClickDeleteCheckList, onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
 
+    const { mutate: changeOrderItemMutate /*data , isLoading, error*/ } = useChangeOrderItem();
     //const [title, setTitle] = useState(title);
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     //const [isModalOpen, setIsModalOpen] = useState(false); 이전 이모티콘 디자인 관련
 
     const onClickOpenCheckList = () => {
@@ -71,15 +48,25 @@ const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem
     // 이전 디자인 이모티콘(?) 관련
     /*
     const onClickModalIcon = (e: React.MouseEvent<HTMLButtonElement>) => {
-     
         setTitleEmoji(e.currentTarget.id);
     };
     */
 
     // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
-    const onDragEnd = ({ source, destination }: DropResult) => {
-        console.log('>>> source', source);
-        console.log('>>> destination', destination);
+    const onDragEnd = ({ source, destination, draggableId }: DropResult ) => {
+
+        changeOrderItemMutate({ 
+            travelId: 2, 
+            checkListId:checkListId , 
+            data: [{id : Number(draggableId), order : Number(destination?.index)},
+                {id : Number(itemDtoList.at(Number(destination?.index))?.itemId), order : Number(source?.index)},
+            ]
+        }); //travel id 수정 필요
+        // console.log('>>> source', source);
+        // console.log('>>> destination', destination );
+        // console.log(draggableId)
+       //
+
     };
     
     return (
@@ -87,20 +74,26 @@ const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem
         <CheckListWrapper>
             <Head>
                 <Title>
-                    <TitleIconWrapper>
-                        <Icon icon='Calendar'/>
-                    </TitleIconWrapper>
-                    <InputWrapper placeholder={title} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{/*setTitle(e.target.value)*/}} value={title}/>
+                    <TitleRight>
+                        {list.essential? 
+                        <>
+                        <Text text={title} color={COLOR.GRAY_800} fontSize={16} lineHeight="21.21px" fontWeight={600}/>
+                        <Dot />
+                        </>
+                         :
+                        <InputWrapper placeholder={title} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{/*setTitle(e.target.value)*/}} value={title}/>
+                        }
+                    </TitleRight>
                     <TitleLeft>
-                    <Indicator>{itemDtoList.filter((item) => item.isChecked === true).length}/{itemDtoList.length}</Indicator>
-                    {isOpen? 
-                    <IconWrapper>
-                        <Icon icon='UpOutlined' onClick={onClickOpenCheckList}/>
-                    </IconWrapper>:
-                    <IconWrapper>
-                        <Icon icon='DownOutlined' onClick={onClickOpenCheckList}/>
-                    </IconWrapper>}
-                </TitleLeft>
+                        <Indicator>{itemDtoList.filter((item) => item.isChecked === true).length}/{itemDtoList.length}</Indicator>
+                        {isOpen? 
+                        <IconWrapper>
+                            <Icon icon='UpOutlined' fill="#5C5F64" onClick={onClickOpenCheckList}/>
+                        </IconWrapper>:
+                        <IconWrapper>
+                            <Icon icon='DownOutlined' fill="#5C5F64" onClick={onClickOpenCheckList}/>
+                        </IconWrapper>}
+                    </TitleLeft>
                 </Title>
             </Head>
 
@@ -136,10 +129,10 @@ const AddCheckList = ({checkListId, order, title, itemDtoList, onChangeCheckItem
                         )}
                     </Droppable>
                 </DragDropContext>
-                <AddCheckItem checkListId={checkListId} id={itemDtoList.length} onClickPlusItem={onClickPlusItem}/>
+                <AddCheckItem checkListId={checkListId} id={itemDtoList.length+1} onClickPlusItem={onClickPlusItem}/>
                 <FinishButtonWrapper>
-                    <FinishButton>
-                        완료
+                    <FinishButton onClick={()=>onClickDeleteCheckList(checkListId)}>
+                        리스트 삭제
                     </FinishButton>
                 </FinishButtonWrapper>
             </CheckItemWrapper>

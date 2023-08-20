@@ -1,5 +1,8 @@
 import React from "react";
 import { useQuery } from "react-query";
+import { getTravelDetail } from "@api/travel/index";
+import { useDispatch,  } from "react-redux";
+import { setTripListState } from "@reducer/slices/TripInfo/TripInfoSlice";
 import useGetMyInfo from "../user/useGetMyInfo";
 import {
   getPastTravles,
@@ -20,10 +23,9 @@ const useGetMyTravel = (filter: string) => {
       const res = await getPastTravles();
       return res;
     }
-  });
+  );
   const data = responseData?.data;
-
-  return { data, refetch, isLoading, error };
+  return { data, isLoading, error };
 };
 
 export default useGetMyTravel;

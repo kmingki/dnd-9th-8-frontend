@@ -10,5 +10,6 @@ export interface checkList {
     checkListId : number;
     title: string; 
     order: number;
+    essential: false;
     itemDtoList: listItem[];
 }
