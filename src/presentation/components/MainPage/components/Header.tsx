@@ -13,7 +13,7 @@ const Header = ({ profile }: { profile: string }) => {
           <Icon icon="Folder" fill={COLOR.GRAY_400} />
         </Link>
         <Link to="/mypage">
-          <img src={profile} width={25} height={25} />
+          <img src={profile} width={25} height={25} alt="사용자 프로필 이미지" />
         </Link>
       </div>
     </HeaderWrapper>
