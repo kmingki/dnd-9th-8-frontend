@@ -15,6 +15,6 @@ await client
   /* 백엔드 api 개발중 */
 export const updateChecklist = async (travelId: number, checkListId: number, title: string) =>
 await client
-    .delete(`travels/${travelId}/check-lists/${checkListId}`)
+    .patch(`travels/${travelId}/check-lists/${checkListId}`, {title: title})
     .then(({ data }) => data)
     .catch((err) => err.response);
