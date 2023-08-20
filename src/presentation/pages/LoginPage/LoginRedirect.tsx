@@ -11,7 +11,7 @@ const LoginRedirect = () => {
 
   useEffect(() => {
     setCookie("accessToken", accessToken, 1);
-    if (memberState === "NEW") {
+    if (memberState === "NEW_MEMBER") {
       navigate("/login/complate");
     } else {
       navigate("/");
