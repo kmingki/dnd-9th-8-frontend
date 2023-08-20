@@ -6,17 +6,15 @@ export const getMyInfo = async () =>
     .then(({ data }) => data)
     .catch((err) => err.response);
 
-export const editUserNickName = async (newNickname: string) =>
+export const editUser = async ({
+  nickname,
+  image,
+}: {
+  nickname: string;
+  image: string;
+}) =>
   await client
-    .put("/members/nicknames", { newNickname })
-    .then(({ data }) => data)
-    .catch((err) => err.response);
-
-export const editUserProfile = async (newProfileImageUrl: string) =>
-  await client
-    .put("/members/profile-images", {
-      newProfileImageUrl,
-    })
+    .patch("/members", { nickname, image })
     .then(({ data }) => data)
     .catch((err) => err.response);
 
