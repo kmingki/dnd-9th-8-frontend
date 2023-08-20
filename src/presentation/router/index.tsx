@@ -12,7 +12,7 @@ import MyTemplatePage from "../pages/MyTemplatePage";
 import EditTripInfoPage from "@pages/EditTripInfoPage";
 import TripRemindPage from "@pages/TripRemindPage";
 import DoubleCheckPage from "@pages/DoubleCheckPage";
-
+import LoginRedirect from "@pages/LoginPage/LoginRedirect";
 
 const Router = () => {
   return (
@@ -20,6 +20,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/login/auth" element={<LoginRedirect />} />
         <Route path="/login/complate" element={<LoginCompletePage />} />
         <Route path="/trip-create/:step" element={<TripCreatePage />} />
         <Route path="/trip-create/complate" element={<CreateComplatePage />} />
@@ -31,7 +32,6 @@ const Router = () => {
         <Route path="/checklist/:id" element={<CheckListPage />} />
         <Route path="/remind/:id" element={<TripRemindPage />} />
         <Route path="/doublecheck/:id" element={<DoubleCheckPage />} />
-
       </Routes>
     </BrowserRouter>
   );

@@ -1,20 +1,16 @@
 import React from "react";
 import { styled } from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import COLOR from "@styles/colors";
 import BottomButton from "../../../presentation/components/common/BottomButton";
 import Icon from "../../../presentation/components/common/Icon";
 import Spacing from "../../../presentation/components/common/Spacing";
 import Text from "@components/common/Text";
-import { setCookie } from "../../../application/utils/cookie";
 
 const LoginCompletePage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const accessToken = new URLSearchParams(location.search).get("token") as string;
 
   const handleClickStart = () => {
-    setCookie("accessToken", accessToken, 1);
     navigate("/trip-create/1");
   };
   return (

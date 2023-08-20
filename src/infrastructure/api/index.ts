@@ -21,7 +21,7 @@ client.interceptors.response.use(
   },
   async (error: any) => {
     const { config, response } = error;
-
+    const accessToken = getCookie("accessToken");
     if (
       response.data.errorCode === "AT-C-0002" ||
       response.data.errorCode === "AT-C-0001"
@@ -31,6 +31,7 @@ client.interceptors.response.use(
       await axios({
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
         method: "post",
         url: `${process.env.REACT_APP_BASE_URL}/auth/refresh`,

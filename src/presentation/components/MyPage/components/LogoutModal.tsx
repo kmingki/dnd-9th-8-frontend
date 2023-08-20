@@ -15,7 +15,6 @@ const LogoutModal = ({ closeModal }: { closeModal: () => void }) => {
     const result = await logout();
     if (result.message === "성공적으로 로그아웃되었습니다.") {
       deleteCookie("accessToken");
-      deleteCookie("refreshToken");
       closeModal();
       navigate("/login");
     }
