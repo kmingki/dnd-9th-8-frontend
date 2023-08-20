@@ -4,7 +4,7 @@ import Icon from "@components/common/Icon";
 import COLOR from "@styles/colors";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ profile }: { profile: string }) => {
   return (
     <HeaderWrapper>
       <Icon icon="Logo" fill={COLOR.GRAY_400} />
@@ -13,7 +13,7 @@ const Header = () => {
           <Icon icon="Folder" fill={COLOR.GRAY_400} />
         </Link>
         <Link to="/mypage">
-          <Icon icon="User" />
+          <img src={profile} width={25} height={25} />
         </Link>
       </div>
     </HeaderWrapper>
