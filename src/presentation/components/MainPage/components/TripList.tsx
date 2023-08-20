@@ -41,53 +41,61 @@ const TripList = () => {
   const subject = convertRemindText(recentTravel?.title) ? "이" : "가";
   const dDayNumber = recentTravel?.dDay.split("D-")[1];
   return (
-    <TripListWrapper>
-      <Button
-        radius={8}
-        background={COLOR.MAIN_GREEN}
-        padding="11px 12px"
-        border="none"
-      >
-        <RemindButton>
-          <div className="remind">
-            <Icon icon="LoudSpeaker" />
-            <Text
-              text={`${recentTravel?.title}${subject} ${dDayNumber}일 남았어요`}
-              color={COLOR.WHITE}
-              fontSize={16}
-              fontWeight={600}
-              lineHeight="16px"
-            />
-          </div>
-          <Icon icon="Chevron" color={COLOR.WHITE} fill={COLOR.WHITE} />
-        </RemindButton>
-      </Button>
-      <Spacing size={28} />
-      <PeriodFilter>
-        {filterList.map((option) => (
-          <OptionPeriodFilter
-            key={option}
-            clicked={tripFilter === option}
-            onClick={() => handleClickFilter(option)}
+    <>
+      {recentTravel && (
+        <TripListWrapper>
+          <Button
+            radius={8}
+            background={COLOR.MAIN_GREEN}
+            padding="11px 12px"
+            border="none"
           >
-            <Text
-              text={option}
-              fontSize={18}
-              fontWeight={600}
-              lineHeight="140%"
-              color={tripFilter === option ? COLOR.GRAY_800 : COLOR.GRAY_500}
-            />
-          </OptionPeriodFilter>
-        ))}
-      </PeriodFilter>
-      <Spacing size={18} />
-      <TripListContainer>
-        {travelData &&
-          travelData.map((travel: any, index: number) => (
-            <TripCard key={index} travelInfo={travel} memberId={userData.memberId} />
-          ))}
-      </TripListContainer>
-    </TripListWrapper>
+            <RemindButton>
+              <div className="remind">
+                <Icon icon="LoudSpeaker" />
+                <Text
+                  text={`${recentTravel?.title}${subject} ${dDayNumber}일 남았어요`}
+                  color={COLOR.WHITE}
+                  fontSize={16}
+                  fontWeight={600}
+                  lineHeight="16px"
+                />
+              </div>
+              <Icon icon="Chevron" color={COLOR.WHITE} fill={COLOR.WHITE} />
+            </RemindButton>
+          </Button>
+          <Spacing size={28} />
+          <PeriodFilter>
+            {filterList.map((option) => (
+              <OptionPeriodFilter
+                key={option}
+                clicked={tripFilter === option}
+                onClick={() => handleClickFilter(option)}
+              >
+                <Text
+                  text={option}
+                  fontSize={18}
+                  fontWeight={600}
+                  lineHeight="140%"
+                  color={tripFilter === option ? COLOR.GRAY_800 : COLOR.GRAY_500}
+                />
+              </OptionPeriodFilter>
+            ))}
+          </PeriodFilter>
+          <Spacing size={18} />
+          <TripListContainer>
+            {travelData &&
+              travelData.map((travel: any, index: number) => (
+                <TripCard
+                  key={index}
+                  travelInfo={travel}
+                  memberId={userData.memberId}
+                />
+              ))}
+          </TripListContainer>
+        </TripListWrapper>
+      )}
+    </>
   );
 };
 
