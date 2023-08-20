@@ -43,6 +43,7 @@ const AddCheckList = ({tripData, checkListId, order, title, itemDtoList, onClick
 
     //checklist title 수정
     const onClickAdd = useCallback(() => {
+        console.log("왜 ");
         updateChecklistMutate({ travelId: Number(tripId), checklistId : checkListId, title:checklisttitle  }); // travelId 수정 필요
     }, [updateChecklistMutate]);
 
