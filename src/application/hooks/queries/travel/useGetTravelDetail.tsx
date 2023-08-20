@@ -7,15 +7,19 @@ const useGetTravelDetail = (travelId: string) => {
     data: responseData,
     isLoading,
     error,
-  } = useQuery(["getTravelDetail"], async () => await getTravelDetail(travelId), {
-    onSuccess: (data) => {},
-    onError: (error) => {
-      console.log("에러");
-      console.error(error);
-    },
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 30,
-  });
+  } = useQuery(
+    ["getTravelDetail", travelId],
+    async () => await getTravelDetail(travelId),
+    {
+      onSuccess: (data) => {},
+      onError: (error) => {
+        console.log("에러");
+        console.error(error);
+      },
+      staleTime: 1000 * 60 * 5,
+      cacheTime: 1000 * 60 * 30,
+    }
+  );
   const data = responseData?.data;
   return { data, isLoading, error };
 };
