@@ -29,7 +29,7 @@ const ShareModal = ({ closeModal, travelId }: { closeModal: () => void, travelId
       />
       <Spacing size={23} />
       <ButtonWrapper>
-        <TextWrapper onClick={()=>onClickKakaoShare("http://localhost:3000/", "제목")}>
+        <TextWrapper onClick={()=>onClickKakaoShare(`${process.env.REACT_APP_SHARE_CLIPBOARD_LINK}`, "제목")}>
           <Icon icon="KakaoLogo"  />
           <Text
             text="카카오톡"
