@@ -65,7 +65,9 @@ const MainWrapper = styled.div`
   .icon {
     display: flex;
     justify-content: flex-end;
-    width: 80vw;
+    width: 100%;
+    padding-right: 36px;
+    box-sizing: border-box;
   }
 `;
 
