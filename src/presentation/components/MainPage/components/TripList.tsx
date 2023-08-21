@@ -9,8 +9,10 @@ import Text from "@components/common/Text";
 import Button from "@components/common/Button";
 import Icon from "@components/common/Icon";
 import useGetMyTravel from "../../../../application/hooks/queries/travel/useGetMyTravel";
+import { useNavigate } from "react-router-dom";
 
 const TripList = () => {
+  const navigate = useNavigate();
   const { data: userData } = useGetMyInfo();
   const filterList = ["예정된 여행", "지난 여행"];
   const [tripFilter, setTripFilter] = useState("예정된 여행");
@@ -40,6 +42,10 @@ const TripList = () => {
   };
   const subject = convertRemindText(recentTravel?.title) ? "이" : "가";
   const dDayNumber = recentTravel?.dDay.split("D-")[1];
+
+  const handleClickRemindButton = () => {
+    navigate(`/trip/${recentTravel.travelId}`);
+  };
   return (
     <>
       {recentTravel && (
@@ -49,6 +55,7 @@ const TripList = () => {
             background={COLOR.MAIN_GREEN}
             padding="11px 12px"
             border="none"
+            onClick={handleClickRemindButton}
           >
             <RemindButton>
               <div className="remind">
