@@ -48,3 +48,4 @@ export { default as Remind } from "./Remind";
 export { default as CloseOutlined } from "./CloseOutlined";
 export { default as LoudSpeaker } from "./LoudSpeaker";
 export { FilledHeart, UnFilledHeart } from "./Heart";
+export { default as Email } from "./Email";

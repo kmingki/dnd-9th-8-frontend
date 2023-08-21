@@ -10,6 +10,10 @@ import { initializeCreateTripInfo } from "../../../application/reducer/slices/cr
 import { useLocation, useNavigate } from "react-router-dom";
 import Toast from "@components/common/Toast";
 import useModal from "@hooks/useModal";
+import BottomSheet from "@components/common/BottomSheet";
+import EmailAuth from "@components/MainPage/components/EmailAuth";
+import Modal from "@components/common/Modal";
+import EmailAuthInput from "@components/MainPage/components/EmailAuthInput";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -18,8 +22,22 @@ const MainPage = () => {
   const { data } = useGetMyInfo();
   const { closeModal: popupCloseModal } = useModal();
 
+  const {
+    isShowModal: isShowEmailAuth,
+    toggleModal: toggleEmailAuth,
+    closeModal: closeEmailAuth,
+  } = useModal();
+  const {
+    isShowModal: isShowEmailInput,
+    toggleModal: toggleEmailInput,
+    closeModal: closeEmailInput,
+  } = useModal();
+
   useEffect(() => {
     dispatch(initializeCreateTripInfo());
+    if (localStorage.getItem("state") === "NEW_MEMBER") {
+      toggleEmailAuth();
+    }
   }, []);
 
   const handlePopupClose = () => {
@@ -28,6 +46,7 @@ const MainPage = () => {
       navigate(".", { state: {} });
     }
   };
+
   return (
     <>
       {data && (
@@ -41,6 +60,15 @@ const MainPage = () => {
           {locationState && locationState.state === "delete_done" && (
             <Toast close={handlePopupClose}>리스트 삭제 완료</Toast>
           )}
+          <BottomSheet isVisible={isShowEmailAuth} closeModal={closeEmailAuth}>
+            <EmailAuth
+              closeModal={closeEmailAuth}
+              toggleEmailInput={toggleEmailInput}
+            />
+          </BottomSheet>
+          <Modal isVisible={isShowEmailInput} closeModal={closeEmailInput}>
+            <EmailAuthInput closeModal={closeEmailInput} />
+          </Modal>
         </MainPageWrapper>
       )}
     </>
