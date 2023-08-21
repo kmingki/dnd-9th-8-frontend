@@ -1,34 +1,12 @@
-import React, { useState } from "react";
-import Icon from "@components/common/Icon";
+import React from "react";
 import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
 import { styled } from "styled-components";
 import Text from "@components/common/Text";
 import { getTripDetailRange } from "../../../application/utils/getDate";
-import { toggleStorageValue } from "../../../infrastructure/api/storage";
-import useGetStorage from "../../../application/hooks/queries/storage/useGetStorage";
+import HeartButton from "@components/common/HeartButton";
 
-const TemplateExist = ({ storageData, memberId }: any) => {
-  const { refetch } = useGetStorage();
-  const [stored, setStored] = useState(
-    storageData.reduce((acc: any, travel: any) => {
-      acc[travel.travelId] = true;
-      return acc;
-    }, {})
-  );
-
-  const handleClickStore = async ({ travelId, memberId }: any) => {
-    setStored((prev: any) => ({
-      ...prev,
-      [travelId]: !prev[travelId],
-    }));
-    await toggleStorageValue({
-      travelId: travelId,
-      memberId: memberId,
-    });
-    refetch();
-  };
-
+const TemplateExist = ({ storageData }: any) => {
   return (
     <TemplateExistWrapper>
       <Spacing size={15} />
@@ -53,12 +31,7 @@ const TemplateExist = ({ storageData, memberId }: any) => {
                 lineHeight="145%"
               />
             </div>
-            <Icon
-              icon={stored[travel.travelId] ? "FilledHeart" : "UnFilledHeart"}
-              onClick={() =>
-                handleClickStore({ travelId: travel.travelId, memberId })
-              }
-            />
+            <HeartButton isInStorage={true} travelId={travel.travelId} />
           </div>
         ))}
       </TripWrapper>

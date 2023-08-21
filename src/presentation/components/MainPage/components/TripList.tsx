@@ -4,7 +4,6 @@ import COLOR from "@styles/colors";
 import { styled } from "styled-components";
 import TripCard from "./TripCard";
 import { getUpcomingTravles } from "../../../../infrastructure/api/travel";
-import useGetMyInfo from "../../../../application/hooks/queries/user/useGetMyInfo";
 import Text from "@components/common/Text";
 import Button from "@components/common/Button";
 import Icon from "@components/common/Icon";
@@ -13,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 const TripList = () => {
   const navigate = useNavigate();
-  const { data: userData } = useGetMyInfo();
   const filterList = ["예정된 여행", "지난 여행"];
   const [tripFilter, setTripFilter] = useState("예정된 여행");
   const [recentTravel, setRecentTravel] = useState<any>();
@@ -93,11 +91,7 @@ const TripList = () => {
           <TripListContainer>
             {travelData &&
               travelData.map((travel: any, index: number) => (
-                <TripCard
-                  key={index}
-                  travelInfo={travel}
-                  memberId={userData.memberId}
-                />
+                <TripCard key={index} travelInfo={travel} />
               ))}
           </TripListContainer>
         </TripListWrapper>

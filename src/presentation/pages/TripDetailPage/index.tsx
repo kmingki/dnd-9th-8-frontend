@@ -43,6 +43,7 @@ import { produce } from "immer";
 import { useSelector } from "react-redux";
 import { RootState } from "@store";
 import Toast from "@components/common/Toast";
+import HeartButton from "@components/common/HeartButton";
 
 interface State {
   checkListState: checkList[];
@@ -250,7 +251,10 @@ const TripDetailPage = () => {
               </Description>
 
               <IconWrapper>
-                <Icon icon={data?.isInStorage ? "FilledHeart" : "UnFilledHeart"} />
+                <HeartButton
+                  isInStorage={data?.isInStorage}
+                  travelId={data?.travelId}
+                />
                 <IconStyleDiv>
                   <Icon
                     icon="EllipsisOutlined"

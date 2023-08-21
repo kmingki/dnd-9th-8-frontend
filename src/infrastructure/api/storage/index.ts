@@ -6,14 +6,8 @@ export const getStorageTravels = async () =>
     .then(({ data }) => data)
     .catch((err) => err.response);
 
-export const toggleStorageValue = async ({
-  travelId,
-  memberId,
-}: {
-  travelId: number;
-  memberId: number;
-}) =>
+export const toggleStorageValue = async ({ travelId }: { travelId: number }) =>
   await client
-    .post(`/storage/${travelId}?memberId=${memberId}`)
+    .post(`/storage/${travelId}`)
     .then(({ data }) => data)
     .catch((err) => err.response);

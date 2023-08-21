@@ -8,10 +8,7 @@ const useGetStorage = () => {
     refetch,
     isLoading,
     error,
-  } = useQuery(["storage"], async () => await getStorageTravels(), {
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 30,
-  });
+  } = useQuery(["storage"], async () => await getStorageTravels());
   const data = responseData?.data;
 
   return { data, refetch, isLoading, error };
