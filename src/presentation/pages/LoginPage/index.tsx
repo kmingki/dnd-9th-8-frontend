@@ -33,8 +33,15 @@ const LoginPage = () => {
           <Icon icon="LogoIcon" />
         </div>
       </MainWrapper>
-      <Spacing size={81} />
+
       <ButtonWrapper>
+        <Text
+          text="SNS 계정으로 로그인하기"
+          color={COLOR.GRAY_700}
+          fontSize={14}
+          fontWeight={500}
+          lineHeight="normal"
+        />
         <ButtonContainer>
           <Link to={kakaoUrl}>
             <Icon icon="AuthKakao" />
@@ -49,6 +56,7 @@ const LoginPage = () => {
 };
 
 const LoginPageWrapper = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   overflow-y: hidden;
@@ -59,29 +67,29 @@ const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 30%;
+  margin-top: 15%;
   margin-left: 40px;
 
   .icon {
+    position: absolute;
     display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    padding-right: 36px;
+    top: 55%;
+    right: 9%;
+    transform: translate(0, -55%);
     box-sizing: border-box;
   }
 `;
 
 const ButtonWrapper = styled.div`
+  position: fixed;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 20px;
   align-items: center;
-
-  color: ${COLOR.GRAY_700};
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
 `;
 
 const ButtonContainer = styled.div`
