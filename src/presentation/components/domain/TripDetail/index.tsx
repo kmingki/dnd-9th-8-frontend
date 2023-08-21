@@ -28,104 +28,99 @@ const ShareModal = ({ closeModal }: { closeModal: () => void }) => {
       <Spacing size={23} />
       <ButtonWrapper>
         <TextWrapper>
-          <Icon icon="KakaoLogo" onClick={onClickKakaoShare}/>
+          <Icon icon="KakaoLogo" onClick={onClickKakaoShare} />
           <Text
-          text="카카오톡"
-          color={COLOR.GRAY_800}
-          fontSize={15}
-          lineHeight="20px"
-          fontWeight={600}
-        />
+            text="카카오톡"
+            color={COLOR.GRAY_800}
+            fontSize={15}
+            lineHeight="20px"
+            fontWeight={600}
+          />
         </TextWrapper>
         <TextWrapper>
           <Icon icon="LinkOutlined" />
           <Text
-          text="URL복사"
-          color={COLOR.GRAY_800}
-          fontSize={15}
-          lineHeight="20px"
-          fontWeight={600}
-        />
+            text="URL복사"
+            color={COLOR.GRAY_800}
+            fontSize={15}
+            lineHeight="20px"
+            fontWeight={600}
+          />
         </TextWrapper>
       </ButtonWrapper>
     </ShareModalWrapper>
   );
 };
 
-
 const DeleteModal = ({ closeModal }: { closeModal: () => void }) => {
-    const navigate = useNavigate();
-    const [isToast, setIsToast] = useState(false);
+  const navigate = useNavigate();
 
-    const handleClickLogout = () => {
-      
-      navigate("/");
+  const handleClickLogout = () => {
+    closeModal();
+    navigate("/", { replace: true, state: { state: "delete_done" } });
+  };
 
-    };
-  
-    return (
-      <ShareModalWrapper>
-        <Text
-          text="여행을 삭제할까요?"
-          color="#191F28"
-          fontSize={20}
-          lineHeight="28px"
-          fontWeight={700}
-        />
-        <Spacing size={10} />
-        <Text
-          text="리스트 삭제 후 복구가 불가능합니다"
-          color="#6B7684"
-          fontSize={15}
-          lineHeight="22px"
-          fontWeight={500}
-        />
-        <Spacing size={30} />
-        <DeleteButtonWrapper>
-          <Button
-            width=""
-            border="none"
-            background="#F2F4F6"
-            color="#505967"
-            radius={12}
-            padding="17px"
-            onClick={() => closeModal()}
-            clicked="true"
-            customstyle={{minWidth : "80px"}}
-          >
-            <Text
+  return (
+    <ShareModalWrapper>
+      <Text
+        text="여행을 삭제할까요?"
+        color="#191F28"
+        fontSize={20}
+        lineHeight="28px"
+        fontWeight={700}
+      />
+      <Spacing size={10} />
+      <Text
+        text="리스트 삭제 후 복구가 불가능합니다"
+        color="#6B7684"
+        fontSize={15}
+        lineHeight="22px"
+        fontWeight={500}
+      />
+      <Spacing size={30} />
+      <DeleteButtonWrapper>
+        <Button
+          width=""
+          border="none"
+          background="#F2F4F6"
+          color="#505967"
+          radius={12}
+          padding="17px"
+          onClick={() => closeModal()}
+          clicked="true"
+          customstyle={{ minWidth: "80px" }}
+        >
+          <Text
             text="취소"
             color="#505967"
             fontSize={17}
             lineHeight="20.4px"
             fontWeight={600}
-            />
-          </Button>
-          <Button
-            width=""
-            border="none"
-            background={COLOR.MAIN_GREEN}
-            color={COLOR.WHITE}
-            radius={12}
-            padding="17px"
-            onClick={handleClickLogout}
-            clicked="true"
-            customstyle={{minWidth : "80px"}}
-          >
-             <Text
+          />
+        </Button>
+        <Button
+          width=""
+          border="none"
+          background={COLOR.MAIN_GREEN}
+          color={COLOR.WHITE}
+          radius={12}
+          padding="17px"
+          onClick={handleClickLogout}
+          clicked="true"
+          customstyle={{ minWidth: "80px" }}
+        >
+          <Text
             text="삭제하기"
             color={COLOR.WHITE}
             fontSize={17}
             lineHeight="20.4px"
             fontWeight={600}
-            />
-          </Button>
-        </DeleteButtonWrapper>
-        {isToast && <Toast close={()=>{}}>어ㅏㅣ너리ㅏㄴ얼</Toast>}
-        
-      </ShareModalWrapper>
-    );
-  };
+          />
+        </Button>
+      </DeleteButtonWrapper>
+    </ShareModalWrapper>
+  );
+};
 
 const ShareModalWrapper = styled.div`
   padding: 22px 47.42px;
@@ -138,27 +133,27 @@ const ShareModalWrapper = styled.div`
   align-items: center;
 `;
 const ButtonWrapper = styled.div`
-    all : unset;
-    border : 0px; 
-    display: flex;
-    flex-direction: row;
-    gap: 41px;
+  all: unset;
+  border: 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 41px;
 `;
 
 const DeleteButtonWrapper = styled.div`
-    width: 100%;
-    all : unset;
-    border : 0px; 
-    display: flex;
-    gap: 8px;
+  width: 100%;
+  all: unset;
+  border: 0px;
+  display: flex;
+  gap: 8px;
 `;
 
 const TextWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `;
 
-export { ShareModal, DeleteModal } ;
+export { ShareModal, DeleteModal };

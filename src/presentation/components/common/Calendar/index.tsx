@@ -10,11 +10,16 @@ import { toLocalISOString } from "../../../../application/utils/getDate";
 type CustomCalendarProps = {
   defaultStartDay?: number[];
   defaultEndDay?: number[];
-  onChangeStartDay?: any,
-  onChangeEndDay?: any,
+  onChangeStartDay?: any;
+  onChangeEndDay?: any;
 };
 
-const CustomCalendar = ({ defaultStartDay, defaultEndDay, onChangeStartDay, onChangeEndDay} : CustomCalendarProps) => {
+const CustomCalendar = ({
+  defaultStartDay,
+  defaultEndDay,
+  onChangeStartDay,
+  onChangeEndDay,
+}: CustomCalendarProps) => {
   const dispatch = useDispatch();
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
 
@@ -66,40 +71,43 @@ const CustomCalendar = ({ defaultStartDay, defaultEndDay, onChangeStartDay, onCh
   };
 
   return (
-    <CalendarWrapper isEditMode={(defaultStartDay && defaultEndDay) ? true : false}>
-      {(defaultStartDay && defaultEndDay) ?
-      <Calendar
-      calendarType="hebrew"
-      locale="ko-KR"
-      selectRange={true}
-      formatMonthYear={formatMonthYear}
-      formatDay={formatDay}
-      onClickDay={updateDateRange}
-      tileClassName={titleClassName}
-      next2Label={null}
-      prev2Label={null}
-      defaultValue={[new Date(defaultStartDay[0],defaultStartDay[1],defaultStartDay[2]), new Date(defaultEndDay[0],defaultEndDay[1],defaultEndDay[2])]}
-    /> :
-    <Calendar
-        calendarType="hebrew"
-        locale="ko-KR"
-        selectRange={true}
-        formatMonthYear={formatMonthYear}
-        formatDay={formatDay}
-        onClickDay={updateDateRange}
-        tileClassName={titleClassName}  
-        next2Label={null}
-        prev2Label={null}
-      />
-
-    }
+    <CalendarWrapper isEditMode={defaultStartDay && defaultEndDay ? true : false}>
+      {defaultStartDay && defaultEndDay ? (
+        <Calendar
+          calendarType="hebrew"
+          locale="ko-KR"
+          selectRange={true}
+          formatMonthYear={formatMonthYear}
+          formatDay={formatDay}
+          onClickDay={updateDateRange}
+          tileClassName={titleClassName}
+          next2Label={null}
+          prev2Label={null}
+          defaultValue={[
+            new Date(defaultStartDay[0], defaultStartDay[1], defaultStartDay[2]),
+            new Date(defaultEndDay[0], defaultEndDay[1], defaultEndDay[2]),
+          ]}
+        />
+      ) : (
+        <Calendar
+          calendarType="hebrew"
+          locale="ko-KR"
+          selectRange={true}
+          formatMonthYear={formatMonthYear}
+          formatDay={formatDay}
+          onClickDay={updateDateRange}
+          tileClassName={titleClassName}
+          next2Label={null}
+          prev2Label={null}
+        />
+      )}
       <Spacing size={16} />
     </CalendarWrapper>
   );
 };
 
-const CalendarWrapper = styled.div<{ isEditMode : boolean }>`
-  border-bottom: ${({ isEditMode}) => isEditMode? "" : "1px solid #dbdbdb"};
+const CalendarWrapper = styled.div<{ isEditMode: boolean }>`
+  border-bottom: ${({ isEditMode }) => (isEditMode ? "" : "1px solid #dbdbdb")};
 `;
 
 export default CustomCalendar;

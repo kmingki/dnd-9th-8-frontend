@@ -18,6 +18,7 @@ const Step3 = () => {
   const { data } = useGetMyInfo();
   const { tripRange, state } = useSelector((state: RootState) => state.createTrip);
   const createTrip = useSelector((state: RootState) => state.createTrip);
+
   const handleClickNextBtn = async () => {
     const travelInfo = {
       memberId: data.memberId,
@@ -29,7 +30,7 @@ const Step3 = () => {
     const res = await createTravel(travelInfo);
     if (res.message === "새로운 여행이 생성되었습니다.") {
       if (state === "main") {
-        navigate("/trip"); // 여행 상세 페이지로 이동
+        navigate(`/trip/${res.data}`); // 여행 상세 페이지로 이동
       } else {
         navigate("/trip-create/complate");
       }

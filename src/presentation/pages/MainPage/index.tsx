@@ -7,14 +7,27 @@ import ListNotExist from "@components/MainPage/ListNotExist";
 import useGetMyInfo from "../../../application/hooks/queries/user/useGetMyInfo";
 import { useDispatch } from "react-redux";
 import { initializeCreateTripInfo } from "../../../application/reducer/slices/createTrip/createTripSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import Toast from "@components/common/Toast";
+import useModal from "@hooks/useModal";
 
 const MainPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { state: locationState } = useLocation();
   const { data } = useGetMyInfo();
+  const { closeModal: popupCloseModal } = useModal();
+
   useEffect(() => {
     dispatch(initializeCreateTripInfo());
   }, []);
 
+  const handlePopupClose = () => {
+    popupCloseModal();
+    if (locationState && locationState.state === "delete_done") {
+      navigate(".", { state: {} });
+    }
+  };
   return (
     <>
       {data && (
@@ -24,6 +37,9 @@ const MainPage = () => {
             <ListExist />
           ) : (
             <ListNotExist nickname={data.nickname} />
+          )}
+          {locationState && locationState.state === "delete_done" && (
+            <Toast close={handlePopupClose}>리스트 삭제 완료</Toast>
           )}
         </MainPageWrapper>
       )}

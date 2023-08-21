@@ -21,14 +21,23 @@ const Step1 = () => {
   const { data } = useGetMyInfo();
   const userName = data?.nickname;
 
-  const { tripType } = useSelector((state: RootState) => state.createTrip);
+  const { tripType, state } = useSelector((state: RootState) => state.createTrip);
   const tripObj = [
     { dest: "DOMESTIC", text: "국내 여행" },
     { dest: "OVERSEAS", text: "해외 여행" },
   ];
 
   useEffect(() => {
-    dispatch(initializeCreateTripInfo());
+    if (state === "main") {
+      dispatch(
+        changeCreateTripState({
+          type: "state",
+          value: "main",
+        })
+      );
+    } else {
+      dispatch(initializeCreateTripInfo());
+    }
   }, []);
 
   const handleClickOnboarding = (dest: string) => {

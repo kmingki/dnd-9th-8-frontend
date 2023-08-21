@@ -16,8 +16,6 @@ const useGetTravelDetail = (travelId: string) => {
         console.log("에러");
         console.error(error);
       },
-      staleTime: 1000 * 60 * 5,
-      cacheTime: 1000 * 60 * 30,
     }
   );
   const data = responseData?.data;
