@@ -34,10 +34,7 @@ const CustomCalendar = ({
   const updateDateRange = (date: Date) => {
     if (dateRange[0] === dateRange[1] && date >= dateRange[0]) {
       setDateRange([dateRange[0], date]);
-      if (onChangeEndDay) {
-        onChangeEndDay(date);
-      }
-
+      onChangeEndDay && onChangeEndDay(date);
       dispatch(
         changeTripRange({
           type: "end",
@@ -46,10 +43,8 @@ const CustomCalendar = ({
       );
     } else {
       setDateRange([date, date]);
-      if (onChangeStartDay && onChangeEndDay) {
-        onChangeStartDay(date);
-        onChangeEndDay(date);
-      }
+      onChangeStartDay && onChangeStartDay(date);
+      onChangeEndDay && onChangeEndDay(date);
       dispatch(
         changeTripRange({
           type: "start",

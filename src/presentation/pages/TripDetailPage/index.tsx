@@ -110,8 +110,8 @@ const TripDetailPage = () => {
     setCheckList((prev) =>
       produce(prev, (draft) => {
         draft?.checkListState.push({
-          checkListId: checklist.checkListState.length + 1,
-          order: checklist.checkListState.length + 1,
+          checkListId: checklist?.checkListState?.length + 1,
+          order: checklist?.checkListState?.length + 1,
           title: "",
           itemDtoList: [],
           essential: false,
@@ -285,7 +285,6 @@ const TripDetailPage = () => {
                 checklist?.checkListState?.map((list: any, index: any) => (
                   <AddCheckList
                     tripData={data}
-                    list={list}
                     checkListId={list?.checkListId}
                     order={list?.order}
                     title={list?.title}
