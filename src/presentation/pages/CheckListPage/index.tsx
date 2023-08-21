@@ -1,31 +1,4 @@
 import React, { useState } from "react";
-import { GreyTemplate } from "@styles/templates";
-import {
-    TextWrapper, 
-    CountWrapper,
-    Count,
-    Total,
-    TextContainer,
-    CheckListWrapper,
-    Title,
-    Dot,
-    Description,
-    AddButtonWrapper,
-    AddButton,
-    AddButtonText,
-    Space
-} from "./style"; 
-import BackHeader from "../../components/common/BackHeader";
-import Icon from "@components/common/Icon";
-import COLOR from "@styles/colors";
-import { /*CheckList,*/ AddCheckList} from "@components/domain/CheckList";
-import { produce } from "immer"
-import { listItem , checkList } from "../../../application/type/checkList";
-import Tag from "@components/common/Tag";
-
-interface State {
-    checkListState: checkList[];
-}
 
 const CheckListPage = () => {
     
