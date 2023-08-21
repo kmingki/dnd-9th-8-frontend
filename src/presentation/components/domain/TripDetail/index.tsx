@@ -7,13 +7,15 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Icon from "@components/common/Icon";
 import Toast from "@components/common/Toast";
+import { shareKakao }  from "@utils/shareKakaoLink";
+import { clipboardShare }  from "@utils/clipboardShare";
 
-const ShareModal = ({ closeModal }: { closeModal: () => void }) => {
+
+const ShareModal = ({ closeModal, travelId }: { closeModal: () => void, travelId: string }) => {
   const navigate = useNavigate();
-
-  const onClickKakaoShare = () => {
+  const onClickKakaoShare = (route: string, title: string) => {
     closeModal();
-    //shareKakao(route, title)}
+    shareKakao(route, title);
   };
 
   return (
@@ -27,8 +29,8 @@ const ShareModal = ({ closeModal }: { closeModal: () => void }) => {
       />
       <Spacing size={23} />
       <ButtonWrapper>
-        <TextWrapper>
-          <Icon icon="KakaoLogo" onClick={onClickKakaoShare} />
+        <TextWrapper onClick={()=>onClickKakaoShare(`${process.env.REACT_APP_SHARE_CLIPBOARD_LINK}`, "제목")}>
+          <Icon icon="KakaoLogo"  />
           <Text
             text="카카오톡"
             color={COLOR.GRAY_800}
@@ -37,8 +39,8 @@ const ShareModal = ({ closeModal }: { closeModal: () => void }) => {
             fontWeight={600}
           />
         </TextWrapper>
-        <TextWrapper>
-          <Icon icon="LinkOutlined" />
+        <TextWrapper onClick={()=>{clipboardShare(travelId)}} >
+          <Icon icon="LinkOutlined"/>
           <Text
             text="URL복사"
             color={COLOR.GRAY_800}
@@ -148,12 +150,15 @@ const DeleteButtonWrapper = styled.div`
   gap: 8px;
 `;
 
-const TextWrapper = styled.div`
+const TextWrapper = styled.button`
+  all: unset;
+  border: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  z-index:1;
 `;
 
 export { ShareModal, DeleteModal };

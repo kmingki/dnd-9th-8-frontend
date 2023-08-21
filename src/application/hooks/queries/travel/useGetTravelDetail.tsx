@@ -11,7 +11,7 @@ const useGetTravelDetail = (travelId: string) => {
     ["getTravelDetail", travelId],
     async () => await getTravelDetail(travelId),
     {
-      onSuccess: (data) => {},
+      onSuccess: (data) => { console.log("<<travel detail>>"); console.log(data)},
       onError: (error) => {
         console.log("에러");
         console.error(error);

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import Icon from "@components/common/Icon";
 import {AddCheckItemWrapper, CheckItemContainer , CheckItemWrapper, CheckBox, HiddenCheckbox, Description, IconWrapper, InputWrapper} from "./checkItemStyle";
 import Color from '@styles/colors';
 import Text from "@components/common/Text";
 import Spacing from "@components/common/Spacing";
 import COLOR from "@styles/colors";
-
-
+import useUpdateItem from "@hooks/queries/item/useUpdateItem";
+import useDeleteItem from "@hooks/queries/item/useDeleteItem";
 
 type CheckItemType = {
     checkListId : number,
@@ -20,15 +21,19 @@ type CheckItemType = {
 };
 
 
-const CheckItem = ({ checkListId, itemId, isChecked, title, onChangeCheckItem, onChangeCheckItemTitle, onClickDeleteCheckItem, isDoubleCheckMode}: CheckItemType) => {
+const CheckItem = ({ checkListId, itemId, isChecked, onChangeCheckItem, title, onChangeCheckItemTitle, onClickDeleteCheckItem, isDoubleCheckMode}: CheckItemType) => {
 
-    const [value, setValue] = useState('');
-
+    const [itemTitle, setItemTitle] = useState(title);
+    const { tripId } = useParams();
+    const { mutate: updateItemMutate /*data , isLoading, error*/ } = useUpdateItem();
+    const { mutate: deleteItemMutate /*data , isLoading, error*/ } = useDeleteItem();
+    /*
     const onChange = (e: React.ChangeEvent<HTMLInputElement>)=> {
 
         onChangeCheckItemTitle(checkListId, itemId, e.target.value);
         setValue(e.target.value);
     }
+    */
     
     return (
         <CheckItemContainer isChecked={isChecked}>
@@ -39,12 +44,17 @@ const CheckItem = ({ checkListId, itemId, isChecked, title, onChangeCheckItem, o
                     {isChecked && <Icon icon='Checked' width={10} height={10} color={Color.WHITE}/> }
                 </CheckBox>
                 <Description isChecked={isChecked}>
-                <InputWrapper placeholder="항목을 작성해주세요" onChange={onChange} value={title} isChecked={isChecked}/>
+                <InputWrapper 
+                placeholder="항목을 작성해주세요" 
+                onBlur={()=> updateItemMutate({ travelId: Number(tripId), checkListId, itemId, title: itemTitle })} 
+                onChange={(e: React.ChangeEvent<HTMLInputElement>)=>setItemTitle(e.target.value)} 
+                value={itemTitle} 
+                isChecked={isChecked}/>
                 </Description>
             </CheckItemWrapper>
             {!isDoubleCheckMode &&
             <CheckItemWrapper>
-                <IconWrapper onClick={()=>onClickDeleteCheckItem(checkListId, itemId)}>
+                <IconWrapper onClick={()=>deleteItemMutate({ travelId: Number(tripId), checkListId: checkListId, itemId: itemId})}>
                     <Icon icon='Delete' fill={COLOR.GRAY_500}/>
                 </IconWrapper>
                 <IconWrapper>

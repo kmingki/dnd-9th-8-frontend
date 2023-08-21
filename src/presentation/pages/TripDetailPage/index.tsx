@@ -74,7 +74,6 @@ const TripDetailPage = () => {
     if (data) {
       setCheckList({ checkListState: data?.checkListDtoList });
     }
-    console.log(data);
   }, [data]);
 
   const {
@@ -105,9 +104,9 @@ const TripDetailPage = () => {
     navigate(`/trip-update/${Number(tripId)}`); // 여행 상세 페이지로 이동
   };
   //checklist 추가
-  const onClickAdd = useCallback(() => {
+  const onClickAdd = () => {
     postNewChecklistMutate({ travelId: Number(tripId), title: "" }); // travelId 수정 필요
-
+    /*
     setCheckList((prev) =>
       produce(prev, (draft) => {
         draft?.checkListState.push({
@@ -119,13 +118,14 @@ const TripDetailPage = () => {
         });
         return draft;
       })
-    );
-  }, [postNewChecklistMutate]);
+    );*/
+  };
 
   //checklist 삭제
   const onClickDeleteCheckList = (checkListId: number) => {
-    deleteChecklistMutate({ travelId: 2, checkListId: checkListId }); // travelId 수정 필요
-
+    console.log()
+    deleteChecklistMutate({ travelId: Number(tripId), checkListId}); // travelId 수정 필요
+    /*
     setCheckList((prev) =>
       produce(prev, (draft) => {
         draft.checkListState = draft?.checkListState.filter((checklisttmp) => {
@@ -133,6 +133,7 @@ const TripDetailPage = () => {
         });
       })
     );
+    */
   };
 
   //item 추가
@@ -166,6 +167,7 @@ const TripDetailPage = () => {
       checkListId: checkListId,
       itemId: id,
     }); // travelId 수정 필요
+    /*
     setCheckList((prev) =>
       produce(prev, (draft) => {
         draft?.checkListState.forEach((checklist) => {
@@ -177,6 +179,7 @@ const TripDetailPage = () => {
         });
       })
     );
+    */
   };
 
   //item 체크 할때
@@ -205,6 +208,7 @@ const TripDetailPage = () => {
   };
 
   //item 내용 수정할때
+  /*
   const onChangeCheckItemTitle = (
     checkListId: number,
     id: number,
@@ -222,6 +226,7 @@ const TripDetailPage = () => {
       })
     );
   };
+  */
 
   return (
     <>
@@ -296,7 +301,6 @@ const TripDetailPage = () => {
                     onClickDeleteCheckList={onClickDeleteCheckList}
                     onChangeCheckItem={onChangeCheckItem}
                     onClickPlusItem={onClickPlusItem}
-                    onChangeCheckItemTitle={onChangeCheckItemTitle}
                     onClickDeleteCheckItem={onClickDeleteCheckItem}
                   />
                 ))}
@@ -315,7 +319,7 @@ const TripDetailPage = () => {
         </ContentContainer>
 
         <Modal isVisible={isShowShareModal} closeModal={closeShareModal}>
-          <ShareModal closeModal={closeShareModal} />
+          <ShareModal closeModal={closeShareModal} travelId={String(tripId)}/>
         </Modal>
         <Modal isVisible={isShowDeleteModal} closeModal={closeDeleteModal}>
           <DeleteModal closeModal={closeDeleteModal} />
