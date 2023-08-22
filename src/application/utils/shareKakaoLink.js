@@ -2,14 +2,14 @@ export const shareKakao = (route, title) => { // url이 id값에 따라 변경�
     if (window.Kakao) {
       const kakao = window.Kakao;
       if (!kakao.isInitialized()) {
-        kakao.init(process.env.REACT_APP_SHARE_KAKAO_LINK_KEY); // 카카오에서 제공받은 javascript key를 넣어줌 -> .env파일에서 호출시킴
+        kakao.init('b4f2b3adc87c59875138f2a68602a1d2'); // 카카오에서 제공받은 javascript key를 넣어줌 -> .env파일에서 호출시킴
       }
   
       kakao.Link.sendDefault({
         objectType: "feed", // 카카오 링크 공유 여러 type들 중 feed라는 타입 -> 자세한 건 카카오에서 확인
         content: {
           title: title, // 인자값으로 받은 title
-          description: "설명", // 인자값으로 받은 title
+          description: "빈틈없는 여행을 위한 준비, 패-킷", // 인자값으로 받은 title
           imageUrl: "이미지 url",
           link: {
             mobileWebUrl: route, // 인자값으로 받은 route(uri 형태)
