@@ -32,7 +32,7 @@ const MainPage = () => {
     <>
       {data && (
         <MainPageWrapper>
-          <Header profile={data.profileImageUrl} />
+          <Header />
           {data.travelCount > 0 ? (
             <ListExist />
           ) : (

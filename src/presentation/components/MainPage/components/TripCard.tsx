@@ -25,16 +25,16 @@ const TripCard = ({ travelInfo }: any) => {
         <Tag
           text={travelInfo.dDay}
           backgroundColor={
-            travelInfo.dDay.includes("-") ? COLOR.MAIN_GREEN : COLOR.GRAY_300
+            travelInfo.dDay.includes("-") ? COLOR.GREEN_100 : COLOR.GRAY_200
           }
-          color={COLOR.WHITE}
+          color={travelInfo.dDay.includes("-") ? COLOR.MAIN_GREEN : "#5C5F64"}
         />
         <Tag
           text={travelInfo.destinationType === "OVERSEAS" ? "해외" : "국내"}
           backgroundColor={
-            travelInfo.destinationType === "OVERSEAS" ? "#5F8BFB" : "#FE984E"
+            travelInfo.destinationType === "OVERSEAS" ? "#D1DEFF" : "#FFE2D1"
           }
-          color={COLOR.WHITE}
+          color={travelInfo.destinationType === "OVERSEAS" ? "#5F8BFB" : "#FE984E"}
         />
       </TopWrapper>
       <Spacing size={11} />
