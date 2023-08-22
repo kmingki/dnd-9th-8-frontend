@@ -58,7 +58,7 @@ const CheckItem = ({ checkListId, itemId, isChecked, onChangeCheckItem, title, o
                     <Icon icon='Delete' fill={COLOR.GRAY_500}/>
                 </IconWrapper>
                 <IconWrapper>
-                    <Icon icon='SwapOutlined' fill={COLOR.GRAY_500}/>
+                    <Icon icon='SliceOutlined' fill={COLOR.GRAY_500}/>
                 </IconWrapper>    
             </CheckItemWrapper>
             }
