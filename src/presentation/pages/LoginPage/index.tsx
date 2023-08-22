@@ -14,32 +14,21 @@ const LoginPage = () => {
     <LoginPageWrapper>
       <MainWrapper>
         <Text
-          text="빈틈없는 여행을 위한"
+          text="빈틈없는 여행의 시작"
           color={COLOR.MAIN_BLACK}
           fontSize={21}
           fontWeight={600}
           lineHeight="139%"
         />
-        <Text
-          text="체크리스트"
-          color={COLOR.MAIN_BLACK}
-          fontSize={21}
-          fontWeight={600}
-          lineHeight="139%"
-        />
+        <Spacing size={17} />
         <Icon icon="AuthLogo" />
-        <Spacing size={91} />
-        <div className="icon">
-          <Icon icon="LogoIcon" />
-        </div>
       </MainWrapper>
-
       <ButtonWrapper>
         <Text
           text="SNS 계정으로 로그인하기"
-          color={COLOR.GRAY_700}
+          color={COLOR.GRAY_800}
           fontSize={14}
-          fontWeight={500}
+          fontWeight={600}
           lineHeight="normal"
         />
         <ButtonContainer>
@@ -60,24 +49,18 @@ const LoginPageWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: hidden;
-  background-color: ${COLOR.WHITE};
+  background: linear-gradient(
+    180deg,
+    rgba(67, 226, 168, 0.35) 0%,
+    rgba(253, 253, 253, 0) 100%
+  );
 `;
 
 const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-top: 15%;
-  margin-left: 40px;
-
-  .icon {
-    position: absolute;
-    display: flex;
-    top: 55%;
-    right: 9%;
-    transform: translate(0, -55%);
-    box-sizing: border-box;
-  }
+  align-items: center;
+  margin-top: 45%;
 `;
 
 const ButtonWrapper = styled.div`

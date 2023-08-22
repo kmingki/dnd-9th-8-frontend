@@ -50,14 +50,13 @@ const TripList = () => {
         <TripListWrapper>
           <Button
             radius={8}
-            background={COLOR.MAIN_GREEN}
+            background="linear-gradient(159deg, #02C293 0%, #05D7A4 100%)"
             padding="11px 12px"
             border="none"
             onClick={handleClickRemindButton}
           >
             <RemindButton>
               <div className="remind">
-                <Icon icon="LoudSpeaker" />
                 <Text
                   text={`${recentTravel?.title}${subject} ${dDayNumber}일 남았어요`}
                   color={COLOR.WHITE}
@@ -122,12 +121,12 @@ const PeriodFilter = styled.div`
   margin-right: -20px;
   padding-left: 20px;
   padding-right: 20px;
-
-  border-bottom: 1px solid ${COLOR.GRAY_100};
 `;
 const OptionPeriodFilter = styled.span<{ clicked: boolean }>`
   text-decoration: ${({ clicked }) => (clicked ? "underline" : "none")};
-  text-underline-offset: 6px;
+  text-decoration-color: ${COLOR.MAIN_GREEN};
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
 `;
 
 const TripListContainer = styled.div`
