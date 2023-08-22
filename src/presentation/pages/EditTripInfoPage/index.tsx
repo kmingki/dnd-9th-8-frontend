@@ -25,6 +25,12 @@ interface TripType {
   endDate?: string;
 }
 
+function timestamp(date: string){
+  let newDate = new Date(date);
+  newDate.setHours(newDate.getHours() + 9);
+  return newDate.toISOString().substring(0, 19);
+}
+
 const EditTripInfoPage = () => {
   const { tripId } = useParams();
   const navigate = useNavigate();
@@ -63,7 +69,7 @@ const EditTripInfoPage = () => {
   const onClickEditButton = () => {
     updateTravelMutate({
       travelId: Number(tripId),
-      travelInfo: { title, startDate, endDate },
+      travelInfo: { title, startDate: timestamp(startDate), endDate: timestamp(endDate) },
     });
     navigate(`/trip/${Number(tripId)}`);
   };
@@ -103,7 +109,7 @@ const EditTripInfoPage = () => {
               lineHeight="18px"
               fontWeight={600}
             />
-            <Icon icon="Calendar" />
+            <Icon icon="CalendarGreen" />
           </DateButton>
           <Bar />
           <DateButton
@@ -118,7 +124,7 @@ const EditTripInfoPage = () => {
               lineHeight="18px"
               fontWeight={600}
             />
-            <Icon icon="Calendar" />
+            <Icon icon="CalendarGreen" />
           </DateButton>
         </InputWrapper>
         {isOpenCalendar && (

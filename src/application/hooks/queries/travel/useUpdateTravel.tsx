@@ -11,7 +11,7 @@ const useUpdateTravel = () => {
 
   const queryClient = useQueryClient();
   const { mutate, data : responseData, isLoading, error } = useMutation(
-    async ({ travelId, travelInfo } : MutationProps) => await modifyTravel({travelId, travelInfo}),
+    async ({ travelId, travelInfo } : MutationProps) => { return await modifyTravel({travelId, travelInfo})},
     {
       onSuccess : (data) => {
         queryClient.invalidateQueries(["getTravelDetail"]); //여행 정보 refetch
