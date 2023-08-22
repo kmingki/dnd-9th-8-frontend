@@ -9,8 +9,8 @@ export const shareKakao = (route, title) => { // url이 id값에 따라 변경�
         objectType: "feed", // 카카오 링크 공유 여러 type들 중 feed라는 타입 -> 자세한 건 카카오에서 확인
         content: {
           title: title, // 인자값으로 받은 title
-          description: "설명", // 인자값으로 받은 title
-          imageUrl: "이미지 url",
+          description: "빈틈없는 여행을 위한 준비, Pack it", // 인자값으로 받은 title
+          imageUrl: "https://dnd--pack-it.s3.ap-northeast-2.amazonaws.com/share-thumbnail-images/share-thumbnail-images.png",
           link: {
             mobileWebUrl: route, // 인자값으로 받은 route(uri 형태)
             webUrl: route
@@ -18,7 +18,7 @@ export const shareKakao = (route, title) => { // url이 id값에 따라 변경�
         },
         buttons: [
           {
-            title: "title",
+            title: "여행 준비 하기",
             link: {
               mobileWebUrl: route,
               webUrl: route
