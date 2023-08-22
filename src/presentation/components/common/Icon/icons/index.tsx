@@ -53,3 +53,4 @@ export { default as LoudSpeaker } from "./LoudSpeaker";
 export { FilledHeart, UnFilledHeart } from "./Heart";
 export { default as SliceOutlined } from "./SliceOutlined";
 export { default as CalendarGreen } from "./CalendarGreen";
+export { default as Email } from "./Email";

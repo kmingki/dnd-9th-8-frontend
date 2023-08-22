@@ -11,7 +11,9 @@ const LoginCompletePage = () => {
 
   const handleClickStart = () => {
     navigate("/trip-create/1");
+    localStorage.setItem("state", "NEW_MEMBER");
   };
+
   return (
     <LoginCompleteWrapper>
       <div className="linear1">

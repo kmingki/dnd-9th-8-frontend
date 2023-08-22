@@ -1,5 +1,5 @@
-import { getCookie, setCookie } from "@utils/cookie";
 import React, { useEffect } from "react";
+import { setCookie } from "@utils/cookie";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const LoginRedirect = () => {
