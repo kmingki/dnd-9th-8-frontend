@@ -13,7 +13,7 @@ import useModal from "@hooks/useModal";
 import BottomSheet from "@components/common/BottomSheet";
 import EmailAuth from "@components/MainPage/components/EmailAuth";
 import Modal from "@components/common/Modal";
-import EmailAuthInput from "@components/MainPage/components/EmailAuthInput";
+import EmailAuthModal from "@components/MainPage/components/EmailAuthModal";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ const MainPage = () => {
             />
           </BottomSheet>
           <Modal isVisible={isShowEmailInput} closeModal={closeEmailInput}>
-            <EmailAuthInput closeModal={closeEmailInput} />
+            <EmailAuthModal closeModal={closeEmailInput} />
           </Modal>
         </MainPageWrapper>
       )}

@@ -5,6 +5,7 @@ import Text from "@components/common/Text";
 import Spacing from "@components/common/Spacing";
 import Button from "@components/common/Button";
 import Icon from "@components/common/Icon";
+import { requestEmailAuth } from "@api/emailAuth";
 
 const EmailAuth = ({
   closeModal,
@@ -13,10 +14,14 @@ const EmailAuth = ({
   closeModal: () => void;
   toggleEmailInput: () => void;
 }) => {
-  const handleClickAuth = () => {
+  const handleClickAuth = async () => {
     closeModal();
-    toggleEmailInput();
+    const res = await requestEmailAuth();
+    if (res.message === "성공적으로 인증 메일이 발송되었습니다.") {
+      toggleEmailInput();
+    }
   };
+
   const handleSkipButton = () => {
     closeModal();
     localStorage.removeItem("state");
@@ -30,13 +35,13 @@ const EmailAuth = ({
         fontWeight={600}
         lineHeight="28px"
       />
-      <Spacing size={35} />
+      <Spacing size={27} />
       <Icon icon="Email" />
-      <Spacing size={35} />
+      <Spacing size={41} />
       <div className="text">
-        <span>이메일 인증</span>을 완료하시면
+        이메일 인증을 완료하시면
         <br />
-        출발 하루 전 체크리스트 리마인더 알림을 받을 수 있어요
+        출발 하루 전 체크리스트 리마인드를 드립니다
       </div>
       <Spacing size={57} />
       <Button
@@ -44,7 +49,7 @@ const EmailAuth = ({
         padding="15.5px 75.5px"
         background={COLOR.MAIN_GREEN}
         radius={8}
-        width="fit-content"
+        width="100%"
         onClick={handleClickAuth}
       >
         <Text
@@ -70,16 +75,14 @@ const EmailAuthWrapper = styled.div`
   background-color: ${COLOR.WHITE};
 
   .text {
-    color: ${COLOR.GRAY_900};
-    font-size: 15px;
+    color: ${COLOR.GRAY_700};
+    font-size: 18px;
     font-weight: 600;
-    line-height: 22px;
-    span {
-      color: ${COLOR.MAIN_GREEN};
-    }
+    line-height: 25px;
   }
+
   .skip {
-    color: ${COLOR.GRAY_800};
+    color: ${COLOR.GRAY_700};
     font-size: 14px;
     font-weight: 600;
     line-height: normal;

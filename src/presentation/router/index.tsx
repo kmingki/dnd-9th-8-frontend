@@ -13,6 +13,7 @@ import EditTripInfoPage from "@pages/EditTripInfoPage";
 import TripRemindPage from "@pages/TripRemindPage";
 import DoubleCheckPage from "@pages/DoubleCheckPage";
 import LoginRedirect from "@pages/LoginPage/LoginRedirect";
+import EmailAuthPage from "@pages/EmailAuthPage";
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/login/auth" element={<LoginRedirect />} />
         <Route path="/login/complate" element={<LoginCompletePage />} />
+        <Route path="/email-auth" element={<EmailAuthPage />} />
         <Route path="/trip-create/:step" element={<TripCreatePage />} />
         <Route path="/trip-create/complate" element={<CreateComplatePage />} />
         <Route path="/trip-update/:tripId" element={<EditTripInfoPage />} />

@@ -11,6 +11,8 @@ import Text from "@components/common/Text";
 import Modal from "@components/common/Modal";
 import LogoutModal from "@components/MyPage/components/LogoutModal";
 import LeaveModal from "@components/MyPage/components/LeaveModal";
+import { requestEmailAuth } from "@api/emailAuth";
+import EmailAuthModal from "@components/MainPage/components/EmailAuthModal";
 
 const MyPage = () => {
   const navigate = useNavigate();
@@ -25,6 +27,18 @@ const MyPage = () => {
     toggleModal: toggleLogoutModal,
     closeModal: closeLogoutModal,
   } = useModal();
+  const {
+    isShowModal: isShowEmailAuth,
+    toggleModal: toggleEmailAuth,
+    closeModal: closeEmailAuth,
+  } = useModal();
+
+  const handleClickEmailAuth = async () => {
+    const res = await requestEmailAuth();
+    if (res.message === "성공적으로 인증 메일이 발송되었습니다.") {
+      toggleEmailAuth();
+    }
+  };
 
   const handleClickLeave = () => {
     toggleLeaveModal();
@@ -36,6 +50,7 @@ const MyPage = () => {
   const handleClickEditInfo = () => {
     navigate("/mypage/edit");
   };
+
   return (
     <>
       {data && (
@@ -60,6 +75,7 @@ const MyPage = () => {
                   padding="8px 16px"
                   background={COLOR.WHITE}
                   border={`1px solid ${COLOR.GRAY_500}`}
+                  onClick={handleClickEmailAuth}
                 >
                   <Text
                     text="이메일 인증하기"
@@ -158,6 +174,9 @@ const MyPage = () => {
               <LeaveModal closeModal={closeLeaveModal} />
             </Modal>
           </MembersWrapper>
+          <Modal isVisible={isShowEmailAuth} closeModal={closeEmailAuth}>
+            <EmailAuthModal closeModal={closeEmailAuth} />
+          </Modal>
         </MyPageWrapper>
       )}
     </>
