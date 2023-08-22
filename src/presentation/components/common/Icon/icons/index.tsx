@@ -2,12 +2,15 @@ export { default as AuthLogo } from "./auth/AuthLogo";
 export { default as AuthKakao } from "./auth/AuthKakao";
 export { default as AuthNaver } from "./auth/AuthNaver";
 export { default as LoginComplete } from "./auth/LoginComplete";
-export { default as LogoIcon } from "./auth/LogoIcon";
+
+export { default as Linear1 } from "./loginComplate/Linear1";
+export { default as Linear2 } from "./loginComplate/Linear2";
 
 export { default as Arrow } from "./Arrow";
 export { default as Bus } from "./Bus";
 export { default as Plane } from "./Plane";
 export { default as Check } from "./Check";
+export { default as UnCheck } from "./UnCheck";
 export { default as InputChecked } from "./InputChecked";
 export { default as Checked } from "./Checked";
 export { default as Plus } from "./Plus";
@@ -48,4 +51,6 @@ export { default as Remind } from "./Remind";
 export { default as CloseOutlined } from "./CloseOutlined";
 export { default as LoudSpeaker } from "./LoudSpeaker";
 export { FilledHeart, UnFilledHeart } from "./Heart";
+export { default as SliceOutlined } from "./SliceOutlined";
+export { default as CalendarGreen } from "./CalendarGreen";
 export { default as Email } from "./Email";

@@ -1,19 +1,18 @@
 import React from "react";
 import { styled } from "styled-components";
 import Icon from "@components/common/Icon";
-import COLOR from "@styles/colors";
 import { Link } from "react-router-dom";
 
-const Header = ({ profile }: { profile: string }) => {
+const Header = () => {
   return (
     <HeaderWrapper>
-      <Icon icon="Logo" fill={COLOR.GRAY_400} />
+      <Icon icon="Logo" />
       <div className="user-side">
         <Link to="/my-template">
-          <Icon icon="Folder" fill={COLOR.GRAY_400} />
+          <Icon icon="UnFilledHeart" />
         </Link>
         <Link to="/mypage">
-          <img src={profile} width={25} height={25} alt="사용자 프로필 이미지" />
+          <Icon icon="Profile" />
         </Link>
       </div>
     </HeaderWrapper>
@@ -31,6 +30,7 @@ const HeaderWrapper = styled.div`
     display: flex;
     flex-direction: row;
     gap: 8px;
+    align-items: center;
   }
 `;
 export default Header;

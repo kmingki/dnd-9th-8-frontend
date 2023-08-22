@@ -57,6 +57,7 @@ const ButtonWrapper = styled.button<ButtonType>`
   border-radius: ${({ radius }) => radius}px;
   color: ${({ color }) => color};
   background-color: ${({ background }) => background};
+  background: ${({ background }) => background};
   padding: ${({ padding }) => padding};
   border: ${({ border }) => border};
 

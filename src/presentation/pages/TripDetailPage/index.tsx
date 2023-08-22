@@ -123,8 +123,8 @@ const TripDetailPage = () => {
 
   //checklist 삭제
   const onClickDeleteCheckList = (checkListId: number) => {
-    console.log()
-    deleteChecklistMutate({ travelId: Number(tripId), checkListId}); // travelId 수정 필요
+    console.log();
+    deleteChecklistMutate({ travelId: Number(tripId), checkListId }); // travelId 수정 필요
     /*
     setCheckList((prev) =>
       produce(prev, (draft) => {
@@ -235,14 +235,20 @@ const TripDetailPage = () => {
           <BackHeader type="tripDetail" />
           <TagWrapper>
             <Tag
-              text={String(data?.dDay)}
-              backgroundColor={COLOR.MAIN_GREEN}
-              color={COLOR.WHITE}
+              text={data?.dDay}
+              backgroundColor={
+                data?.dDay.includes("-") ? COLOR.GREEN_100 : COLOR.GRAY_200
+              }
+              color={data?.dDay.includes("-") ? COLOR.MAIN_GREEN : "#5C5F64"}
             />
             <Tag
-              text={String(DESTINATION[data?.destinationType])}
-              backgroundColor="#6B5FFB"
-              color={COLOR.WHITE}
+              text={DESTINATION[data?.destinationType]}
+              backgroundColor={
+                DESTINATION[data?.destinationType] === "해외" ? "#D1DEFF" : "#FFE2D1"
+              }
+              color={
+                DESTINATION[data?.destinationType] === "해외" ? "#5F8BFB" : "#FE984E"
+              }
             />
           </TagWrapper>
           <Spacing size={15} />
@@ -319,7 +325,7 @@ const TripDetailPage = () => {
         </ContentContainer>
 
         <Modal isVisible={isShowShareModal} closeModal={closeShareModal}>
-          <ShareModal closeModal={closeShareModal} travelId={String(tripId)}/>
+          <ShareModal closeModal={closeShareModal} travelId={String(tripId)} />
         </Modal>
         <Modal isVisible={isShowDeleteModal} closeModal={closeDeleteModal}>
           <DeleteModal closeModal={closeDeleteModal} />

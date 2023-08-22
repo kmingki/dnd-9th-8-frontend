@@ -25,7 +25,11 @@ const OnboardingButton = ({
         <IconWrapper>
           <Icon icon="Check" />
         </IconWrapper>
-      ) : null}
+      ) : (
+        <IconWrapper>
+          <Icon icon="UnCheck" />
+        </IconWrapper>
+      )}
       <Text
         text={text || ""}
         color={COLOR.GRAY_800}
@@ -44,7 +48,7 @@ const OnboardingButtonWapper = styled.button<{ ischecked?: string }>`
   padding: 16px 0;
 
   border-radius: 8px;
-  border: none;
+  border: 2px solid ${COLOR.GRAY_100};
   ${({ ischecked }) =>
     ischecked === "true" &&
     css`
