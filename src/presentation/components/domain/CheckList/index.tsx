@@ -36,6 +36,7 @@ type checkListType = { tripData: any; checkListId: number; order: number; title:
 const AddCheckList = ({tripData, checkListId, order, title, itemDtoList, onClickDeleteCheckList,onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
     const { tripId } = useParams();
     const [checklisttitle, setTitle] = useState(title);
+    const [itemList, setItemList] = useState(itemDtoList);
     const [isOpen, setIsOpen] = useState(false);
     const { mutate: updateChecklistMutate /*data , isLoading, error*/ } = useUpdateChecklist();
     const { mutate: changeOrderItemMutate /*data , isLoading, error*/ } = useChangeOrderItem();
@@ -52,12 +53,19 @@ const AddCheckList = ({tripData, checkListId, order, title, itemDtoList, onClick
     // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
     const onDragEnd = ({ source, destination, draggableId }: DropResult ) => {
 
+        const newItems = [...itemDtoList];
+        const [removed] = newItems.splice(source.index, 1);
+        newItems.splice(Number(destination?.index), 0, removed);
+        setItemList(newItems);
+        //console.log(newItems);
+        const newItemsTmp = newItems.map((i, index)=> {return { id: i.itemId, order: index+1}});
+        
+        //console.log(newItmesTmp);
+
         changeOrderItemMutate({ 
-            travelId: 2, 
+            travelId: Number(tripId), 
             checkListId:checkListId , 
-            data: [{id : Number(draggableId), order : Number(destination?.index)},
-                {id : Number(itemDtoList.at(Number(destination?.index))?.itemId), order : Number(source?.index)},
-            ]
+            data: newItemsTmp
         }); //travel id 수정 필요
     };
     

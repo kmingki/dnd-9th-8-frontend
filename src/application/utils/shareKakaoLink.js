@@ -9,7 +9,7 @@ export const shareKakao = (route, title) => { // url이 id값에 따라 변경�
         objectType: "feed", // 카카오 링크 공유 여러 type들 중 feed라는 타입 -> 자세한 건 카카오에서 확인
         content: {
           title: title, // 인자값으로 받은 title
-          description: "설명", // 인자값으로 받은 title
+          description: "빈틈없는 여행을 위한 준비, 패-킷", // 인자값으로 받은 title
           imageUrl: "이미지 url",
           link: {
             mobileWebUrl: route, // 인자값으로 받은 route(uri 형태)

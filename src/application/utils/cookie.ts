@@ -3,6 +3,7 @@ export const setCookie = (name: string, value: string, exp: number) => {
   date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
   document.cookie =
     name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+  console.log(document.cookie);
 };
 
 export const getCookie = (name: string) => {
