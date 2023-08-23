@@ -19,6 +19,7 @@ import {
     InputWrapper, 
     IconWrapper, 
     Dot,
+    DotWrapper,
     TitleIconWrapper, 
     ModalOverlay,
     ModalWindow,
@@ -36,7 +37,6 @@ type checkListType = { tripData: any; checkListId: number; order: number; title:
 const AddCheckList = ({tripData, checkListId, order, title, itemDtoList, onClickDeleteCheckList,onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
     const { tripId } = useParams();
     const [checklisttitle, setTitle] = useState(title);
-    const [itemList, setItemList] = useState(itemDtoList);
     const [isOpen, setIsOpen] = useState(false);
     const { mutate: updateChecklistMutate /*data , isLoading, error*/ } = useUpdateChecklist();
     const { mutate: changeOrderItemMutate /*data , isLoading, error*/ } = useChangeOrderItem();
@@ -56,12 +56,10 @@ const AddCheckList = ({tripData, checkListId, order, title, itemDtoList, onClick
         const newItems = [...itemDtoList];
         const [removed] = newItems.splice(source.index, 1);
         newItems.splice(Number(destination?.index), 0, removed);
-        setItemList(newItems);
-        //console.log(newItems);
+        console.log(newItems);
         const newItemsTmp = newItems.map((i, index)=> {return { id: i.itemId, order: index+1}});
         
         //console.log(newItmesTmp);
-
         changeOrderItemMutate({ 
             travelId: Number(tripId), 
             checkListId:checkListId , 
@@ -77,7 +75,7 @@ const AddCheckList = ({tripData, checkListId, order, title, itemDtoList, onClick
                     {tripData?.essential ? 
                     <>
                     <Text text={title} color="#232527" fontSize={16} lineHeight="21.12px" fontWeight={600} />
-                    <Dot />
+                    <DotWrapper><Dot /></DotWrapper>
                     </>
                     :
                     <InputWrapper placeholder={checklisttitle} onBlur={onClickAdd} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{setTitle(e.target.value)}} value={checklisttitle}/>

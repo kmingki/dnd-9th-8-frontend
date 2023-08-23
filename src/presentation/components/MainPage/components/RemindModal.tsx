@@ -8,14 +8,13 @@ import COLOR from "@styles/colors";
 import Button from "@components/common/Button";
 import BottomButton from "@components/common/BottomButton";
 
-const TripRemindPage = () => {
+const RemindModal = ({ closeModal }: { closeModal: () => void }) => {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { tripId } = useParams();
     const [title, setTitle] = useState("");
     const [ isOpenCalendar, setIsOpenCalendar ] = useState(false); 
-   
-    return (
-      <Container>
+  return (
+    <Container>
         
         <ContentContainer>
             <Icon icon="Remind"/>
@@ -26,18 +25,17 @@ const TripRemindPage = () => {
         <div>
             <BottomButton
                 text="다시 체크하기"
-                onClick={()=>{navigate(`/doublecheck/${id}`)}}
+                onClick={()=>{navigate(`/doublecheck/${tripId}`)}}
                 textButton={true}
-                textButtonOnClick={()=>{localStorage.setItem("double_check_done", "true"); navigate("/")}}
+                textButtonOnClick={()=>{navigate("/")}}
                 textButtonChild="안할래요"
             />
         </div>
       </Container>
-    );
-  };
+  );
+};
 
 const Container = styled.div`
-    padding: 0 20px;  
     height: 100%;
     background-color: ${COLOR.GRAY_50};
 `
@@ -50,5 +48,4 @@ const ContentContainer = styled.div`
   padding-top : 149.3px;
 `;
 
-export default TripRemindPage;
-
+export default RemindModal;

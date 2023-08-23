@@ -41,6 +41,15 @@ const TripList = () => {
   const subject = convertRemindText(recentTravel?.title) ? "이" : "가";
   const dDayNumber = recentTravel?.dDay.split("D-")[1];
 
+  /* 리마인드페이지로 이동 */
+  /*
+  useEffect(() => {
+    if (localStorage.getItem("double_check_done")==="false" && recentTravel?.dDay.split("D-")[1] === "1") {
+      navigate(`/remind/${recentTravel.travelId}`);
+    }
+  }, [recentTravel]);
+  */
+ 
   const handleClickRemindButton = () => {
     navigate(`/trip/${recentTravel.travelId}`);
   };

@@ -86,7 +86,7 @@ const EditTripInfoPage = () => {
           fontWeight={600}
         />
         <Spacing size={5.53} />
-        <Input placeholder="" onChange={onChangeTitle} value={title} />
+        <Input placeholder="" maxLength={10} onChange={onChangeTitle} value={title} textCountInside={true}/>
         <Spacing size={23.98} />
         <Text
           text="여행 일정"

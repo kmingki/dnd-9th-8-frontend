@@ -7,6 +7,13 @@ const Dot = styled.div`
     height: 5px;
     width: 5px;
 `
+const DotWrapper = styled.div`
+    margin-left : 1.4px;
+    display : flex;
+    flex-direction: column;
+    justify-content: flex-start;
+`;
+
 const FinishButtonWrapper = styled.div`
     display : flex;
     justify-content: flex-end;
@@ -195,6 +202,7 @@ const Space = styled.div`
 
 export { 
     Dot,
+    DotWrapper,
     FinishButtonWrapper, 
     FinishButton, 
     CheckListWrapper, 

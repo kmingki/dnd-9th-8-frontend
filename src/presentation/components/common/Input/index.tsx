@@ -13,6 +13,7 @@ type InputType = {
   maxLength?: number;
   error?: string;
   success?: string;
+  textCountInside?: boolean;
 };
 
 const Input = ({
@@ -25,6 +26,7 @@ const Input = ({
   maxLength,
   error,
   success,
+  textCountInside
 }: InputType) => {
   return (
     <InputWrapper>
@@ -38,13 +40,18 @@ const Input = ({
           maxLength={maxLength}
           error={error}
         />
+        {textCountInside && maxLength && (
+          <div className="checked-icon">
+            <TextCount>{`${value.length}/${maxLength}`}</TextCount>
+          </div>
+        )}
         {success === "true" && (
           <div className="checked-icon">
             <Icon icon="InputChecked" />
           </div>
         )}
       </InputContainer>
-
+      
       {textCount && maxLength && (
         <TextCount>{`${value.length}/${maxLength}`}</TextCount>
       )}

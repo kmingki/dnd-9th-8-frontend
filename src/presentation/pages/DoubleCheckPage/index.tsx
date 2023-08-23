@@ -70,13 +70,14 @@ const DoubleCheckPage = () => {
         console.log(data);
     }, [data]);
     */
-  const onClickExit = () => {};
+  const onClickExit = () => {
+    localStorage.setItem("double_check_done", "true"); //더블체크 페이지도 다시 이동하는 일이 없도록 로컬스토리지에 저장
+    navigate("/");
+  };
 
   const onClickComplete = () => {
-    setTimeout(() => {
-      toggleCompleteModal();
-    }, 500);
-    navigate(`/`);
+    localStorage.setItem("double_check_done", "true"); 
+    navigate("/");
   };
 
   //item 체크 할때
@@ -90,7 +91,9 @@ const DoubleCheckPage = () => {
 
   return (
     <>
-      !data? <div></div>:
+    {
+      data &&
+      <>
       <Container>
         <BackHeaderWrapper>
           <div></div>
@@ -156,6 +159,8 @@ const DoubleCheckPage = () => {
       <Modal isVisible={isShowCompleteModal} closeModal={closeCompleteModal}>
         <DoubleCheckModal closeModal={closeCompleteModal} />
       </Modal>
+      </>
+    }
     </>
   );
 };
