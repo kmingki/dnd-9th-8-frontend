@@ -36,13 +36,13 @@ const ProgressBar = ({
             startColor={startColor}
             finishColor={finishColor}
           >
-            <progress id="progress" max={max} value={value} />
+            <progress id="progress" max={max} value={value} style={{"animation":"ani", "animationDuration": "1s"}}/>
           </ProgressBarWrapper>
         </>
       ) : (
         <>
           <ProgressBarWrapper size={size} startColor={startColor}>
-            <progress id="progress" max={max} value={value} />
+            <progress id="progress" max={max} value={value} style={{"animation":"ani", "animationDuration": "1s"}}/>
           </ProgressBarWrapper>
         </>
       )}
@@ -87,6 +87,8 @@ const ProgressBarWrapper = styled.div<{
   finishColor?: string;
 }>`
   width: 100%;
+  animation : ani;
+  animationDuration : 1s;
   height: ${({ size }) =>
     css`
       ${size === "large" ? "16" : "6"}px;
