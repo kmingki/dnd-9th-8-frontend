@@ -33,7 +33,7 @@ const ListNotExist = ({ nickname }: { nickname: string }) => {
       <Spacing size={28} />
       <CheckListBox>
         <Icon icon="NotExistCheckList" />
-        <Spacing size={18} />
+        <Spacing size={40} />
         <Text
           text="준비하고 있는 여행이 없어요"
           color={COLOR.GRAY_700}
