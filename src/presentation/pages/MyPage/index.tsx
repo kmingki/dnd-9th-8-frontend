@@ -87,9 +87,8 @@ const MyPage = () => {
                 </Button>
               </div>
             </InfoWrapper>
-            <Spacing size={17} />
+            <Spacing size={21} />
             <BottomWrapper>
-              <Spacing size={21} />
               <Button
                 radius={12}
                 padding="24px 30px"
@@ -192,6 +191,7 @@ const MyPageWrapper = styled.div`
 const MembersWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   .template-button {
     display: flex;
@@ -245,20 +245,21 @@ const InfoWrapper = styled.div`
   }
 `;
 const BottomWrapper = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  flex-grow: 1;
   margin: 0 -20px;
-  padding: 0 20px;
-  height: 100vh;
+  padding: 23px 20px 50px 20px;
   background-color: ${COLOR.GRAY_50};
 `;
+
 const ButtonWrapper = styled.div`
-  position: fixed;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  bottom: 50px;
-
-  width: calc(100% - 40px);
+  margin-bottom: 9%;
 `;
 
 export default MyPage;
