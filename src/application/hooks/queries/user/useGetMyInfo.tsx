@@ -13,7 +13,7 @@ const useGetMyInfo = () => {
     ["user"],
     async () => {
       const res = await getMyInfo();
-      if (res.data.message === "요청에 토큰이 존재하지 않습니다.") {
+      if (res.message !== "성공적으로 회원 정보가 조회되었습니다.") {
         navigate("/login", { replace: true });
       } else return res;
     },
