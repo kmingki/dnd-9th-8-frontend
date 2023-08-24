@@ -1,4 +1,4 @@
-import React, { useState, useCallback} from "react";
+import React, { useState,useEffect , useCallback} from "react";
 import { useParams } from "react-router-dom";
 import Icon from "@components/common/Icon";
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd'; //drag and drop
@@ -37,10 +37,15 @@ type checkListType = { CheckListData: checkList; checkListId: number; order: num
 
 const AddCheckList = ({CheckListData, checkListId, order, title, itemDtoList, onClickDeleteCheckList,onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
     const { tripId } = useParams();
-    const [checklisttitle, setTitle] = useState(title);
+    const [ checklisttitle, setTitle] = useState(title);
+    const [ itemlist, setItemlist ] = useState<listItem[]>(itemDtoList);
     const [isOpen, setIsOpen] = useState(false);
     const { mutate: updateChecklistMutate /*data , isLoading, error*/ } = useUpdateChecklist();
     const { mutate: changeOrderItemMutate /*data , isLoading, error*/ } = useChangeOrderItem();
+
+    useEffect(()=>{
+        setItemlist(itemDtoList);
+    }, [itemDtoList])
 
     const onClickOpenCheckList = () => {
         setIsOpen(prev=>!prev);
@@ -54,11 +59,12 @@ const AddCheckList = ({CheckListData, checkListId, order, title, itemDtoList, on
     // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
     const onDragEnd = ({ source, destination, draggableId }: DropResult ) => {
 
-        const newItems = [...itemDtoList];
+        const newItems = JSON.parse(JSON.stringify(itemlist));
         const [removed] = newItems.splice(source.index, 1);
         newItems.splice(Number(destination?.index), 0, removed);
         console.log(newItems);
-        const newItemsTmp = newItems.map((i, index)=> {return { id: i.itemId, order: index+1}});
+        const newItemsTmp = newItems.map((i : listItem, index:number)=> {return { id: i.itemId, order: index+1}});
+        setItemlist(newItems);
         
         //console.log(newItmesTmp);
         changeOrderItemMutate({ 
@@ -67,7 +73,7 @@ const AddCheckList = ({CheckListData, checkListId, order, title, itemDtoList, on
             data: newItemsTmp
         }); //travel id 수정 필요
     };
-    
+
     return (
         <>
         <CheckListWrapper>
@@ -101,7 +107,7 @@ const AddCheckList = ({CheckListData, checkListId, order, title, itemDtoList, on
                     <Droppable droppableId="droppable">
                         {(provided: any) => (
                         <div ref={provided.innerRef} {...provided.droppableProps}>
-                            {itemDtoList.map((item, index) => (
+                            {itemlist.map((item, index) => (
                             <Draggable key={item.itemId} draggableId={String(item.itemId)} index={index}>
                                 {(provided : any) => (
                                 <div
