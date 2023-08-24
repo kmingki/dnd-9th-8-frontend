@@ -49,34 +49,37 @@ const TripList = () => {
     }
   }, [recentTravel]);
   */
- 
+
   const handleClickRemindButton = () => {
     navigate(`/trip/${recentTravel.travelId}`);
   };
   return (
     <>
-      {recentTravel && (
+      {travelData && (
         <TripListWrapper>
-          <Button
-            radius={8}
-            background="linear-gradient(159deg, #02C293 0%, #05D7A4 100%)"
-            padding="11px 12px"
-            border="none"
-            onClick={handleClickRemindButton}
-          >
-            <RemindButton>
-              <div className="remind">
-                <Text
-                  text={`${recentTravel?.title}${subject} ${dDayNumber}일 남았어요`}
-                  color={COLOR.WHITE}
-                  fontSize={16}
-                  fontWeight={600}
-                  lineHeight="16px"
-                />
-              </div>
-              <Icon icon="Chevron" color={COLOR.WHITE} fill={COLOR.WHITE} />
-            </RemindButton>
-          </Button>
+          {recentTravel && (
+            <Button
+              radius={8}
+              background="linear-gradient(159deg, #02C293 0%, #05D7A4 100%)"
+              padding="11px 12px"
+              border="none"
+              onClick={handleClickRemindButton}
+            >
+              <RemindButton>
+                <div className="remind">
+                  <Text
+                    text={`${recentTravel?.title}${subject} ${dDayNumber}일 남았어요`}
+                    color={COLOR.WHITE}
+                    fontSize={16}
+                    fontWeight={600}
+                    lineHeight="16px"
+                  />
+                </div>
+                <Icon icon="Chevron" color={COLOR.WHITE} fill={COLOR.WHITE} />
+              </RemindButton>
+            </Button>
+          )}
+
           <Spacing size={28} />
           <PeriodFilter>
             {filterList.map((option) => (

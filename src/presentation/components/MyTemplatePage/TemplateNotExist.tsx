@@ -33,7 +33,7 @@ const TemplateNotExistWrapper = styled.div`
     transform: translate(-50%, -30%);
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 39px;
     justify-content: center;
     align-items: center;
   }
