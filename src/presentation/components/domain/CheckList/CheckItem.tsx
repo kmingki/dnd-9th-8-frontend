@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Icon from "@components/common/Icon";
-import {AddCheckItemWrapper, CheckItemContainer , CheckItemWrapper, CheckBox, HiddenCheckbox, Description, IconWrapper, InputWrapper} from "./checkItemStyle";
+import {CheckButton, EmptyButton, AddCheckItemWrapper, CheckItemContainer , CheckItemWrapper,  Description, IconWrapper, InputWrapper} from "./checkItemStyle";
 import Color from '@styles/colors';
 import Text from "@components/common/Text";
 import Spacing from "@components/common/Spacing";
@@ -38,11 +38,14 @@ const CheckItem = ({ checkListId, itemId, isChecked, onChangeCheckItem, title, o
     return (
         <CheckItemContainer isChecked={isChecked}>
             <CheckItemWrapper>
-                <CheckBox checked={isChecked}>
-                    <HiddenCheckbox type="checkbox"
-                    onChange={()=>onChangeCheckItem(checkListId, itemId, isChecked)} />
-                    {isChecked && <Icon icon='Checked' width={10} height={10} color={Color.WHITE}/> }
-                </CheckBox>
+                {isChecked ?
+                <CheckButton checked={isChecked} onClick={()=>onChangeCheckItem(checkListId, itemId, isChecked)} >
+                    <Icon icon='Checked' width={10} height={10} color={Color.WHITE}/>
+                </CheckButton>
+                :
+                <EmptyButton checked={isChecked} onClick={()=>onChangeCheckItem(checkListId, itemId, isChecked)} >
+                </EmptyButton>
+                }
                 <Description isChecked={isChecked}>
                 <InputWrapper 
                 placeholder="항목을 작성해주세요" 

@@ -10,7 +10,7 @@ export const shareKakao = (route, title) => { // url이 id값에 따라 변경�
         content: {
           title: title, // 인자값으로 받은 title
           description: "빈틈없는 여행을 위한 준비, Pack it", // 인자값으로 받은 title
-          imageUrl: "https://dnd--pack-it.s3.ap-northeast-2.amazonaws.com/share-thumbnail-images/share-thumbnail-images.png",
+          imageUrl: "https://pack-it--s3.s3.ap-northeast-2.amazonaws.com/share-thumbnail-images/share-thumbnail-images.png",
           link: {
             mobileWebUrl: route, // 인자값으로 받은 route(uri 형태)
             webUrl: route

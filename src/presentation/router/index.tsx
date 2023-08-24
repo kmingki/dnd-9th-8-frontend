@@ -33,7 +33,7 @@ const Router = () => {
         <Route path="/my-template" element={<MyTemplatePage />} />
         <Route path="/checklist/:id" element={<CheckListPage />} />
         <Route path="/remind/:id" element={<TripRemindPage />} />
-        <Route path="/doublecheck/:id" element={<DoubleCheckPage />} />
+        <Route path="/doublecheck/:tripid" element={<DoubleCheckPage />} />
       </Routes>
     </BrowserRouter>
   );

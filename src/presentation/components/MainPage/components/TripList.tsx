@@ -8,10 +8,11 @@ import Text from "@components/common/Text";
 import Button from "@components/common/Button";
 import Icon from "@components/common/Icon";
 import useGetMyTravel from "../../../../application/hooks/queries/travel/useGetMyTravel";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const TripList = () => {
   const navigate = useNavigate();
+  const { state: locationState } = useLocation();
   const filterList = ["예정된 여행", "지난 여행"];
   const [tripFilter, setTripFilter] = useState("예정된 여행");
   const [recentTravel, setRecentTravel] = useState<any>();
@@ -42,13 +43,15 @@ const TripList = () => {
   const dDayNumber = recentTravel?.dDay.split("D-")[1];
 
   /* 리마인드페이지로 이동 */
-  /*
   useEffect(() => {
-    if (localStorage.getItem("double_check_done")==="false" && recentTravel?.dDay.split("D-")[1] === "1") {
-      navigate(`/remind/${recentTravel.travelId}`);
+    
+    if (localStorage.getItem("block_remind_page")==="true") {
+      if (dDayNumber && dDayNumber !== "1") localStorage.setItem("block_remind_page", "false");
+    } else {
+      if (dDayNumber === "1") navigate(`/remind/${recentTravel.travelId}`);
     }
-  }, [recentTravel]);
-  */
+  }, [recentTravel?.dDay]);
+  
 
   const handleClickRemindButton = () => {
     navigate(`/trip/${recentTravel.travelId}`);

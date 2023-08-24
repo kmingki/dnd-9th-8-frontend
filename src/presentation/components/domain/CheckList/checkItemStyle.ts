@@ -33,50 +33,33 @@ const CheckItemWrapper = styled.div`
     align-items : center;
 `;
 
-/*
-const CheckItemWrapper = styled.button`
+const CheckButton = styled.button<{ checked: boolean }>`
     all : unset;
-    border : 0px;
-    height: 40px;
-    border : 1px solid ${Color.GRAY_200};
-    border-radius: 8px;
-    display : flex;
-    align-items : center;
-    justify-content: space-between;
-`;
-*/
-
-const CheckBox = styled.label<{ checked: boolean }>`
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    border: 1.7px solid ${({ checked }) => (checked ? `${Color.MAIN_GREEN}` : `#E9ECF0`)};
+    min-width: 14px;
+    min-height: 14px;
     border-radius: 4px;
-    background: ${({ checked }) => (checked && `${Color.MAIN_GREEN}`)};
+    background: linear-gradient(#35D59B, #00E6AF);
     cursor: pointer;
     margin-left : 11px;
 
     display : flex;
     justify-content: center;
     align-items : center;
-`;
-
-const HiddenCheckbox  = styled.input`
-    height: 16px;
-    width: 16px;
     
+`; 
+
+const EmptyButton = styled.button<{ checked: boolean }>`
+    all : unset;
+    min-width: 12.3px;
+    min-height: 12.3px;
     border-radius: 4px;
-    
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
+    border: 1.7px solid #E9ECF0;
+    cursor: pointer;
+    margin-left : 11px;
 
+    display : flex;
+    justify-content: center;
+    align-items : center;
 `;
 
 const Description = styled.div<{ isChecked : boolean }>`
@@ -111,4 +94,4 @@ const InputWrapper = styled.input<{ isChecked : boolean }>`
 `;
 
 
-export {AddCheckItemWrapper, CheckItemContainer, CheckItemWrapper, CheckBox, HiddenCheckbox, Description, IconWrapper, InputWrapper};
+export {CheckButton, EmptyButton, AddCheckItemWrapper, CheckItemContainer, CheckItemWrapper, Description, IconWrapper, InputWrapper};

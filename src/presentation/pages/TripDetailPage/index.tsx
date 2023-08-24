@@ -297,9 +297,9 @@ const TripDetailPage = () => {
           <ContentWrapper>
             <CheckListWrapper>
               {checklist?.checkListState &&
-                checklist?.checkListState?.map((list: any, index: any) => (
+                checklist?.checkListState?.map((list: checkList, index: any) => (
                   <AddCheckList
-                    tripData={data}
+                    CheckListData={list}
                     checkListId={list?.checkListId}
                     order={list?.order}
                     title={list?.title}

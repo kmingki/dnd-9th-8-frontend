@@ -20,6 +20,7 @@ import {
     IconWrapper, 
     Dot,
     DotWrapper,
+    TextWrapper,
     TitleIconWrapper, 
     ModalOverlay,
     ModalWindow,
@@ -31,10 +32,10 @@ import {
     Space
 } from "./style";
 
-type checkListType = { tripData: any; checkListId: number; order: number; title: string; itemDtoList: listItem[], onClickDeleteCheckList: any, onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle?: any, onClickDeleteCheckItem: any};
+type checkListType = { CheckListData: checkList; checkListId: number; order: number; title: string; itemDtoList: listItem[], onClickDeleteCheckList: any, onChangeCheckItem: any, onClickPlusItem: any, onChangeCheckItemTitle?: any, onClickDeleteCheckItem: any};
 
 
-const AddCheckList = ({tripData, checkListId, order, title, itemDtoList, onClickDeleteCheckList,onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
+const AddCheckList = ({CheckListData, checkListId, order, title, itemDtoList, onClickDeleteCheckList,onChangeCheckItem, onClickPlusItem, onChangeCheckItemTitle, onClickDeleteCheckItem}: checkListType) => {
     const { tripId } = useParams();
     const [checklisttitle, setTitle] = useState(title);
     const [isOpen, setIsOpen] = useState(false);
@@ -72,11 +73,11 @@ const AddCheckList = ({tripData, checkListId, order, title, itemDtoList, onClick
         <CheckListWrapper>
             <Head>
                 <Title>
-                    {tripData?.essential ? 
-                    <>
+                    {CheckListData?.essential? 
+                    <TextWrapper>
                     <Text text={title} color="#232527" fontSize={16} lineHeight="21.12px" fontWeight={600} />
                     <DotWrapper><Dot /></DotWrapper>
-                    </>
+                    </TextWrapper>
                     :
                     <InputWrapper placeholder={checklisttitle} onBlur={onClickAdd} onChange={(e: React.ChangeEvent<HTMLInputElement>)=>{setTitle(e.target.value)}} value={checklisttitle}/>
                     }
