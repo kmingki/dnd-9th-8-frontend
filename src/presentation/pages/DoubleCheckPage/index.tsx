@@ -30,9 +30,9 @@ interface State {
 }
 
 const DoubleCheckPage = () => {
-  const { id } = useParams();
+  const { tripid } = useParams();
   const navigate = useNavigate();
-  const { data, isLoading, error } = useGetTravelDetail(String(id));
+  const { data, isLoading, error } = useGetTravelDetail(String(tripid));
   const { mutate: itemCheckMutate /*data , isLoading, error*/ } = useItemCheck();
   const {
     isShowModal: isShowCompleteModal,
@@ -71,12 +71,12 @@ const DoubleCheckPage = () => {
     }, [data]);
     */
   const onClickExit = () => {
-    localStorage.setItem("double_check_done", "true"); //더블체크 페이지도 다시 이동하는 일이 없도록 로컬스토리지에 저장
+    localStorage.setItem("block_remind_page", "true");  //더블체크 페이지도 다시 이동하는 일이 없도록 로컬스토리지에 저장
     navigate("/");
   };
 
   const onClickComplete = () => {
-    localStorage.setItem("double_check_done", "true"); 
+    localStorage.setItem("block_remind_page", "true");
     navigate("/");
   };
 
@@ -86,7 +86,7 @@ const DoubleCheckPage = () => {
     id: number,
     isChecked: boolean
   ) => {
-    itemCheckMutate({ travelId: Number(id), checkListId: checkListId, itemId: id });
+    itemCheckMutate({ travelId: Number(tripid), checkListId: checkListId, itemId: id });
   };
 
   return (
@@ -153,7 +153,6 @@ const DoubleCheckPage = () => {
               </>
             )
         )}
-
         <BottomButton text="완료하기" onClick={onClickComplete} textButton={false} />
       </Container>
       <Modal isVisible={isShowCompleteModal} closeModal={closeCompleteModal}>
@@ -167,7 +166,7 @@ const DoubleCheckPage = () => {
 
 const Container = styled.div`
   padding: 0 20px;
-  height: 100%;
+  padding-bottom: 100px;
   background-color: ${COLOR.GRAY_50};
 `;
 

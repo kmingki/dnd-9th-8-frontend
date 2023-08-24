@@ -8,12 +8,15 @@ const Dot = styled.div`
     width: 5px;
 `
 const DotWrapper = styled.div`
-    margin-left : 1.4px;
+    margin-left : 2px;
     display : flex;
     flex-direction: column;
     justify-content: flex-start;
 `;
 
+const TextWrapper = styled.div`
+    display : flex;
+`;
 const FinishButtonWrapper = styled.div`
     display : flex;
     justify-content: flex-end;
@@ -203,6 +206,7 @@ const Space = styled.div`
 export { 
     Dot,
     DotWrapper,
+    TextWrapper,
     FinishButtonWrapper, 
     FinishButton, 
     CheckListWrapper, 
