@@ -1,5 +1,5 @@
 :root {
-  --MAIN_GREEN: #00b488;
+  --MAIN_GREEN: #00c388;
   --MAIN_BLUE: #6b5ffb;
   --MAIN_YELLOW: #fff8f1;
   --GRAY_900: #232527;
@@ -23,6 +23,11 @@
   --GREEN_100: #ccf0e7;
   --GREEN_50: #eafff8;
   --WHITE: #ffffff;
+}
+
+.react-calendar__tile {
+  margin: 0;
+  border: 0;
 }
 
 .react-calendar .react-calendar__navigation {
