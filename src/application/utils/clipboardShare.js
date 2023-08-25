@@ -4,7 +4,7 @@ export function clipboardShare(travelId) {
     var tmpTextarea = document.createElement('textarea');
     
     // 2. 해당 element에 복사하고자 하는 value 저장
-    tmpTextarea.value = `${process.env.REACT_APP_SHARE_CLIPBOARD_LINK}/trip/${travelId}`;
+    tmpTextarea.value = `${process.env.REACT_APP_SHARE_CLIPBOARD_LINK}trip/${travelId}`;
     
     // 3. 해당 element를 화면에 안보이는 곳에 위치
     tmpTextarea.setAttribute('readonly', '');
