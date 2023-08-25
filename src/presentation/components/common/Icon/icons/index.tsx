@@ -54,3 +54,4 @@ export { FilledHeart, UnFilledHeart } from "./Heart";
 export { default as SliceOutlined } from "./SliceOutlined";
 export { default as CalendarGreen } from "./CalendarGreen";
 export { default as Email } from "./Email";
+export { default as DoubleCheckIcon } from "./DoubleCheckIcon";

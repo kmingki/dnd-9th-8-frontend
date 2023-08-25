@@ -14,6 +14,7 @@ import BottomSheet from "@components/common/BottomSheet";
 import EmailAuth from "@components/MainPage/components/EmailAuth";
 import Modal from "@components/common/Modal";
 import EmailAuthModal from "@components/MainPage/components/EmailAuthModal";
+import DoubleCheckCompleteModal from "@components/domain/DoubleCheckComplete";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -33,6 +34,13 @@ const MainPage = () => {
     closeModal: closeEmailInput,
   } = useModal();
 
+  const {
+    isShowModal: isShowCompleteModal,
+    toggleModal: toggleCompleteModal,
+    closeModal: closeCompleteModal,
+  } = useModal();
+
+
   useEffect(() => {
     dispatch(initializeCreateTripInfo());
     if (localStorage.getItem("state") === "NEW_MEMBER") {
@@ -40,12 +48,20 @@ const MainPage = () => {
     }
   }, []);
 
+  
   const handlePopupClose = () => {
     popupCloseModal();
     if (locationState && locationState.state === "delete_done") {
       navigate(".", { state: {} });
     }
   };
+
+  useEffect(() => {
+    if (locationState && locationState.state === "remind_check_done") {
+      toggleCompleteModal();
+
+    }
+  }, []);
 
   return (
     <>
@@ -68,6 +84,9 @@ const MainPage = () => {
           </BottomSheet>
           <Modal isVisible={isShowEmailInput} closeModal={closeEmailInput}>
             <EmailAuthModal closeModal={closeEmailInput} />
+          </Modal>
+          <Modal isVisible={isShowCompleteModal} closeModal={closeCompleteModal}>
+            <DoubleCheckCompleteModal closeModal={closeCompleteModal} />
           </Modal>
         </MainPageWrapper>
       )}
