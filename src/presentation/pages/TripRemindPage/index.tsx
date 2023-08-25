@@ -30,7 +30,7 @@ const TripRemindPage = () => {
                 text="다시 체크하기"
                 onClick={()=>{navigate(`/doublecheck/${id}`)}}
                 textButton={true}
-                textButtonOnClick={()=>{localStorage.setItem("block_remind_page", "true"); navigate("/")}}
+                textButtonOnClick={()=>{ localStorage.setItem("block_remind_page", "true"); navigate("/")}}
                 textButtonChild="안할래요"
             />
         </div>

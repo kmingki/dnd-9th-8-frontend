@@ -76,8 +76,9 @@ const DoubleCheckPage = () => {
   };
 
   const onClickComplete = () => {
+    
     localStorage.setItem("block_remind_page", "true");
-    navigate("/");
+    navigate("/", { state: { state: "remind_check_done" } });
   };
 
   //item 체크 할때
