@@ -9,7 +9,7 @@ const Header = () => {
       <Icon icon="Logo" />
       <div className="user-side">
         <Link to="/my-template">
-          <Icon icon="UnFilledHeart" />
+          <Icon icon="FilledHeart" color="#8B95A1" fill="#8B95A1" />
         </Link>
         <Link to="/mypage">
           <Icon icon="Profile" />
