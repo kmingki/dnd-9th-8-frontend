@@ -37,13 +37,21 @@ const BottomButton = ({
 const BottomButtonWrapper = styled.div`
   position: fixed;
   bottom: 20px;
-  left: 20px;
-  right: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 
   display: flex;
   flex-direction: column;
   gap: 8px;
   align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+  @media (min-width: 480px) {
+    width: 480px;
+  }
 `;
 const Button = styled.button`
   width: 100%;

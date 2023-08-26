@@ -65,16 +65,20 @@ const BottomSheet = ({ isVisible, closeModal, children }: BottomSheetType) => {
 
 const BottomSheetWrapper = styled.div<{ isanimating: boolean }>`
   position: fixed;
-  left: 0;
-  right: 0;
   bottom: 0;
 
+  width: 100%;
   padding: 20px;
   background-color: ${COLOR.WHITE};
 
   border-radius: 16px 16px 0px 0px;
   box-shadow: 0px -8px 16px 0px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 
   animation: ${(props) => (props.isanimating ? slideDown : slideUp)} 0.3s forwards;
+
+  @media (min-width: 480px) {
+    width: 480px;
+  }
 `;
 export default BottomSheet;
