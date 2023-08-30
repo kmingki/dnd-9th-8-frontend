@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+<h1>packit</h1>
+<img width="532" alt="packit" src="https://github.com/dnd-side-project/dnd-9th-8-frontend/assets/70315572/0c3656ec-9193-43bd-a959-2308da431499">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p><strong>packit</strong>은 빈틈없는 여행을 위한 가이드라인 제공 서비스입니다.</p>
 
-## Available Scripts
+<br>
+<h2>기능 소개</h2>
+<h3>생성된 여행 체크리스트 템플릿 불러오기</h3>
+<img width="700px" alt="생성된 여행 체크리스트 템플릿 불러오기" src="https://github.com/dnd-side-project/dnd-9th-8-frontend/assets/70315572/7fc0865d-0a2b-402a-b494-823c995d0c9a">
 
-In the project directory, you can run:
+<h3>여행 체크리스트 확인 및 작성</h3>
+<img width="700px" alt="여행 체크리스트 확인 및 작성" src="https://github.com/dnd-side-project/dnd-9th-8-frontend/assets/70315572/85b4eca8-fe55-4c29-a02c-89d926a08d70">
 
-### `yarn start`
+<h3>여행 체크리스트 편집 및 공유</h3>
+<img width="700px" alt="여행 체크리스트 편집 및 공유" src="https://github.com/dnd-side-project/dnd-9th-8-frontend/assets/70315572/2efc899d-4d54-44ed-9337-d1d52f213181"">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<h3>체크리스트 리마인드</h3>
+<img width="700px" alt="체크리스트 리마인드" src="https://github.com/dnd-side-project/dnd-9th-8-frontend/assets/70315572/b6427d38-c1fb-4b4a-9767-7d2ebb2ced63">
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br>
+<h2>개발 기간</h2>
+<ul>
+    <li>개발 : 2023.08 ~ 진행중</li>
+</ul>
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br>
+<h2>기술 스택</h2>
+<ul>
+    <li>React</li>
+    <li>TypeScript</li>
+    <li>redux-toolkit</li>
+    <li>react-query</li>
+    <li>styled-components</li>
+    <li>PWA</li>
+</ul>
