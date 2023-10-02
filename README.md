@@ -32,4 +32,24 @@
     <li>react-query</li>
     <li>styled-components</li>
     <li>PWA</li>
+    <li>RESTful API</li>
 </ul>
+
+<br>
+<h2>역할</h2>
+<h3>PACK IT 서비스 클라이언트 개발</h3>
+<ul>
+    <li>컴포넌트 및 페이지 마크업 제작</li>
+    <li>RESTful API를 이용한 백엔드 연동 개발</li>
+    <li>카카오톡, url 공유 기능 구현</li>
+</ul>
+
+<br>
+<h2>팀 구성</h2>
+<ul>
+    <li>개발 : 2023.08 ~ 진행중</li>
+</ul>
+
+<br>
+<h2>서비스 링크</h2>
+<h3>https://pack-it-chi.vercel.app/</h3>
