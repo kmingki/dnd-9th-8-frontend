@@ -45,11 +45,5 @@
 </ul>
 
 <br>
-<h2>팀 구성</h2>
-<ul>
-    <li>개발 : 2023.08 ~ 진행중</li>
-</ul>
-
-<br>
 <h2>서비스 링크</h2>
 <h3>https://pack-it-chi.vercel.app/</h3>
